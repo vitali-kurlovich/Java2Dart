@@ -8,40 +8,54 @@ import org.apache.commons.cli.ParseException;
 import java.io.IOException;
 
 public class CLI {
-
+    public static final String inputKey = "input";
+    public static final String inputShortKey = "i";
+    public static final String outputKey = "output";
+    public static final String outputShortKey = "o";
     private String[] args;
 
     public CLI(String[] args) {
         this.args = args;
     }
 
-    public void run() throws ParseException {
+    public void run() throws Exception {
         parse(args);
     }
 
     private Options options() {
         final Options options = new Options();
-        options.addOption(new Option("i", "input", true, "Input directory or file path"));
-
-        options.addOption(new Option("o", "option", true, "Output directory or file path"));
+        options.addOption(new Option(CLI.inputShortKey, CLI.inputKey, true, "Input directory or file path"));
+        options.addOption(new Option(CLI.outputShortKey, CLI.outputKey, true, "Output directory or file path"));
 
         return options;
     }
 
-    private void parse(String[] args) throws ParseException {
+    private void parse(String[] args) throws Exception {
         final var options = options();
         final var parser = new DefaultParser();
         final var cmd = parser.parse(options, args);
-        if (cmd.hasOption("input")) {
-            final var path = cmd.getOptionValue("input");
+
+        final String inputPath;
+        final String outputPath;
+
+        if (cmd.hasOption(CLI.inputKey)) {
+            final var path = cmd.getOptionValue(CLI.inputKey);
             System.out.println("input argument: " + path);
-            try {
-                final var inputPath = new java.io.File(path).getCanonicalPath();
-                System.out.println("Input path:" + inputPath);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+            inputPath = new java.io.File(path).getCanonicalPath();
+        } else {
+            inputPath = new java.io.File(".").getCanonicalPath();
         }
+
+        if (cmd.hasOption(CLI.outputKey)) {
+            final var path = cmd.getOptionValue(CLI.outputKey);
+            System.out.println("output argument: " + path);
+            outputPath = new java.io.File(path).getCanonicalPath();
+        } else {
+            outputPath = new java.io.File("./dart").getCanonicalPath();
+        }
+
+        System.out.println("Input path:" + inputPath);
+        System.out.println("Output path:" + outputPath);
     }
 
 }
