@@ -2,6 +2,8 @@ package org.java2dart;
 
 import spoon.Launcher;
 
+import java.io.IOException;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
@@ -14,6 +16,19 @@ public class Main {
       //  launcher.addInputResource();
         for (var arg: args ) {
             System.out.printf(arg);
+        }
+
+        try {
+            String currentPath = new java.io.File(".").getCanonicalPath();
+            System.out.println("Current dir:" + currentPath);
+
+            String currentDir = System.getProperty("user.dir");
+            System.out.println("Current dir using System:" + currentDir);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+
+        } finally {
+
         }
 
 
