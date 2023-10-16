@@ -3,16 +3,14 @@ package org.java2dart;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-
-import java.io.IOException;
+import org.java2dart.ast.ASTLoader;
 
 public class CLI {
     public static final String inputKey = "input";
     public static final String inputShortKey = "i";
     public static final String outputKey = "output";
     public static final String outputShortKey = "o";
-    private String[] args;
+    private final String[] args;
 
     public CLI(String[] args) {
         this.args = args;
@@ -56,6 +54,9 @@ public class CLI {
 
         System.out.println("Input path:" + inputPath);
         System.out.println("Output path:" + outputPath);
+
+        final var aslparser = new ASTLoader(inputPath);
+        aslparser.run();
     }
 
 }
