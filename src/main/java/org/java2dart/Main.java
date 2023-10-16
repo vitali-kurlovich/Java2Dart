@@ -1,5 +1,8 @@
 package org.java2dart;
 
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import spoon.Launcher;
 
 import java.io.IOException;
@@ -8,13 +11,23 @@ import java.io.IOException;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
 
-     //  final var launcher = new Launcher();
+        final var options = new Options();
 
-      //  launcher.addInputResource();
-        for (var arg: args ) {
+// add t option
+        options.addOption("t", false, "display current time");
+
+        final var parser = new DefaultParser();
+        try {
+            final var cmd = parser.parse(options, args);
+        } catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //  final var launcher = new Launcher();
+
+        //  launcher.addInputResource();
+        for (var arg : args) {
             System.out.printf(arg);
         }
 
@@ -32,13 +45,5 @@ public class Main {
         }
 
 
-
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
-        }
     }
 }
