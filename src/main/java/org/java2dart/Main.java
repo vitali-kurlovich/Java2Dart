@@ -17,7 +17,7 @@ public class Main {
 
        try {
            cli.run();
-       } catch (ParseException e) {
+       } catch (Exception e) {
            System.out.println(e.getMessage());
        }
 
