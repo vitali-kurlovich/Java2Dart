@@ -1,103 +1,73 @@
 package org.java2dart.ast.generate.builder;
 
-import org.java2dart.ast.dart.DartKeywordGenerator;
-import org.java2dart.ast.generate.KeywordGenerator;
+import org.java2dart.ast.generate.builder.base.BaseTypeCodeBuilder;
 import org.java2dart.ast.generate.toplevel.AbstrcationType;
-import org.java2dart.ast.generate.toplevel.AccesLevel;
-import org.java2dart.ast.generate.toplevel.TypeModifier;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtField;
+import spoon.reflect.declaration.CtType;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class ClassBuilder implements Builder {
 
-    private ArrayList<MethodBuilder> methods = new ArrayList<MethodBuilder>();
-    private  ArrayList<FieldBuilder> fields = new ArrayList<FieldBuilder>();
-  //  private final Builder[] methodsBuilders;
-    private final String className;
-    private final KeywordGenerator generator = new DartKeywordGenerator();
-    private AccesLevel accesLevel = AccesLevel.PROTECTED ;
+public class ClassBuilder extends BaseTypeCodeBuilder {
 
-    private  boolean isFinal;
-    private  boolean isAbstract;
-    private  boolean isStatic;
+    //private ArrayList<MethodBuilder> methods = new ArrayList<MethodBuilder>();
+    private  ArrayList<FieldCodeBuilder> fields = new ArrayList<FieldCodeBuilder>();
+    //  private final Builder[] methodsBuilders;
+    private final CtClass classType;
 
-    final StringBuilder builder = new StringBuilder();
 
-    public ClassBuilder( String className) {
-        // this.methodsBuilders = methodsBuilders;
-        this.className = className;
+    public ClassBuilder(CtClass classType) {
+        super(classType);
+
+        this.classType = classType;
     }
 
-    String getClassName() {
-        return  className;
+    public boolean isExtended() {
+
+
+
+        return classType.getSuperclass() != null;
     }
 
-    public void setAccesLevel( AccesLevel level) {
-        accesLevel  = level;
-    }
-    public void setFinal( boolean flag) {
-        isFinal = flag;
+    public  List<CtField<?>> fields() {
+        return  classType.getFields();
     }
 
-    public  void  setAbstract( boolean flag) {
-        isAbstract = flag;
-    }
 
-    public  void  setStatic( boolean flag) {
-        isStatic = flag;
-    }
-
-    public  void append(MethodBuilder builder) {
-        methods.add(builder);
-    }
 
     @Override
     public String build() {
-        builder.setLength(0);
 
-        append(generator.accesLevelKeyword(accesLevel));
+        //classType.getSuperclass().getSimpleName()
 
-        if (isStatic) {
-            append(generator.typeModifier(TypeModifier.STATIC));
+
+        clean();
+        appendTypeProperty();
+        append(AbstrcationType.CLASS);
+        appendName();
+
+
+        beginBlock();
+        newline();
+        // TODO: Fields & Methods
+
+        final var fields = fields();
+        for (final var field:
+             fields) {
+           final var builder = new FieldCodeBuilder(field);
+
+           final var exp = builder.build();
+           append(exp);
         }
 
-        if (isAbstract) {
-            append(generator.typeModifier(TypeModifier.ABSTRACT));
-        }
 
-        if (isFinal) {
-            append(generator.typeModifier(TypeModifier.FINAL));
-        }
 
-        append(generator.abstrcationType(AbstrcationType.CLASS));
+        endBlock();
 
-        append(className);
-
-        append("{\n");
-// TODO: implementation;
-
-        for (final var field: fields ) {
-            final var string = field.build();
-            if (string != null) {
-                append(string);
-            }
-        }
-
-        for (final var method: methods ) {
-            final var string = method.build();
-            if (string != null) {
-                append(string);
-            }
-        }
-
-        append("}");
-       // builder.append()
-
-        return builder.toString();
+        return super.build();
     }
 
-    private void append(String str) {
-        builder.append(str);
-        builder.append(" ");
-    }
+
 }
