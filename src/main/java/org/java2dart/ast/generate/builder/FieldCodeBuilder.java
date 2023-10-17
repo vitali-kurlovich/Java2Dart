@@ -1,30 +1,28 @@
 package org.java2dart.ast.generate.builder;
 
-import org.java2dart.ast.generate.builder.base.BaseTypeCodeBuilder;
+import org.java2dart.ast.generate.builder.base.*;
 import spoon.reflect.declaration.CtField;
 
-public class FieldCodeBuilder extends BaseTypeCodeBuilder {
+public class FieldCodeBuilder extends BaseCodeBuilder {
 
     protected final CtField field;
 
     public FieldCodeBuilder(CtField field) {
 
-        super(field, field);
         this.field = field;
     }
 
     @Override
     public String build() {
-        appendModifiers();
 
-        final var type = field.getType();
+       final var modifiableBuilder = new ModifiableCodeBuilder(field);
+        append(modifiableBuilder);
 
-        final var typeName = type.getSimpleName();
-        append(typeName);
-        whitespace();
+       final var typeInfoBuilder =  new TypeInformationCodeBuilder(field.getType());
+        append(typeInfoBuilder);
 
-        appendName();
-        endline();
+        final var namedBuilder = new NamedElementCodeBuilder(field);
+        append(namedBuilder);
         newline();
 
 

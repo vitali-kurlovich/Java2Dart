@@ -1,6 +1,9 @@
 package org.java2dart.ast.generate.builder;
 
+import org.java2dart.ast.generate.builder.base.BaseCodeBuilder;
 import org.java2dart.ast.generate.builder.base.BaseTypeCodeBuilder;
+import org.java2dart.ast.generate.builder.base.ModifiableCodeBuilder;
+import org.java2dart.ast.generate.builder.base.NamedElementCodeBuilder;
 import org.java2dart.ast.generate.toplevel.AbstrcationType;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtField;
@@ -11,16 +14,15 @@ import java.util.List;
 import java.util.Set;
 
 
-public class ClassCodeBuilder extends BaseTypeCodeBuilder {
+public class ClassCodeBuilder extends BaseCodeBuilder {
 
     //  private final Builder[] methodsBuilders;
     private final CtClass classType;
-    //private ArrayList<MethodBuilder> methods = new ArrayList<MethodBuilder>();
-    private ArrayList<FieldCodeBuilder> fields = new ArrayList<FieldCodeBuilder>();
+
 
 
     public ClassCodeBuilder(CtClass classType) {
-        super(classType);
+
         this.classType = classType;
     }
 
@@ -41,10 +43,17 @@ public class ClassCodeBuilder extends BaseTypeCodeBuilder {
     public String build() {
 
         clean();
-        appendModifiers();
-        append(AbstrcationType.CLASS);
-        appendName();
+        //appendModifiers();
 
+        final var modifiresBuilder = new ModifiableCodeBuilder(classType);
+
+        append(modifiresBuilder);
+
+        append(AbstrcationType.CLASS);
+
+        final var nameBuilder = new NamedElementCodeBuilder(classType);
+        append(nameBuilder);
+        whitespace();
 
         beginBlock();
         newline();
@@ -55,6 +64,7 @@ public class ClassCodeBuilder extends BaseTypeCodeBuilder {
                 fields) {
             final var builder = new FieldCodeBuilder(field);
             append(builder);
+
         }
 
         final var methods = methods();
@@ -67,6 +77,8 @@ public class ClassCodeBuilder extends BaseTypeCodeBuilder {
 
 
         endBlock();
+
+        newline();
 
         return super.build();
     }

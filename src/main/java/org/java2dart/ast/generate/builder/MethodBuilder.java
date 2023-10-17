@@ -1,34 +1,43 @@
 package org.java2dart.ast.generate.builder;
 
 
-import org.java2dart.ast.generate.builder.base.BaseCodeBuilder;
-import org.java2dart.ast.generate.builder.base.Builder;
-import org.java2dart.ast.generate.builder.base.ModifiableCodeBuilder;
+import org.java2dart.ast.generate.builder.base.*;
 import spoon.reflect.declaration.CtMethod;
+import spoon.reflect.declaration.CtParameter;
 
-public class MethodBuilder extends ModifiableCodeBuilder {
+import java.util.List;
 
+public class MethodBuilder extends BaseCodeBuilder {
     protected final CtMethod<?> method;
 
     public MethodBuilder(CtMethod<?> method) {
-        super(method);
+
         this.method = method;
     }
 
-    public String name() {
-        return method.getSimpleName();
+
+
+    public List<CtParameter<?>> parameters() {
+        return method.getParameters();
     }
 
-    public void appendName() {
-        append(name());
-        whitespace();
-    }
+
 
     @Override
     public String build() {
 
-        appendModifiers();
-        appendName();
+        final var modifiableBuilder = new ModifiableCodeBuilder(method);
+        append(modifiableBuilder);
+
+
+
+        final var typeInfoBuilder =  new TypeInformationCodeBuilder(method.getType());
+        append(typeInfoBuilder);
+
+
+        final var namedBuilder = new NamedElementCodeBuilder(method);
+        append(namedBuilder);
+
         beginBlock();
         newline();
         endBlock();

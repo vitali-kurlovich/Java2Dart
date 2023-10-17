@@ -3,34 +3,34 @@ package org.java2dart.ast.generate.builder.base;
 import spoon.reflect.declaration.CtModifiable;
 import spoon.reflect.declaration.CtNamedElement;
 import spoon.reflect.declaration.CtType;
+import spoon.reflect.declaration.CtTypeInformation;
 // CtTypeInformation
 // CtNamedElement
 
 
+public class BaseTypeCodeBuilder extends BaseCodeBuilder {
 
-
-public class BaseTypeCodeBuilder extends ModifiableCodeBuilder {
-
-    protected final CtNamedElement element;
+   // protected final CtNamedElement element;
+    protected final CtType<?> type;
 
     public BaseTypeCodeBuilder(CtType<?> type) {
-        this(type, type);
+
+        this.type = type;
     }
 
-    public BaseTypeCodeBuilder(CtModifiable modifiable, CtNamedElement element) {
-        //this.modifiable = modifiable;
-        super(modifiable);
-        this.element = element;
+
+    public void  modifiers() {
+        final var builder = new ModifiableCodeBuilder(type);
+        append(builder);
+
     }
 
-    public String name() {
-        return  element.getSimpleName();
+    public  void name() {
+        final var builder = new NamedElementCodeBuilder(type);
+        append(builder);
     }
 
-    public void appendName() {
-        append(name());
-        whitespace();
-    }
+
 
 
 

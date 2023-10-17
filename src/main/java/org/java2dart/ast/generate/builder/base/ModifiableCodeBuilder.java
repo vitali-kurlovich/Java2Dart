@@ -14,6 +14,12 @@ public class ModifiableCodeBuilder extends BaseCodeBuilder {
 
     }
 
+    @Override
+    public String build() {
+        appendModifiers();
+        return super.build();
+    }
+
     public void appendModifiers() {
         append(accesLevel());
 
