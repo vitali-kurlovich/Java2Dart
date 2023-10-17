@@ -23,6 +23,15 @@ public abstract class BaseCodeBuilder implements CodeBuilder {
     }
 
     @Override
+    public  void append(Builder builder) {
+        final var exp = builder.build();
+
+        if (exp != null) {
+            append(exp);
+        }
+    }
+
+    @Override
     public void whitespace() {
         append(" ");
     }

@@ -2,7 +2,6 @@ package org.java2dart.ast.generate.builder;
 
 import org.java2dart.ast.generate.builder.base.BaseTypeCodeBuilder;
 import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtType;
 
 public class FieldCodeBuilder extends BaseTypeCodeBuilder {
 
@@ -16,7 +15,7 @@ public class FieldCodeBuilder extends BaseTypeCodeBuilder {
 
     @Override
     public String build() {
-        appendTypeProperty();
+        appendModifiers();
 
         final var type = field.getType();
 

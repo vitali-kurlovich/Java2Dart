@@ -1,7 +1,6 @@
 package org.java2dart.ast.processing;
 
-import org.java2dart.ast.generate.toplevel.AccesLevel;
-import org.java2dart.ast.generate.builder.ClassBuilder;
+import org.java2dart.ast.generate.builder.ClassCodeBuilder;
 import spoon.reflect.declaration.CtClass;
 
 public final class ASTClassProcessing {
@@ -9,7 +8,7 @@ public final class ASTClassProcessing {
 
 
 
-        final var builder =  new ClassBuilder(c);
+        final var builder =  new ClassCodeBuilder(c);
 
 
         final var source = builder.build();

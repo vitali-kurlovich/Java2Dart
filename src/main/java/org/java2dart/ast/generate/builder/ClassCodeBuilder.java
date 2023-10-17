@@ -4,47 +4,44 @@ import org.java2dart.ast.generate.builder.base.BaseTypeCodeBuilder;
 import org.java2dart.ast.generate.toplevel.AbstrcationType;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtField;
-import spoon.reflect.declaration.CtType;
+import spoon.reflect.declaration.CtMethod;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
-public class ClassBuilder extends BaseTypeCodeBuilder {
+public class ClassCodeBuilder extends BaseTypeCodeBuilder {
 
-    //private ArrayList<MethodBuilder> methods = new ArrayList<MethodBuilder>();
-    private  ArrayList<FieldCodeBuilder> fields = new ArrayList<FieldCodeBuilder>();
     //  private final Builder[] methodsBuilders;
     private final CtClass classType;
+    //private ArrayList<MethodBuilder> methods = new ArrayList<MethodBuilder>();
+    private ArrayList<FieldCodeBuilder> fields = new ArrayList<FieldCodeBuilder>();
 
 
-    public ClassBuilder(CtClass classType) {
+    public ClassCodeBuilder(CtClass classType) {
         super(classType);
-
         this.classType = classType;
     }
 
     public boolean isExtended() {
-
-
-
         return classType.getSuperclass() != null;
     }
 
-    public  List<CtField<?>> fields() {
-        return  classType.getFields();
+    public Set<CtMethod<?>> methods() {
+        return  classType.getMethods();
     }
 
+    public List<CtField<?>> fields() {
+        return classType.getFields();
+    }
 
 
     @Override
     public String build() {
 
-        //classType.getSuperclass().getSimpleName()
-
-
         clean();
-        appendTypeProperty();
+        appendModifiers();
         append(AbstrcationType.CLASS);
         appendName();
 
@@ -54,14 +51,19 @@ public class ClassBuilder extends BaseTypeCodeBuilder {
         // TODO: Fields & Methods
 
         final var fields = fields();
-        for (final var field:
-             fields) {
-           final var builder = new FieldCodeBuilder(field);
-
-           final var exp = builder.build();
-           append(exp);
+        for (final var field :
+                fields) {
+            final var builder = new FieldCodeBuilder(field);
+            append(builder);
         }
 
+        final var methods = methods();
+
+        for (final var method: methods) {
+            final var builder = new MethodBuilder(method);
+            append(builder);
+            newline();
+        }
 
 
         endBlock();
