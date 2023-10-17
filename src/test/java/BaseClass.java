@@ -6,7 +6,7 @@ public final class BaseClass {
         this.intArrayField = intArrayField;
     }
 
-    public int intField;
+    public int intField = 6;
     public double doubleField;
 
     private String stringField;
@@ -15,6 +15,7 @@ public final class BaseClass {
 
     private void method() {
 
+        System.out.println("Hello");
     }
 
     public static String retStringMethod() {
@@ -22,8 +23,8 @@ public final class BaseClass {
     }
 
     private void method(int value, double value1) {
-
-        intField = value;
+        final var a = value + 100;
+        intField = value + a;
         doubleField = value1;
     }
 

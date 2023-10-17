@@ -7,6 +7,7 @@ import spoon.reflect.declaration.CtParameter;
 
 import java.util.List;
 
+
 public class MethodBuilder extends BaseCodeBuilder {
     protected final CtMethod<?> method;
 
@@ -15,23 +16,19 @@ public class MethodBuilder extends BaseCodeBuilder {
         this.method = method;
     }
 
-
-
     public List<CtParameter<?>> parameters() {
         return method.getParameters();
     }
 
-
-
     @Override
     public String build() {
+
 
         final var modifiableBuilder = new ModifiableCodeBuilder(method);
         append(modifiableBuilder);
 
 
-
-        final var typeInfoBuilder =  new TypeInformationCodeBuilder(method.getType());
+        final var typeInfoBuilder = new TypeInformationCodeBuilder(method.getType());
         append(typeInfoBuilder);
 
 
@@ -39,6 +36,17 @@ public class MethodBuilder extends BaseCodeBuilder {
         append(namedBuilder);
 
         beginBlock();
+        newline();
+
+       final var codeBuilder = new CodeBlockBuilder(method.getBody());
+        append(codeBuilder);
+
+        newline();
+       // final var block = method.getBody();
+       //var last = block.getLastStatement().toString();
+        //block.getShortRepresentation()
+        //append(last);
+
         newline();
         endBlock();
 

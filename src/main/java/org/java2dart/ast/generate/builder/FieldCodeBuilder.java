@@ -15,6 +15,9 @@ public class FieldCodeBuilder extends BaseCodeBuilder {
     @Override
     public String build() {
 
+       var factory = field.getFactory().Code();
+
+
        final var modifiableBuilder = new ModifiableCodeBuilder(field);
         append(modifiableBuilder);
 
@@ -23,7 +26,11 @@ public class FieldCodeBuilder extends BaseCodeBuilder {
 
         final var namedBuilder = new NamedElementCodeBuilder(field);
         append(namedBuilder);
+
+        //var bloce = factory.getReferences()
+
         newline();
+
 
 
         return super.build();
