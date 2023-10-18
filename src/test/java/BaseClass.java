@@ -1,3 +1,4 @@
+
 public final class BaseClass {
     public BaseClass(int intField, double doubleField, String stringField, int[] intArrayField) {
         this.intField = intField;
@@ -18,12 +19,13 @@ public final class BaseClass {
         System.out.println("Hello");
     }
 
-    public static String retStringMethod() {
-        return "Adb" + "Cda";
+    public  String retStringMethod() {
+        stringField = "Adb" + "Cda";
+        return stringField;
     }
 
     private void method(int value, double value1) {
-        final var a = value + 100;
+        final var a = value +  0xff;
         intField = value + a;
         doubleField = value1;
     }

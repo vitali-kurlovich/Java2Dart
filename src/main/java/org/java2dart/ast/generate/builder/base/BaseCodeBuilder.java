@@ -7,7 +7,7 @@ import org.java2dart.ast.generate.toplevel.AccesLevel;
 import org.java2dart.ast.generate.toplevel.TypeModifier;
 
 
-public abstract class BaseCodeBuilder implements CodeBuilder {
+public  class BaseCodeBuilder implements CodeBuilder {
     final StringBuilder builder = new StringBuilder();
 
     final KeywordGenerator keywordGenerator = new DartKeywordGenerator();

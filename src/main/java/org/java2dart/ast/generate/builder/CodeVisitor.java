@@ -78,7 +78,22 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtBinaryOperator(CtBinaryOperator<T> ctBinaryOperator) {
+        builder.newline();
         builder.append("visitCtBinaryOperator");
+
+       final var leftExp = ctBinaryOperator.getLeftHandOperand();
+        final var rightExp = ctBinaryOperator.getRightHandOperand();
+
+        leftExp.accept(this);
+        builder.whitespace();
+
+       final var king = ctBinaryOperator.getKind();
+
+        builder.append( king.toString());
+
+        builder.whitespace();
+        rightExp.accept(this);
+
         builder.newline();
     }
 
@@ -110,6 +125,20 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtClass(CtClass<T> ctClass) {
         builder.append("visitCtClass");
         builder.newline();
+
+
+       final var path = ctClass.getPath();
+        builder.append(path.toString());
+
+        ctClass.getPackage().accept(this);
+
+
+
+
+        ctClass.getFields().forEach(f -> f.accept(this));
+
+        ctClass.getMethods().forEach(m-> m.accept(this));
+
     }
 
     @Override
@@ -216,8 +245,19 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtLiteral(CtLiteral<T> ctLiteral) {
+        builder.newline();
         builder.append("visitCtLiteral");
         builder.newline();
+
+      final var literalType =  ctLiteral.getType().getSimpleName();
+
+        builder.append("type: " + literalType );
+        builder.newline();
+       final var value = ctLiteral.getValue();
+
+        builder.append(value.toString());
+
+
     }
 
     @Override
@@ -238,10 +278,12 @@ public class CodeVisitor implements CtVisitor {
         builder.append(assigned.toString());
         builder.newline();
 
-        var assinement = ctAssignment.getValueByRole(CtRole.ASSIGNMENT);
+        final var assigmentExp = ctAssignment.getAssignment();
 
 
-        builder.append(assinement.toString());
+        assigmentExp.accept(this);
+
+
         builder.newline();
 
         builder.append("------");
@@ -344,13 +386,28 @@ public class CodeVisitor implements CtVisitor {
     @Override
     public void visitCtPackage(CtPackage ctPackage) {
         builder.append("visitCtPackage");
+        builder.whitespace();
+        builder.append(ctPackage.getSimpleName());
         builder.newline();
+
+
+
+
+
     }
 
     @Override
     public void visitCtPackageReference(CtPackageReference ctPackageReference) {
         builder.append("visitCtPackageReference");
         builder.newline();
+
+        //ctPackageReference.getDirectChildren().forEach( t -> t.accept(this));
+
+       // ctPackageReference.asIterable().forEach(el -> el.accept(this));
+
+       //final var fragment = ctPackageReference.getOriginalSourceFragment();
+        //builder.append( fragment.getSourceCode() );
+
     }
 
     @Override
@@ -434,7 +491,17 @@ public class CodeVisitor implements CtVisitor {
     @Override
     public <T> void visitCtTypeReference(CtTypeReference<T> ctTypeReference) {
         builder.append("visitCtTypeReference");
+        builder.append("    ");
+        builder.append( ctTypeReference.getSimpleName());
         builder.newline();
+
+        final var decl = ctTypeReference.getDeclaration();
+
+        if (decl != null) {
+            decl.accept(this);
+        }
+
+     //   ctTypeReference.getDeclaration().accept(this);
     }
 
     @Override
@@ -451,8 +518,18 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtVariableRead(CtVariableRead<T> ctVariableRead) {
+
+        builder.newline();
         builder.append("visitCtVariableRead");
         builder.newline();
+
+        final var varible = ctVariableRead.getVariable();
+        builder.append( varible.getSimpleName());
+        builder.newline();
+
+
+
+
     }
 
     @Override
@@ -519,6 +596,14 @@ public class CodeVisitor implements CtVisitor {
     public void visitCtModule(CtModule ctModule) {
         builder.append("visitCtModule");
         builder.newline();
+
+        ctModule.getExportedPackages().forEach( pack -> pack.accept(this) );
+
+        ctModule.getRootPackage().accept(this);
+
+        ctModule.getReferencedTypes().forEach(t -> t.accept(this));
+
+       // ctModule.accept(this);
     }
 
     @Override
