@@ -10,6 +10,11 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
 
       if ( ctTypeReference.isPrimitive() ) {
          final var simpleName = ctTypeReference.getSimpleName();
+
+         if (simpleName == "void") {
+             return voidDescription();
+         }
+
          return primitiveDescription(simpleName);
       }
 
@@ -20,7 +25,7 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
 
           return classDescription(simpleName, true);
       }
-      
+
 
        return null;
    }

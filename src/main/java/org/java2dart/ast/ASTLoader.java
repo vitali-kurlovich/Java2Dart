@@ -1,10 +1,8 @@
 package org.java2dart.ast;
 
-import org.java2dart.ast.generate.builder.CodeVisitor;
+import org.java2dart.ast.generate.CodeVisitor;
 import org.java2dart.ast.generate.builder.base.BaseCodeBuilder;
-import org.java2dart.ast.processing.ASTTypeProcessing;
 import spoon.Launcher;
-import spoon.reflect.declaration.CtType;
 
 public final class ASTLoader {
 

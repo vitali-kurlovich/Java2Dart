@@ -1,6 +1,7 @@
-package org.java2dart.ast.generate.builder;
+package org.java2dart.ast.generate;
 
 import org.java2dart.ast.generate.builder.base.CodeBuilder;
+import org.java2dart.factory.Factory;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
@@ -81,15 +82,15 @@ public class CodeVisitor implements CtVisitor {
         builder.newline();
         builder.append("visitCtBinaryOperator");
 
-       final var leftExp = ctBinaryOperator.getLeftHandOperand();
+        final var leftExp = ctBinaryOperator.getLeftHandOperand();
         final var rightExp = ctBinaryOperator.getRightHandOperand();
 
         leftExp.accept(this);
         builder.whitespace();
 
-       final var king = ctBinaryOperator.getKind();
+        final var king = ctBinaryOperator.getKind();
 
-        builder.append( king.toString());
+        builder.append(king.toString());
 
         builder.whitespace();
         rightExp.accept(this);
@@ -127,17 +128,15 @@ public class CodeVisitor implements CtVisitor {
         builder.newline();
 
 
-       final var path = ctClass.getPath();
+        final var path = ctClass.getPath();
         builder.append(path.toString());
 
         ctClass.getPackage().accept(this);
 
 
-
-
         ctClass.getFields().forEach(f -> f.accept(this));
 
-        ctClass.getMethods().forEach(m-> m.accept(this));
+        ctClass.getMethods().forEach(m -> m.accept(this));
 
     }
 
@@ -249,11 +248,11 @@ public class CodeVisitor implements CtVisitor {
         builder.append("visitCtLiteral");
         builder.newline();
 
-      final var literalType =  ctLiteral.getType().getSimpleName();
+        final var literalType = ctLiteral.getType().getSimpleName();
 
-        builder.append("type: " + literalType );
+        builder.append("type: " + literalType);
         builder.newline();
-       final var value = ctLiteral.getValue();
+        final var value = ctLiteral.getValue();
 
         builder.append(value.toString());
 
@@ -391,9 +390,6 @@ public class CodeVisitor implements CtVisitor {
         builder.newline();
 
 
-
-
-
     }
 
     @Override
@@ -403,9 +399,9 @@ public class CodeVisitor implements CtVisitor {
 
         //ctPackageReference.getDirectChildren().forEach( t -> t.accept(this));
 
-       // ctPackageReference.asIterable().forEach(el -> el.accept(this));
+        // ctPackageReference.asIterable().forEach(el -> el.accept(this));
 
-       //final var fragment = ctPackageReference.getOriginalSourceFragment();
+        //final var fragment = ctPackageReference.getOriginalSourceFragment();
         //builder.append( fragment.getSourceCode() );
 
     }
@@ -492,8 +488,26 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtTypeReference(CtTypeReference<T> ctTypeReference) {
         builder.append("visitCtTypeReference");
         builder.append("    ");
-        builder.append( ctTypeReference.getSimpleName());
+        final var simpleName = ctTypeReference.getSimpleName();
+        if ( simpleName == "void" ) {
+            System.out.println(simpleName);
+        }
+
+        builder.append(simpleName);
         builder.newline();
+
+
+        final var factory = Factory.TypeDescription();
+
+        try {
+            final var desc = factory.description(ctTypeReference);
+            System.out.println(desc.toString());
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        //System.out.println(desc.toString());
 
         final var decl = ctTypeReference.getDeclaration();
 
@@ -501,7 +515,7 @@ public class CodeVisitor implements CtVisitor {
             decl.accept(this);
         }
 
-     //   ctTypeReference.getDeclaration().accept(this);
+        //   ctTypeReference.getDeclaration().accept(this);
     }
 
     @Override
@@ -524,10 +538,8 @@ public class CodeVisitor implements CtVisitor {
         builder.newline();
 
         final var varible = ctVariableRead.getVariable();
-        builder.append( varible.getSimpleName());
+        builder.append(varible.getSimpleName());
         builder.newline();
-
-
 
 
     }
@@ -597,13 +609,13 @@ public class CodeVisitor implements CtVisitor {
         builder.append("visitCtModule");
         builder.newline();
 
-        ctModule.getExportedPackages().forEach( pack -> pack.accept(this) );
+        ctModule.getExportedPackages().forEach(pack -> pack.accept(this));
 
         ctModule.getRootPackage().accept(this);
 
         ctModule.getReferencedTypes().forEach(t -> t.accept(this));
 
-       // ctModule.accept(this);
+        // ctModule.accept(this);
     }
 
     @Override

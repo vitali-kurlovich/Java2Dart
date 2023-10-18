@@ -17,7 +17,7 @@ public final class VoidTypeDescription extends BaseTypeDescription {
 
     @Override
     public boolean isPrimitive() {
-        return false;
+        return true;
     }
 
     @Override

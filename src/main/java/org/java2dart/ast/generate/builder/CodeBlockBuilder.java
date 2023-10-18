@@ -1,5 +1,6 @@
 package org.java2dart.ast.generate.builder;
 
+import org.java2dart.ast.generate.CodeVisitor;
 import org.java2dart.ast.generate.builder.base.BaseCodeBuilder;
 import spoon.reflect.code.*;
 

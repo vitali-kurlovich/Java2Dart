@@ -1,6 +1,6 @@
 package org.java2dart.ast.processing;
 
-import org.java2dart.ast.generate.builder.CodeVisitor;
+import org.java2dart.ast.generate.CodeVisitor;
 import org.java2dart.ast.generate.builder.base.BaseCodeBuilder;
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtType;

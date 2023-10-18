@@ -1,5 +1,7 @@
 package examples.base;
 
+import org.jspecify.annotations.NonNull;
+
 public final class BaseClass {
     public BaseClass(int intField, double doubleField, String stringField, int[] intArrayField) {
         this.intField = intField;
