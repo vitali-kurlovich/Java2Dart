@@ -301,7 +301,7 @@ public class CodeVisitor implements CtVisitor {
         var assigned = ctLocalVariable.getReference().getSimpleName();   ///..getValueByRole(CtRole.ASSIGNED);
 
 
-        builder.append(assigned.toString());
+        builder.append(assigned);
         builder.newline();
 
         var expression = ctLocalVariable.getDefaultExpression();

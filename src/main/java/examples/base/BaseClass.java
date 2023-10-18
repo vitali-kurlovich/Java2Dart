@@ -1,3 +1,4 @@
+package examples.base;
 
 public final class BaseClass {
     public BaseClass(int intField, double doubleField, String stringField, int[] intArrayField) {
@@ -12,7 +13,7 @@ public final class BaseClass {
 
     private String stringField;
 
-    private int[] intArrayField;
+    private final int[] intArrayField;
 
     private void method() {
 
