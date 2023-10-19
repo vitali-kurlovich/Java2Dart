@@ -1,6 +1,6 @@
-package org.java2dart.syntaxis.dart;
+package org.java2dart.synthesize.type.dart;
 
-import org.java2dart.syntaxis.BaseTypeSpecifier;
+import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.java2dart.types.array.ArrayTypeDescription;
 import org.java2dart.types.generic.GenericTypeDescription;
 import org.java2dart.types.none.VoidTypeDescription;
@@ -8,8 +8,6 @@ import org.java2dart.types.object.ObjectTypeDescription;
 import org.java2dart.types.object.parameterized.ParameterizedTypeDescription;
 import org.java2dart.types.primitive.PrimitiveTypeDescription;
 import org.jspecify.annotations.NonNull;
-
-import java.util.ArrayList;
 
 public class DartTypeSpecifier extends BaseTypeSpecifier {
 

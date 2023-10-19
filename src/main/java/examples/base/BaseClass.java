@@ -3,7 +3,8 @@ package examples.base;
 import org.jspecify.annotations.NonNull;
 
 
-public final class BaseClass<T> implements BaseInterface {
+
+public final class BaseClass<T extends BaseInterface> implements BaseInterface {
 
     protected class InnerClass<T> {
         private final T field;

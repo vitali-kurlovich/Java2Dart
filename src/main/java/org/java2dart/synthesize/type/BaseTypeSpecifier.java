@@ -1,4 +1,4 @@
-package org.java2dart.syntaxis;
+package org.java2dart.synthesize.type;
 
 import org.java2dart.types.TypeDescription;
 import org.java2dart.types.array.ArrayTypeDescription;
