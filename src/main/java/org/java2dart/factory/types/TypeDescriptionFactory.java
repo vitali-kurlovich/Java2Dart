@@ -2,6 +2,9 @@ package org.java2dart.factory.types;
 
 import org.java2dart.types.TypeDescription;
 import org.java2dart.types.array.ArrayTypeDescription;
+import org.java2dart.types.generic.GenericClassTypeDescription;
+import org.java2dart.types.generic.GenericInterfaceTypeDescription;
+import org.java2dart.types.generic.GenericParameterTypeDescription;
 import org.java2dart.types.generic.GenericTypeDescription;
 import org.java2dart.types.none.VoidTypeDescription;
 import org.java2dart.types.object.ClassTypeDescription;
@@ -126,9 +129,19 @@ public class TypeDescriptionFactory {
         return new EnumTypeDescription(name, nullable);
     }
 
-    public @NonNull GenericTypeDescription genericDescription(@NonNull String name) {
-        return new GenericTypeDescription(name);
+    public @NonNull GenericTypeDescription genericClassDescription(@NonNull String name) {
+        return new GenericClassTypeDescription(name);
     }
+
+    public @NonNull GenericTypeDescription genericInterfaceDescription(@NonNull String name) {
+        return new GenericInterfaceTypeDescription(name);
+    }
+
+    public @NonNull GenericTypeDescription genericParameterDescription(@NonNull String name) {
+        return new GenericParameterTypeDescription(name);
+    }
+
+
 
 
 }

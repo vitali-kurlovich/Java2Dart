@@ -48,4 +48,9 @@ public class ArrayTypeDescription extends BaseTypeDescription {
                 + "< -----------------\n" ;
 
     }
+
+    @Override
+    public TypeKind king() {
+        return baseType.king();
+    }
 }

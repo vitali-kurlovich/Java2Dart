@@ -1,7 +1,5 @@
 package org.java2dart.types;
 
-import org.jspecify.annotations.NonNull;
-
 public interface TypeDescription {
 
     boolean isVoid() ;
@@ -12,6 +10,17 @@ public interface TypeDescription {
     boolean isArray() ;
 
     boolean isGeneric() ;
+
+    TypeKind king();
+
+   public enum TypeKind {
+        ENUM,
+        CLASS,
+        INTERFACE,
+        PRIMITIVE,
+
+       NONE
+    }
 }
 
 

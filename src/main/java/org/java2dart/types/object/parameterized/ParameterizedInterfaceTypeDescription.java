@@ -9,4 +9,9 @@ public final class ParameterizedInterfaceTypeDescription extends ParameterizedTy
     public ParameterizedInterfaceTypeDescription(@NonNull String typeName, List<TypeDescription> typeArguments, @NonNull boolean nullable) {
         super(typeName, NonPrimitiveType.INTERFACE, typeArguments, nullable);
     }
+
+    @Override
+    public TypeKind king() {
+        return TypeKind.INTERFACE;
+    }
 }

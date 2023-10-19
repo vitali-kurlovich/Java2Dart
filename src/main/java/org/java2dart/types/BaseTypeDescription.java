@@ -4,6 +4,8 @@ import org.java2dart.types.TypeDescription;
 
 public abstract class BaseTypeDescription implements TypeDescription {
 
+
+
     @Override
     public String toString() {
        final var builder = new StringBuilder();

@@ -1,24 +1,24 @@
 package org.java2dart.factory.synthesize;
 
-import org.java2dart.synthesize.param.BaseTypeParameterSpecifier;
-import org.java2dart.synthesize.param.dart.DartTypeParameterSpecifier;
-import org.java2dart.synthesize.scheme.BaseSchemeSpecifier;
-import org.java2dart.synthesize.scheme.dart.DartSchemeSpecifier;
+import org.java2dart.synthesize.scheme.BaseObjectSchemeSpecifier;
+import org.java2dart.synthesize.scheme.dart.DartObjectSchemeSpecifier;
+import org.java2dart.synthesize.definition.BaseSchemeDefinitionSpecifier;
+import org.java2dart.synthesize.definition.dart.DartSchemeDefinitionSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
 
 public class SpecifierFactory {
     private final BaseTypeSpecifier typeSpecifier ;
-    private final BaseTypeParameterSpecifier typeParameterSpecifier;
+    private final BaseObjectSchemeSpecifier typeParameterSpecifier;
 
-    private final BaseSchemeSpecifier schemeSpecifier;
+    private final BaseSchemeDefinitionSpecifier schemeSpecifier;
 
     public SpecifierFactory() {
         typeSpecifier = new DartTypeSpecifier();
 
-        typeParameterSpecifier = new DartTypeParameterSpecifier(typeSpecifier);
+        typeParameterSpecifier = new DartObjectSchemeSpecifier(typeSpecifier);
 
-        schemeSpecifier =  new DartSchemeSpecifier(typeSpecifier, typeParameterSpecifier);
+        schemeSpecifier =  new DartSchemeDefinitionSpecifier( typeParameterSpecifier);
     }
 
     public BaseTypeSpecifier typeSpecifier() {
@@ -26,12 +26,12 @@ public class SpecifierFactory {
     }
 
   //  public BaseSchemeSpecifier BaseSchemeSpecifier
-    public BaseTypeParameterSpecifier typeParameterSpecifier() {
+    public BaseObjectSchemeSpecifier typeParameterSpecifier() {
         return typeParameterSpecifier;
     }
 
-    public BaseSchemeSpecifier schemeSpecifier() {
-        return new DartSchemeSpecifier(typeSpecifier(), typeParameterSpecifier());
+    public BaseSchemeDefinitionSpecifier schemeSpecifier() {
+        return new DartSchemeDefinitionSpecifier( typeParameterSpecifier());
     }
 
 

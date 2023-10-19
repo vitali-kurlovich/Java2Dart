@@ -6,4 +6,9 @@ public class ClassTypeDescription extends ObjectTypeDescription {
     public ClassTypeDescription(@NonNull String typeName, @NonNull boolean nullable) {
         super(typeName, NonPrimitiveType.CLASS, nullable);
     }
+
+    @Override
+    public TypeKind king() {
+        return TypeKind.CLASS;
+    }
 }

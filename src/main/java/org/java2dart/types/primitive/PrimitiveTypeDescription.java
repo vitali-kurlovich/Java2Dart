@@ -82,6 +82,10 @@ public final class PrimitiveTypeDescription extends BaseTypeDescription {
         return false;
     }
 
+    @Override
+    public TypeKind king() {
+        return TypeKind.PRIMITIVE;
+    }
 
 
     @Override

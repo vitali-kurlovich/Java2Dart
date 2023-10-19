@@ -1,15 +1,13 @@
-package org.java2dart.synthesize.param.dart;
+package org.java2dart.synthesize.scheme.dart;
 
 import org.java2dart.schema.IObjectScheme;
-import org.java2dart.schema.ObjectScheme;
-import org.java2dart.schema.TypeParameter;
-import org.java2dart.synthesize.param.BaseTypeParameterSpecifier;
+import org.java2dart.synthesize.scheme.BaseObjectSchemeSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.jspecify.annotations.NonNull;
 
-public class DartTypeParameterSpecifier extends BaseTypeParameterSpecifier {
+public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
 
-    public DartTypeParameterSpecifier(BaseTypeSpecifier typeSpecifier) {
+    public DartObjectSchemeSpecifier(BaseTypeSpecifier typeSpecifier) {
         super(typeSpecifier);
     }
 
@@ -18,6 +16,25 @@ public class DartTypeParameterSpecifier extends BaseTypeParameterSpecifier {
         final var typeDescription = parameter.getSpecification();
         final var builder = new StringBuilder();
         builder.append(typeSpecifier.specify(typeDescription));
+
+        if (parameter.isParameterized()) {
+            final var formalParameters = parameter.getFormalParameters();
+
+            var needsSeparator = false;
+            builder.append("<");
+            for (final var param : formalParameters) {
+
+                if (needsSeparator) {
+                    builder.append(", ");
+                }
+
+                final var paramSpec = specify(param);
+                builder.append(paramSpec);
+
+                needsSeparator = true;
+            }
+            builder.append(">");
+        }
 
         if (parameter.isExtends()) {
             builder.append(" extended ");

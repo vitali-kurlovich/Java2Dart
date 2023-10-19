@@ -34,4 +34,9 @@ public final class VoidTypeDescription extends BaseTypeDescription {
     public boolean isGeneric() {
         return false;
     }
+
+    @Override
+    public TypeKind king() {
+        return TypeKind.NONE;
+    }
 }

@@ -56,9 +56,17 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
         }
 
         if (ctTypeReference.isGenerics()) {
+            if (ctTypeReference.isClass()) {
+                return genericClassDescription(simpleName);
+            }
 
+            if (ctTypeReference.isInterface()) {
+                return genericInterfaceDescription(simpleName);
+            }
 
-            return genericDescription(simpleName);
+            if ( ctTypeReference.isParentInitialized() ) {
+                return genericParameterDescription(simpleName);
+            }
         }
 
         throw new RuntimeException();

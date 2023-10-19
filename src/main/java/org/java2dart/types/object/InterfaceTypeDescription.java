@@ -8,4 +8,10 @@ public class InterfaceTypeDescription extends ObjectTypeDescription {
         super(typeName, NonPrimitiveType.INTERFACE, nullable);
     }
 
+    @Override
+    public TypeKind king() {
+        return TypeKind.INTERFACE;
+    }
+
+
 }

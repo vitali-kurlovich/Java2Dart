@@ -5,7 +5,8 @@ import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.object.ObjectTypeDescription;
 import org.jspecify.annotations.NonNull;
 
-public class GenericTypeDescription extends BaseTypeDescription implements NamedTypeDescription {
+
+public abstract class GenericTypeDescription extends BaseTypeDescription implements NamedTypeDescription {
 
     @NonNull
     private final String typeName;
@@ -53,5 +54,7 @@ public class GenericTypeDescription extends BaseTypeDescription implements Named
 
                 + "typeName: " + getTypeName() + "\n";
     }
+
+
 
 }

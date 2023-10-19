@@ -2,8 +2,6 @@ package org.java2dart.ast.generate;
 
 import org.java2dart.ast.generate.builder.base.CodeBuilder;
 import org.java2dart.factory.Factory;
-import org.java2dart.synthesize.param.dart.DartTypeParameterSpecifier;
-import org.java2dart.synthesize.scheme.dart.DartSchemeSpecifier;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;

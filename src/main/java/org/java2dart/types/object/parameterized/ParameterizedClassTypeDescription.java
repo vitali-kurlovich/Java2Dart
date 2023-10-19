@@ -7,9 +7,14 @@ import java.util.List;
 
 
 public final class ParameterizedClassTypeDescription extends ParameterizedTypeDescription {
-    public ParameterizedClassTypeDescription(@NonNull String typeName, List<TypeDescription> typeArguments, @NonNull boolean nullable) {
-
-
+    public ParameterizedClassTypeDescription(@NonNull String typeName,
+                                             List<TypeDescription> typeArguments,
+                                             @NonNull boolean nullable) {
         super(typeName, NonPrimitiveType.CLASS, typeArguments, nullable);
+    }
+
+    @Override
+    public TypeKind king() {
+        return TypeKind.CLASS;
     }
 }
