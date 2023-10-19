@@ -2,7 +2,12 @@ package examples.base;
 
 import org.jspecify.annotations.NonNull;
 
-public final class BaseClass<T extends BaseInterface> extends FooClass<String> implements BaseInterface {
+public final class BaseClass<T extends BaseInterface> extends FooClass<String> implements BaseInterface, SecondInteface<Integer> {
+
+    @Override
+    public void method(Integer value) {
+
+    }
 
     protected class InnerClass<T> {
         private final T field;
@@ -32,6 +37,11 @@ public final class BaseClass<T extends BaseInterface> extends FooClass<String> i
     public void method() {
 
         System.out.println("Hello");
+    }
+
+    public void method(T value) {
+
+
     }
 
     public String retStringMethod() {

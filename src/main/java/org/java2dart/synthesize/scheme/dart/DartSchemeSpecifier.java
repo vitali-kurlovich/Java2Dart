@@ -56,6 +56,24 @@ public class DartSchemeSpecifier extends BaseSchemeSpecifier {
            // final var typeName = typeSpecifier.specify();
         }
 
+        if (scheme.isImplements()) {
+           final var interfaces = scheme.getInterfaces();
+            builder.append(" implements ");
+
+            var needsSeparator = false;
+            for (final var ref : interfaces) {
+                if (needsSeparator) {
+                    builder.append(", ");
+                }
+                final var spec = typeSpecifier.specify(ref);
+                builder.append(spec);
+
+
+                needsSeparator = true;
+            }
+
+        }
+
 
         return builder.toString();
     }

@@ -13,7 +13,9 @@ import spoon.reflect.declaration.CtTypeParameter;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ASTSchemaFactory extends SchemaFactory {
 
@@ -36,8 +38,14 @@ public class ASTSchemaFactory extends SchemaFactory {
 
        final var superInterfaces =  ctClass.getSuperInterfaces();
 
-       if (  superInterfaces != null) {
+        Set<NamedTypeDescription> interfaces = null;
 
+       if (  superInterfaces != null) {
+           interfaces  = new HashSet<NamedTypeDescription>();
+           for (final var ref:superInterfaces) {
+              final var desc = typeDescriptionFactory.description(ref);
+               interfaces.add((NamedTypeDescription) desc);
+           }
        }
 
 
@@ -45,13 +53,14 @@ public class ASTSchemaFactory extends SchemaFactory {
           final var params = ctClass.getFormalCtTypeParameters();
 
           final var formalParameters = typeParameterFactory.typeParameters(params);
-           return classSchema(description, formalParameters, description(superClass), null );
+
+           return classSchema(description, formalParameters, description(superClass), interfaces );
        }
 
 
 
 
-       return classSchema(description, description(superClass), null );
+       return classSchema(description, description(superClass), interfaces );
     }
 
 

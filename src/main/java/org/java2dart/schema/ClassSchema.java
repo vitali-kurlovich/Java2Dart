@@ -30,11 +30,15 @@ public class ClassSchema {
     }
 
     public boolean isParameterized() {
-        return formalParameters != null && !formalParameters.isEmpty();
+        return getFormalParameters() != null && !getFormalParameters().isEmpty();
     }
 
     public boolean isExtends() {
         return getSuperClass() != null;
+    }
+
+    public boolean isImplements() {
+        return getInterfaces() != null && !getInterfaces().isEmpty();
     }
 
     public @Nullable List<TypeParameter> getFormalParameters() {
