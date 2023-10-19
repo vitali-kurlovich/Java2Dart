@@ -11,12 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
-
     public @Nullable TypeDescription description(CtTypeReference<?> ctTypeReference) throws IllegalStateException {
 
         if (ctTypeReference.isArray()) {
-            if (ctTypeReference instanceof CtArrayTypeReference<?>) {
-                final var arrayTypeReference = (CtArrayTypeReference<?>) ctTypeReference;
+            if (ctTypeReference instanceof CtArrayTypeReference<?> arrayTypeReference) {
                 final var componentTypeReference = arrayTypeReference.getComponentType();
 
                 final var component = description(componentTypeReference);
@@ -27,38 +25,28 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
             }
         }
 
+        final var simpleName = ctTypeReference.getSimpleName();
 
         if (ctTypeReference.isPrimitive()) {
-            final var simpleName = ctTypeReference.getSimpleName();
-
             if (simpleName == "void") {
                 return voidDescription();
             }
-
             return primitiveDescription(simpleName);
         }
 
-
-        final var simpleName = ctTypeReference.getSimpleName();
-
         if (ctTypeReference.isClass()) {
-
             if (ctTypeReference.isParameterized()) {
                 final var args = ctTypeReference.getActualTypeArguments();
-
                 return parameterizedClassDescription(simpleName, descriptions(args), true);
             }
-
             return classDescription(simpleName, true);
         }
 
         if (ctTypeReference.isInterface()) {
             if (ctTypeReference.isParameterized()) {
                 final var args = ctTypeReference.getActualTypeArguments();
-
                 return parameterizedInterfaceDescription(simpleName, descriptions(args), true);
             }
-
             return interfaceDescription(simpleName, true);
         }
 
@@ -66,19 +54,12 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
             return enumDescription(simpleName, true);
         }
 
-
         if (ctTypeReference.isGenerics()) {
-
-
             return genericDescription(simpleName);
-
-            //  System.out.println("Generic");
-
         }
 
-        return null;
+        throw new RuntimeException();
     }
-
 
     private @NonNull List<TypeDescription> descriptions(List<CtTypeReference<?>> ctTypeReferences) throws IllegalStateException {
         final var descriptions = new ArrayList<TypeDescription>();

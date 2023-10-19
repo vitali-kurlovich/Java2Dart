@@ -6,7 +6,7 @@ import org.jspecify.annotations.NonNull;
 public final class BaseClass<T> implements BaseInterface {
 
     protected class InnerClass<T> {
-        private T field;
+        private final T field;
 
         public InnerClass(T field) {
             this.field = field;

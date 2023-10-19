@@ -8,7 +8,7 @@ import java.util.List;
 
 
 public abstract class ParameterizedTypeDescription extends ObjectTypeDescription {
-    private List<TypeDescription> typeArguments;
+    private final List<TypeDescription> typeArguments;
 
     protected ParameterizedTypeDescription(@NonNull String typeName, @NonNull NonPrimitiveType type,
                                            List<TypeDescription> typeArguments,
@@ -34,7 +34,7 @@ public abstract class ParameterizedTypeDescription extends ObjectTypeDescription
 
         return super.toString()
                 + "typeArguments: [\n" +
-                builder.toString()
+                builder
                 + "]\n";
     }
 }
