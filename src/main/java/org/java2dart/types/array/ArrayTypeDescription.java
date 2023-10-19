@@ -39,4 +39,13 @@ public class ArrayTypeDescription extends BaseTypeDescription {
     public boolean isGeneric() {
         return false;
     }
+
+    @Override
+    public String toString() {
+        return super.toString()
+               + "baseType: > -----------------\n" +
+                baseType.toString()
+                + "< -----------------\n" ;
+
+    }
 }

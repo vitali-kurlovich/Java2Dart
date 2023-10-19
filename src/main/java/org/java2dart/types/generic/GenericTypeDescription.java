@@ -1,32 +1,25 @@
-package org.java2dart.types.object;
+package org.java2dart.types.generic;
 
 import org.java2dart.types.BaseTypeDescription;
 import org.java2dart.types.NamedTypeDescription;
-import org.java2dart.types.TypeDescription;
+import org.java2dart.types.object.ObjectTypeDescription;
 import org.jspecify.annotations.NonNull;
 
+public class GenericTypeDescription extends BaseTypeDescription implements NamedTypeDescription {
 
-public abstract class ObjectTypeDescription extends BaseTypeDescription implements NamedTypeDescription {
-
-    @NonNull
-    public final NonPrimitiveType type;
     @NonNull
     private final String typeName;
-    @NonNull
-    private final boolean nullable;
 
-    protected ObjectTypeDescription(@NonNull String typeName, @NonNull NonPrimitiveType type, @NonNull boolean nullable) {
+    public GenericTypeDescription(@NonNull String typeName) {
         assert (!typeName.isEmpty());
-
         this.typeName = typeName;
-        this.type = type;
-        this.nullable = nullable;
     }
 
     @NonNull
     public String getTypeName() {
         return typeName;
     }
+
 
     @Override
     public boolean isVoid() {
@@ -40,7 +33,7 @@ public abstract class ObjectTypeDescription extends BaseTypeDescription implemen
 
     @Override
     public boolean isNullable() {
-        return nullable;
+        return false;
     }
 
     @Override
@@ -50,20 +43,15 @@ public abstract class ObjectTypeDescription extends BaseTypeDescription implemen
 
     @Override
     public boolean isGeneric() {
-        return false;
+        return true;
     }
 
     @Override
     public String toString() {
         return super.toString()
-                + "type: " +
-                getTypeName() + "\n"
-                + "typeName: " + typeName + "\n";
+
+
+                + "typeName: " + getTypeName() + "\n";
     }
 
-    public enum NonPrimitiveType {
-        ENUM,
-        CLASS,
-        INTERFACE
-    }
 }

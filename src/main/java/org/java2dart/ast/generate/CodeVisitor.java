@@ -136,7 +136,7 @@ public class CodeVisitor implements CtVisitor {
 
         ctClass.getFields().forEach(f -> f.accept(this));
 
-        ctClass.getMethods().forEach(m -> m.accept(this));
+       // ctClass.getMethods().forEach(m -> m.accept(this));
 
     }
 
@@ -186,6 +186,21 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtField(CtField<T> ctField) {
         builder.append("visitCtField");
         builder.newline();
+
+
+      final var type =  ctField.getType();
+
+
+      final var factory = Factory.TypeDescription();
+
+      try {
+         final var desc = factory.description(type);
+         System.out.println(desc);
+
+      } catch (Exception e) {
+
+      }
+
     }
 
     @Override
@@ -337,6 +352,20 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtMethod(CtMethod<T> ctMethod) {
         builder.append("visitCtMethod");
         builder.newline();
+
+       var ctTypeReference = ctMethod.getType();
+
+        final var factory = Factory.TypeDescription();
+
+        try {
+            final var desc = factory.description(ctTypeReference);
+            System.out.println(desc.toString());
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
     @Override
@@ -489,33 +518,29 @@ public class CodeVisitor implements CtVisitor {
         builder.append("visitCtTypeReference");
         builder.append("    ");
         final var simpleName = ctTypeReference.getSimpleName();
-        if ( simpleName == "void" ) {
-            System.out.println(simpleName);
-        }
 
         builder.append(simpleName);
         builder.newline();
 
-
-        final var factory = Factory.TypeDescription();
-
-        try {
-            final var desc = factory.description(ctTypeReference);
-            System.out.println(desc.toString());
-        } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-        }
-
-        //System.out.println(desc.toString());
-
+//        final var factory = Factory.TypeDescription();
+//
+//        try {
+//            final var desc = factory.description(ctTypeReference);
+//            System.out.println(desc.toString());
+//        } catch (Exception e) {
+//
+//            System.out.println(e.getMessage());
+//        }
+//
+//        //System.out.println(desc.toString());
+//
         final var decl = ctTypeReference.getDeclaration();
 
         if (decl != null) {
             decl.accept(this);
         }
 
-        //   ctTypeReference.getDeclaration().accept(this);
+          // ctTypeReference.getDeclaration().accept(this);
     }
 
     @Override

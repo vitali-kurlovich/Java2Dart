@@ -1,14 +1,19 @@
-package org.java2dart.types.factory;
+package org.java2dart.factory.types;
 
 import org.java2dart.types.TypeDescription;
 import org.java2dart.types.array.ArrayTypeDescription;
+import org.java2dart.types.generic.GenericTypeDescription;
 import org.java2dart.types.none.VoidTypeDescription;
 import org.java2dart.types.object.ClassTypeDescription;
 import org.java2dart.types.object.EnumTypeDescription;
 import org.java2dart.types.object.InterfaceTypeDescription;
+import org.java2dart.types.object.parameterized.ParameterizedClassTypeDescription;
+import org.java2dart.types.object.parameterized.ParameterizedInterfaceTypeDescription;
 import org.java2dart.types.primitive.PrimitiveType;
 import org.java2dart.types.primitive.PrimitiveTypeDescription;
 import org.jspecify.annotations.NonNull;
+
+import java.util.List;
 
 
 public class TypeDescriptionFactory {
@@ -97,12 +102,32 @@ public class TypeDescriptionFactory {
         return new ClassTypeDescription(name, nullable);
     }
 
+    public @NonNull ParameterizedClassTypeDescription parameterizedClassDescription(@NonNull String name,
+                                                                                    @NonNull List<TypeDescription> typeArguments,
+                                                                                    @NonNull boolean nullable) {
+
+        return new ParameterizedClassTypeDescription(name, typeArguments, nullable);
+    }
+
+
+
     public @NonNull InterfaceTypeDescription interfaceDescription(@NonNull String name, @NonNull boolean nullable) {
         return new InterfaceTypeDescription(name, nullable);
     }
 
+    public @NonNull ParameterizedInterfaceTypeDescription parameterizedInterfaceDescription(@NonNull String name,
+                                                                                        @NonNull List<TypeDescription> typeArguments,
+                                                                                        @NonNull boolean nullable) {
+
+        return new ParameterizedInterfaceTypeDescription(name, typeArguments, nullable);
+    }
+
     public @NonNull EnumTypeDescription enumDescription(@NonNull String name, @NonNull boolean nullable) {
         return new EnumTypeDescription(name, nullable);
+    }
+
+    public @NonNull GenericTypeDescription genericDescription(@NonNull String name) {
+        return new GenericTypeDescription(name);
     }
 
 
