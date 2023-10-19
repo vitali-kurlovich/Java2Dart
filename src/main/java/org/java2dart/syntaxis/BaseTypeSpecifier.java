@@ -12,31 +12,30 @@ import org.jspecify.annotations.NonNull;
 public abstract class BaseTypeSpecifier implements TypeSpecifier {
 
 
-    public @NonNull String specify(TypeDescription description) throws  IllegalStateException{
+    public @NonNull String specify(TypeDescription description) throws IllegalStateException {
         if (description instanceof VoidTypeDescription) {
-            return  specify( (VoidTypeDescription) description );
+            return specify((VoidTypeDescription) description);
         }
 
         if (description instanceof PrimitiveTypeDescription) {
-            return  specify( (PrimitiveTypeDescription) description );
+            return specify((PrimitiveTypeDescription) description);
         }
 
         if (description instanceof ParameterizedTypeDescription) {
-            return  specify( (ParameterizedTypeDescription) description );
+            return specify((ParameterizedTypeDescription) description);
         }
 
         if (description instanceof ObjectTypeDescription) {
-            return  specify( (ObjectTypeDescription) description );
+            return specify((ObjectTypeDescription) description);
         }
 
         if (description instanceof ArrayTypeDescription) {
-            return  specify( (ArrayTypeDescription) description );
+            return specify((ArrayTypeDescription) description);
         }
 
 
-
         if (description instanceof GenericTypeDescription) {
-            return  specify( (GenericTypeDescription) description );
+            return specify((GenericTypeDescription) description);
         }
 
 
