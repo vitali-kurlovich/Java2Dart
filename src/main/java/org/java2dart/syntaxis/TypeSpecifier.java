@@ -10,11 +10,11 @@ import org.jspecify.annotations.NonNull;
 
 public interface TypeSpecifier {
 //
-    public @NonNull String specify(VoidTypeDescription description);
-   public @NonNull String specify(PrimitiveTypeDescription description);
-    public @NonNull String specify(ObjectTypeDescription description);
+    @NonNull String specify(VoidTypeDescription description);
+   @NonNull String specify(PrimitiveTypeDescription description);
+    @NonNull String specify(ObjectTypeDescription description);
 
-    public @NonNull String specify(ParameterizedTypeDescription description);
-    public @NonNull String specify(ArrayTypeDescription description);
-    public @NonNull String specify(GenericTypeDescription description);
+    @NonNull String specify(ParameterizedTypeDescription description);
+    @NonNull String specify(ArrayTypeDescription description);
+    @NonNull String specify(GenericTypeDescription description);
 }
