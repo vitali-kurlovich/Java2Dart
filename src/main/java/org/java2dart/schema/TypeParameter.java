@@ -7,8 +7,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 public class TypeParameter {
-    private final @NonNull TypeDescription typeDescription;
-    private final @Nullable List<TypeDescription> interfaces;
+    public final @NonNull TypeDescription typeDescription;
+    public final @Nullable List<TypeDescription> interfaces;
 
     public TypeParameter(@NonNull TypeDescription typeDescription, @Nullable List<TypeDescription> interfaces) {
         this.typeDescription = typeDescription;
