@@ -8,52 +8,33 @@ import java.util.List;
 import java.util.Set;
 
 public class ClassSchema extends ObjectScheme {
-    private final @Nullable List<TypeParameter> formalParameters;
 
 
     public ClassSchema(NamedTypeDescription specification,
                        @Nullable NamedTypeDescription superClass,
-                       @Nullable Set<NamedTypeDescription> interfaces,
-                       @Nullable List<TypeParameter> formalParameters) {
-        super(specification, superClass, interfaces);
-        this.formalParameters = formalParameters;
-    }
-
-    public ClassSchema(@NonNull NamedTypeDescription specification,
-                       @Nullable NamedTypeDescription superClass,
-                       @Nullable List<TypeParameter> formalParameters) {
-        super(specification, superClass);
-        this.formalParameters = formalParameters;
-    }
-
-    public ClassSchema(@NonNull NamedTypeDescription specification,
-                       @Nullable Set<NamedTypeDescription> interfaces,
-                       @Nullable List<TypeParameter> formalParameters) {
-        super(specification, interfaces);
-        this.formalParameters = formalParameters;
-    }
-
-    public ClassSchema(@NonNull NamedTypeDescription specification,
-                       @Nullable List<TypeParameter> formalParameters) {
-        super(specification);
-        this.formalParameters = formalParameters;
-    }
-
-
-    public ClassSchema(NamedTypeDescription specification,
-                       @Nullable NamedTypeDescription superClass,
+                       @Nullable List<IObjectScheme> formalParameters,
                        @Nullable Set<NamedTypeDescription> interfaces) {
-        this(specification, superClass, interfaces, null);
+        super(specification, superClass, formalParameters, interfaces);
     }
 
-    public boolean isParameterized() {
-        return getFormalParameters() != null && !getFormalParameters().isEmpty();
+    public ClassSchema(@NonNull NamedTypeDescription specification,
+                       @Nullable NamedTypeDescription superClass,
+                       @Nullable List<IObjectScheme> formalParameters) {
+        super(specification, superClass, formalParameters);
     }
 
-
-    public @Nullable List<TypeParameter> getFormalParameters() {
-        return formalParameters;
+    public ClassSchema(@NonNull NamedTypeDescription specification,
+                       @Nullable List<IObjectScheme> formalParameters,
+                       @Nullable Set<NamedTypeDescription> interfaces) {
+        super(specification, formalParameters, interfaces);
     }
 
+    public ClassSchema(@NonNull NamedTypeDescription specification,
+                       @Nullable List<IObjectScheme> formalParameters) {
+        super(specification, formalParameters);
+    }
 
+    public ClassSchema(@NonNull NamedTypeDescription specification) {
+        super(specification);
+    }
 }

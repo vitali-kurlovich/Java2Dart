@@ -4,6 +4,7 @@ import org.java2dart.factory.schema.param.ast.ASTTypeParameterFactory;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.ClassSchema;
 import org.java2dart.factory.schema.SchemaFactory;
+import org.java2dart.schema.IObjectScheme;
 import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
@@ -48,17 +49,20 @@ public class ASTSchemaFactory extends SchemaFactory {
            }
        }
 
-
        if (ctClass.isParameterized() ) {
           final var params = ctClass.getFormalCtTypeParameters();
 
           final var formalParameters = typeParameterFactory.typeParameters(params);
 
-           return classSchema(description, formalParameters, description(superClass), interfaces );
+          final var  parameters = new ArrayList< IObjectScheme >();
+
+           for (final var formal: formalParameters
+                ) {
+               parameters.add(formal);
+           }
+
+           return classSchema(description,  description(superClass), parameters, interfaces );
        }
-
-
-
 
        return classSchema(description, description(superClass), interfaces );
     }

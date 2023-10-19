@@ -1,5 +1,7 @@
 package org.java2dart.synthesize.param.dart;
 
+import org.java2dart.schema.IObjectScheme;
+import org.java2dart.schema.ObjectScheme;
 import org.java2dart.schema.TypeParameter;
 import org.java2dart.synthesize.param.BaseTypeParameterSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
@@ -12,7 +14,7 @@ public class DartTypeParameterSpecifier extends BaseTypeParameterSpecifier {
     }
 
     @Override
-    public @NonNull String specify(TypeParameter parameter) {
+    public @NonNull String specify(IObjectScheme parameter) {
         final var typeDescription = parameter.getSpecification();
         final var builder = new StringBuilder();
         builder.append(typeSpecifier.specify(typeDescription));

@@ -4,36 +4,52 @@ import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
-public abstract class ObjectScheme {
+
+public abstract class ObjectScheme implements IObjectScheme {
     private final NamedTypeDescription specification;
     private final @Nullable NamedTypeDescription superClass;
     private final @Nullable Set<NamedTypeDescription> interfaces;
 
+    private final @Nullable List<IObjectScheme> formalParameters;
+
     public ObjectScheme(NamedTypeDescription specification,
                         @Nullable NamedTypeDescription superClass,
-                        @Nullable Set<NamedTypeDescription> interfaces) {
+                        @Nullable List<IObjectScheme> formalParameters,
+                        @Nullable Set<NamedTypeDescription> interfaces
+                        ) {
         this.specification = specification;
         this.superClass = superClass;
         this.interfaces = interfaces;
+        this.formalParameters = formalParameters;
     }
 
     public ObjectScheme(@NonNull NamedTypeDescription specification,
-                        @Nullable NamedTypeDescription superClass) {
+                        @Nullable NamedTypeDescription superClass,
+                        @Nullable List<IObjectScheme> formalParameters) {
 
-        this(specification, superClass, null);
+        this(specification, superClass, formalParameters , null);
     }
 
     public ObjectScheme(@NonNull NamedTypeDescription specification,
-                        @Nullable Set<NamedTypeDescription> interfaces) {
+                        @Nullable List<IObjectScheme> formalParameters,
+                        @Nullable Set<NamedTypeDescription> interfaces
+                        ) {
 
-        this(specification, null, interfaces);
+        this(specification, null, formalParameters, interfaces );
+    }
+
+    public ObjectScheme(@NonNull NamedTypeDescription specification,
+                        @Nullable List<IObjectScheme> formalParameters) {
+
+        this(specification, null, formalParameters,null);
     }
 
     public ObjectScheme(@NonNull NamedTypeDescription specification) {
 
-        this(specification, null, null);
+        this(specification, null, null, null);
     }
 
     public NamedTypeDescription getSpecification() {
@@ -55,4 +71,15 @@ public abstract class ObjectScheme {
     public @Nullable Set<NamedTypeDescription> getInterfaces() {
         return interfaces;
     }
+
+    public boolean isParameterized() {
+        return getFormalParameters() != null && !getFormalParameters().isEmpty();
+    }
+
+
+    public @Nullable List<IObjectScheme> getFormalParameters() {
+        return formalParameters;
+    }
+
+
 }

@@ -23,10 +23,7 @@ public class DartSchemeSpecifier extends BaseSchemeSpecifier {
         builder.append("class ");
 
         //scheme.getSpecification().is
-
-
         final var specification = scheme.getSpecification();
-
 
         builder.append(typeSpecifier.specify(specification));
 
