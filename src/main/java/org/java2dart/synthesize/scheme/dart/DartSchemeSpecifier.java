@@ -21,11 +21,14 @@ public class DartSchemeSpecifier extends BaseSchemeSpecifier {
         final var builder = new StringBuilder();
 
         builder.append("class ");
+
+        //scheme.getSpecification().is
+
+
         final var specification = scheme.getSpecification();
 
-        final var typeName = typeSpecifier.specify(specification);
 
-        builder.append(typeName);
+        builder.append(typeSpecifier.specify(specification));
 
         if (scheme.isParameterized()) {
             final var formalParameters = scheme.getFormalParameters();
@@ -41,6 +44,16 @@ public class DartSchemeSpecifier extends BaseSchemeSpecifier {
                 needsSeparator = true;
             }
             builder.append(">");
+        }
+
+        if (scheme.isExtends()) {
+            final var superClass = scheme.getSuperClass();
+            builder.append(" extends ");
+            final var typeSpec =  typeSpecifier.specify(superClass);
+
+            builder.append(typeSpec);
+
+           // final var typeName = typeSpecifier.specify();
         }
 
 
