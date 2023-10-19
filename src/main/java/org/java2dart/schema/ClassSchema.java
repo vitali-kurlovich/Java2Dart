@@ -4,10 +4,11 @@ import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.Set;
 
 public class ClassSchema {
     private final @Nullable NamedTypeDescription superClass;
-    private final @Nullable List<NamedTypeDescription> interfaces;
+    private final @Nullable Set<NamedTypeDescription> interfaces;
     private final NamedTypeDescription specification;
 
     private final @Nullable List<TypeParameter> formalParameters;
@@ -15,14 +16,16 @@ public class ClassSchema {
     public ClassSchema(NamedTypeDescription specification,
                        @Nullable List<TypeParameter> formalParameters,
                        @Nullable NamedTypeDescription superClass,
-                       @Nullable List<NamedTypeDescription> interfaces) {
+                       @Nullable Set<NamedTypeDescription> interfaces) {
         this.superClass = superClass;
         this.interfaces = interfaces;
         this.specification = specification;
         this.formalParameters = formalParameters;
     }
 
-    public ClassSchema(NamedTypeDescription specification, @Nullable NamedTypeDescription superClass, @Nullable List<NamedTypeDescription> interfaces) {
+    public ClassSchema(NamedTypeDescription specification,
+                       @Nullable NamedTypeDescription superClass,
+                       @Nullable Set<NamedTypeDescription> interfaces) {
         this(specification, null, superClass, interfaces);
     }
 
@@ -42,7 +45,7 @@ public class ClassSchema {
         return superClass;
     }
 
-    public @Nullable List<NamedTypeDescription> getInterfaces() {
+    public @Nullable Set<NamedTypeDescription> getInterfaces() {
         return interfaces;
     }
 

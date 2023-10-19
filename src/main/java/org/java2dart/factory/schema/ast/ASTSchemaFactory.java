@@ -32,6 +32,14 @@ public class ASTSchemaFactory extends SchemaFactory {
 
        final var description  = description(type);
        assert ( description != null);
+// ctClass.getNestedTypes()  internals
+
+       final var superInterfaces =  ctClass.getSuperInterfaces();
+
+       if (  superInterfaces != null) {
+
+       }
+
 
        if (ctClass.isParameterized() ) {
           final var params = ctClass.getFormalCtTypeParameters();
@@ -39,6 +47,9 @@ public class ASTSchemaFactory extends SchemaFactory {
           final var formalParameters = typeParameterFactory.typeParameters(params);
            return classSchema(description, formalParameters, description(superClass), null );
        }
+
+
+
 
        return classSchema(description, description(superClass), null );
     }
