@@ -25,7 +25,7 @@ public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specif
     }
 
     public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification) {
-        return new TypeParameter(specification, null);
+        return new TypeParameter(specification);
     }
 
 }

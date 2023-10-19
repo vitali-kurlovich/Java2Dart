@@ -20,6 +20,6 @@ public class SchemaFactory {
                                             @Nullable List<TypeParameter> formalParameters,
                                             @Nullable NamedTypeDescription superClass,
                                             @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(specification, formalParameters, superClass, interfaces);
+        return new ClassSchema(specification, superClass, interfaces, formalParameters);
     }
 }

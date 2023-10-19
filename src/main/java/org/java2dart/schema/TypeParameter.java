@@ -6,44 +6,22 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.Set;
 
-public class TypeParameter {
-    private final @NonNull NamedTypeDescription specification;
+public class TypeParameter extends ObjectScheme {
 
-    private final @Nullable NamedTypeDescription superClass;
-    private final @Nullable Set<NamedTypeDescription> interfaces;
 
-    public TypeParameter(@NonNull NamedTypeDescription specification,
-                         @Nullable NamedTypeDescription superClass,
-                         @Nullable Set<NamedTypeDescription> interfaces) {
-        this.specification = specification;
-        this.superClass = superClass;
-        this.interfaces = interfaces;
+    public TypeParameter(NamedTypeDescription specification, @Nullable NamedTypeDescription superClass, @Nullable Set<NamedTypeDescription> interfaces) {
+        super(specification, superClass, interfaces);
     }
 
-    public TypeParameter(@NonNull NamedTypeDescription specification,
-                         @Nullable NamedTypeDescription superClass) {
-
-        this(specification, superClass, null);
+    public TypeParameter(@NonNull NamedTypeDescription specification, @Nullable NamedTypeDescription superClass) {
+        super(specification, superClass);
     }
 
-
-    public NamedTypeDescription getSpecification() {
-        return specification;
+    public TypeParameter(@NonNull NamedTypeDescription specification, @Nullable Set<NamedTypeDescription> interfaces) {
+        super(specification, interfaces);
     }
 
-    public boolean isExtends() {
-        return getSuperClass() != null;
-    }
-
-    public @Nullable NamedTypeDescription getSuperClass() {
-        return superClass;
-    }
-
-    public boolean isImplements() {
-        return getInterfaces() != null && !getInterfaces().isEmpty();
-    }
-
-    public @Nullable Set<NamedTypeDescription> getInterfaces() {
-        return interfaces;
+    public TypeParameter(@NonNull NamedTypeDescription specification) {
+        super(specification);
     }
 }
