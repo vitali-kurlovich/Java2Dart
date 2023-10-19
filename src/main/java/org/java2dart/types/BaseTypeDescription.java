@@ -30,7 +30,6 @@ public abstract class BaseTypeDescription implements TypeDescription {
         builder.append(isGeneric());
         builder.append("\n");
 
-
         return builder.toString();
     }
 }

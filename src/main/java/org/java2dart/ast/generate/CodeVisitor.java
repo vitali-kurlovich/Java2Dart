@@ -2,6 +2,7 @@ package org.java2dart.ast.generate;
 
 import org.java2dart.ast.generate.builder.base.CodeBuilder;
 import org.java2dart.factory.Factory;
+import org.java2dart.syntaxis.dart.DartTypeSpecifier;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
@@ -195,7 +196,12 @@ public class CodeVisitor implements CtVisitor {
 
       try {
          final var desc = factory.description(type);
-         System.out.println(desc);
+
+        final var  specifier = new DartTypeSpecifier();
+
+
+
+         System.out.println( specifier.specify(desc));
 
       } catch (Exception e) {
 

@@ -37,7 +37,8 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
         if (ctTypeReference.isClass()) {
             if (ctTypeReference.isParameterized()) {
                 final var args = ctTypeReference.getActualTypeArguments();
-                return parameterizedClassDescription(simpleName, descriptions(args), true);
+                final var descriptions = descriptions(args);
+                return parameterizedClassDescription(simpleName, descriptions , true);
             }
             return classDescription(simpleName, true);
         }
@@ -55,6 +56,8 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
         }
 
         if (ctTypeReference.isGenerics()) {
+
+
             return genericDescription(simpleName);
         }
 
