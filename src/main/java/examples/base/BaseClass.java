@@ -2,7 +2,7 @@ package examples.base;
 
 import org.jspecify.annotations.NonNull;
 
-public final class BaseClass<T extends BaseInterface> extends FooClass<String> implements BaseInterface, SecondInteface<Integer> {
+public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K> implements BaseInterface, SecondInteface<Integer> {
 
     @Override
     public void method(Integer value) {
@@ -25,7 +25,6 @@ public final class BaseClass<T extends BaseInterface> extends FooClass<String> i
 
     InnerClass<T> innerStringField;
 
-   @NonNull BaseClass<T> baseField;
 
     public BaseClass(int intField, double doubleField, String stringField, int[][] intArrayField) {
         this.intField = intField;

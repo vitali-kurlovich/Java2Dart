@@ -3,6 +3,7 @@ package org.java2dart.factory.schema.param.ast;
 import org.java2dart.factory.schema.param.TypeParameterFactory;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.TypeParameter;
+import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -22,9 +23,16 @@ public class ASTTypeParameterFactory extends TypeParameterFactory {
     public @NonNull TypeParameter typeParameter(@NonNull CtTypeParameter parameter) {
 
         final var type = parameter.getReference();
-        final var typeDescription = typeDescriptionFactory.description(type);
+        final var specification = (NamedTypeDescription) typeDescriptionFactory.description(type);
         // TODO: Interfaces
-        return typeParameter(typeDescription);
+
+       final var superClass = parameter.getSuperclass();
+        if ( superClass != null) {
+            final var superClassSpec =  (NamedTypeDescription) typeDescriptionFactory.description(superClass);
+            return typeParameter(specification, superClassSpec);
+        }
+
+        return typeParameter(specification);
     }
 
     public @NonNull List<TypeParameter> typeParameters(@NonNull List<CtTypeParameter> parameters) {

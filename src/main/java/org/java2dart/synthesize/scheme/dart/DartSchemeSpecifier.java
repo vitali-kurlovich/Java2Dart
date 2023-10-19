@@ -36,11 +36,14 @@ public class DartSchemeSpecifier extends BaseSchemeSpecifier {
             var needsSeparator = false;
             builder.append("<");
             for (final var param : formalParameters) {
-                final var paramSpec = typeParameterSpecifier.specify(param);
-                builder.append(paramSpec);
+
                 if (needsSeparator) {
                     builder.append(", ");
                 }
+
+                final var paramSpec = typeParameterSpecifier.specify(param);
+                builder.append(paramSpec);
+
                 needsSeparator = true;
             }
             builder.append(">");
