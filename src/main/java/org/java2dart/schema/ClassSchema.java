@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ClassSchema extends ObjectScheme {
-
-
+    
     public ClassSchema(NamedTypeDescription specification,
                        @Nullable NamedTypeDescription superClass,
                        @Nullable List<IObjectScheme> formalParameters,
