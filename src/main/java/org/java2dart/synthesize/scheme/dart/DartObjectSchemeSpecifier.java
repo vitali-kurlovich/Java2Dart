@@ -46,8 +46,18 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
         final var interfaces = scheme.getInterfaces();
 
         if (interfaces != null && !interfaces.isEmpty()) {
+            switch (scheme.getTypeKing()) {
 
-            builder.append(" implement ");
+                case ENUM, NONE, PRIMITIVE, GENERIC -> {
+                    throw new RuntimeException("Not implemented");
+                }
+                case CLASS -> {
+                    builder.append(" implement ");
+                }
+                case INTERFACE -> {
+                    builder.append(" extends ");
+                }
+            }
 
             var needsSeparator = false;
             for (final var ref : interfaces) {
