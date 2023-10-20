@@ -8,7 +8,7 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
 
       enum InnerEnum {
-        FIRST, LAST;
+        FIRST, LAST
       }
 
     @Override
