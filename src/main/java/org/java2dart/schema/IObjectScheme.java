@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Set;
 
 public interface IObjectScheme {
-    public NamedTypeDescription getSpecification();
+    NamedTypeDescription getSpecification();
 
-    public boolean isExtends();
+    boolean isExtends();
 
-    public @Nullable NamedTypeDescription getSuperClass();
+    @Nullable NamedTypeDescription getSuperClass();
 
-    public boolean isImplements();
+    boolean isImplements();
 
-    public @Nullable Set<NamedTypeDescription> getInterfaces();
+    @Nullable Set<NamedTypeDescription> getInterfaces();
 
-    public boolean isParameterized();
+    boolean isParameterized();
 
 
-    public @Nullable List<IObjectScheme> getFormalParameters();
+    @Nullable List<IObjectScheme> getFormalParameters();
 
 }
