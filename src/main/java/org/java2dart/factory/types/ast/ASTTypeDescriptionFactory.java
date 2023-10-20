@@ -9,6 +9,7 @@ import spoon.reflect.reference.CtTypeReference;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
     public @Nullable TypeDescription description(CtTypeReference<?> ctTypeReference) throws IllegalStateException {
@@ -28,7 +29,7 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
         final var simpleName = ctTypeReference.getSimpleName();
 
         if (ctTypeReference.isPrimitive()) {
-            if (simpleName == "void") {
+            if (Objects.equals(simpleName, "void")) {
                 return voidDescription();
             }
             return primitiveDescription(simpleName);

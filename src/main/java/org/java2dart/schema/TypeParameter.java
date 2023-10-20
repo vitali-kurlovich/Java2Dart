@@ -7,25 +7,52 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class TypeParameter extends BaseObjectScheme {
+public class TypeParameter implements IObjectScheme {
 
+    private final IObjectScheme schema;
 
-    public TypeParameter(NamedTypeDescription specification,
-                         @Nullable NamedTypeDescription superClass,
-                         @Nullable List<IObjectScheme> formalParameters,
-                         @Nullable Set<NamedTypeDescription> interfaces) {
-        super(null, specification, superClass, formalParameters, interfaces);
+    public TypeParameter( @NonNull IObjectScheme schema) {
+        assert (schema != null);
+        this.schema = schema;
     }
 
-    public TypeParameter(@NonNull NamedTypeDescription specification,
-                         @Nullable NamedTypeDescription superClass,
-                         @Nullable List<IObjectScheme> formalParameters) {
-        super(null , specification, superClass, formalParameters);
+    @Override
+    public NamedTypeDescription getSpecification() {
+        return schema.getSpecification();
     }
 
+    @Override
+    public boolean isExtends() {
+        return schema.isExtends();
+    }
 
+    @Override
+    public @Nullable NamedTypeDescription getSuperClass() {
+        return schema.getSuperClass();
+    }
 
+    @Override
+    public boolean isImplements() {
+        return schema.isImplements();
+    }
 
+    @Override
+    public @Nullable Set<NamedTypeDescription> getInterfaces() {
+        return schema.getInterfaces();
+    }
 
+    @Override
+    public boolean isParameterized() {
+        return schema.isParameterized();
+    }
 
+    @Override
+    public @Nullable List<TypeParameter> getFormalParameters() {
+        return schema.getFormalParameters();
+    }
+
+    @Override
+    public Set<ModifierKind> getModifiers() {
+        return schema.getModifiers();
+    }
 }

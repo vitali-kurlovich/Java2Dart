@@ -20,27 +20,7 @@ public class ASTTypeParameterFactory extends TypeParameterFactory {
 
     public @NonNull TypeParameter typeParameter(@NonNull CtTypeParameter parameter) {
 
-        final var type = parameter.getReference();
-        final var specification = (NamedTypeDescription) typeDescriptionFactory.description(type);
-        // TODO: Interfaces
+        throw new RuntimeException("Not implemented");
 
-        final var superClass = parameter.getSuperclass();
-        if (superClass != null) {
-            final var superClassSpec = (NamedTypeDescription) typeDescriptionFactory.description(superClass);
-            return typeParameter(specification, superClassSpec);
-        }
-
-        return typeParameter(specification);
-    }
-
-    public @NonNull List<TypeParameter> typeParameters(@NonNull List<CtTypeParameter> parameters) {
-
-        final var typeParameters = new ArrayList<TypeParameter>();
-
-        for (final var param : parameters) {
-            typeParameters.add(typeParameter(param));
-        }
-
-        return typeParameters;
     }
 }

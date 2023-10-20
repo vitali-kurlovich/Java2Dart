@@ -5,6 +5,8 @@ import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.ClassSchema;
 import org.java2dart.factory.schema.SchemaFactory;
 import org.java2dart.schema.IObjectScheme;
+import org.java2dart.schema.builder.ObjectSchemaBuilder;
+import org.java2dart.schema.builder.ast.ASTObjectSchemaBuilder;
 import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
@@ -21,50 +23,28 @@ import java.util.Set;
 public class ASTSchemaFactory extends SchemaFactory {
 
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
-    private final ASTTypeParameterFactory typeParameterFactory;
 
-    public ASTSchemaFactory(ASTTypeDescriptionFactory typeDescriptionFactory, ASTTypeParameterFactory typeParameterFactory) {
+    public ASTSchemaFactory(ASTTypeDescriptionFactory typeDescriptionFactory) {
         this.typeDescriptionFactory = typeDescriptionFactory;
-        this.typeParameterFactory = typeParameterFactory;
     }
 
-    public ClassSchema classSchema(CtClass<?> ctClass) throws IllegalStateException {
+    public IObjectScheme classSchema(CtClass<?> ctClass) throws IllegalStateException {
 
-        final var type = ctClass.getTypeErasure();
-        final var superClass = ctClass.getSuperclass();
+        final var builder = new ASTObjectSchemaBuilder(typeDescriptionFactory);
 
-        final var description = description(type);
-        assert (description != null);
-// ctClass.getNestedTypes()  internals
+        builder.setSpecification(ctClass.getTypeErasure());
+        builder.setSuperClass(ctClass.getSuperclass());
 
-        final var superInterfaces = ctClass.getSuperInterfaces();
-
-        Set<NamedTypeDescription> interfaces = null;
-
-        if (superInterfaces != null) {
-            interfaces = new HashSet<NamedTypeDescription>();
-            for (final var ref : superInterfaces) {
-                final var desc = typeDescriptionFactory.description(ref);
-                interfaces.add((NamedTypeDescription) desc);
-            }
+        for (final var ref : ctClass.getSuperInterfaces()) {
+            builder.appendInterface(ref);
         }
 
         if (ctClass.isParameterized()) {
-            final var params = ctClass.getFormalCtTypeParameters();
-
-            final var formalParameters = typeParameterFactory.typeParameters(params);
-
-            final var parameters = new ArrayList<IObjectScheme>();
-
-            for (final var formal : formalParameters
-            ) {
-                parameters.add(formal);
+            for (final var ref : ctClass.getFormalCtTypeParameters()) {
+                builder.appendFormalParameter(ref);
             }
-
-            return classSchema(description, description(superClass), parameters, interfaces);
         }
-
-        return classSchema(description, description(superClass), interfaces);
+        return builder.build();
     }
 
 

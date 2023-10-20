@@ -14,33 +14,4 @@ public class SchemaFactory {
 
 
 
-    public @NonNull ClassSchema classSchema(Set<Modifible.ModifierKind> modifiers,
-                                            NamedTypeDescription specification,
-                                            @Nullable NamedTypeDescription superClass,
-                                            @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(modifiers, specification, superClass, null, interfaces);
-    }
-
-    public @NonNull ClassSchema classSchema(
-                                            NamedTypeDescription specification,
-                                            @Nullable NamedTypeDescription superClass,
-                                            @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(null, specification, superClass, null, interfaces);
-    }
-
-    public @NonNull ClassSchema classSchema(Set<Modifible.ModifierKind> modifiers,
-                                            NamedTypeDescription specification,
-                                            @Nullable NamedTypeDescription superClass,
-                                            @Nullable List<IObjectScheme> formalParameters,
-                                            @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(modifiers, specification, superClass, formalParameters, interfaces);
-    }
-
-    public @NonNull ClassSchema classSchema(
-                                            NamedTypeDescription specification,
-                                            @Nullable NamedTypeDescription superClass,
-                                            @Nullable List<IObjectScheme> formalParameters,
-                                            @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(null, specification, superClass, formalParameters, interfaces);
-    }
 }

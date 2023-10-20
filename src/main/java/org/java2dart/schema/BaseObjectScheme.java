@@ -12,14 +12,17 @@ public abstract class BaseObjectScheme implements IObjectScheme {
     private final NamedTypeDescription specification;
     private final @Nullable NamedTypeDescription superClass;
     private final @Nullable Set<NamedTypeDescription> interfaces;
-    private final @Nullable List<IObjectScheme> formalParameters;
+    private final @Nullable List<TypeParameter> formalParameters;
 
     public BaseObjectScheme(Set<ModifierKind> modifiers,
-                            NamedTypeDescription specification,
+                            @NonNull NamedTypeDescription specification,
+                            @Nullable List<TypeParameter> formalParameters,
                             @Nullable NamedTypeDescription superClass,
-                            @Nullable List<IObjectScheme> formalParameters,
                             @Nullable Set<NamedTypeDescription> interfaces
     ) {
+
+        assert (specification != null);
+
         this.modifiers = modifiers;
         this.specification = specification;
         this.superClass = superClass;
@@ -27,39 +30,14 @@ public abstract class BaseObjectScheme implements IObjectScheme {
         this.formalParameters = formalParameters;
     }
 
-    public BaseObjectScheme(Set<ModifierKind> modifiers,
-            @NonNull NamedTypeDescription specification,
-                            @Nullable NamedTypeDescription superClass,
-                            @Nullable List<IObjectScheme> formalParameters) {
 
-        this(modifiers, specification, superClass, formalParameters, null);
-    }
-
-    public BaseObjectScheme(@NonNull NamedTypeDescription specification,
-                            @Nullable List<IObjectScheme> formalParameters,
-                            @Nullable Set<NamedTypeDescription> interfaces,
-                            Set<ModifierKind> modifiers) {
-
-        this(modifiers, specification, null, formalParameters, interfaces);
-    }
-
-    public BaseObjectScheme(@NonNull NamedTypeDescription specification,
-                            @Nullable List<IObjectScheme> formalParameters, Set<ModifierKind> modifiers) {
-
-        this(modifiers, specification, null, formalParameters, null);
-    }
-
-    public BaseObjectScheme(@NonNull NamedTypeDescription specification, Set<ModifierKind> modifiers) {
-
-        this(modifiers, specification, null, null, null);
-    }
 
     public NamedTypeDescription getSpecification() {
         return specification;
     }
 
     public Set<ModifierKind> getModifiers() {
-        return null;
+        return modifiers;
     }
 
     public boolean isExtends() {
@@ -82,7 +60,7 @@ public abstract class BaseObjectScheme implements IObjectScheme {
         return getFormalParameters() != null && !getFormalParameters().isEmpty();
     }
 
-    public @Nullable List<IObjectScheme> getFormalParameters() {
+    public @Nullable List<TypeParameter> getFormalParameters() {
         return formalParameters;
     }
 }

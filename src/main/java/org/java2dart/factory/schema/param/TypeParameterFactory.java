@@ -10,14 +10,5 @@ import java.util.Set;
 public class TypeParameterFactory {
 
 
-    public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification,
-                                                @Nullable NamedTypeDescription superClass) {
-        return new TypeParameter(specification, superClass, null);
-    }
-
-
-    public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification) {
-        return new TypeParameter(null, specification, null, null);
-    }
 
 }

@@ -21,6 +21,6 @@ public interface IObjectScheme extends Modifible {
     boolean isParameterized();
 
 
-    @Nullable List<IObjectScheme> getFormalParameters();
+    @Nullable List<TypeParameter> getFormalParameters();
 
 }
