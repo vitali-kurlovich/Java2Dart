@@ -21,20 +21,12 @@ public class TypeParameter implements IObjectScheme {
         return schema.getSpecification();
     }
 
-    @Override
-    public boolean isExtends() {
-        return schema.isExtends();
-    }
 
     @Override
     public @Nullable NamedTypeDescription getSuperClass() {
         return schema.getSuperClass();
     }
 
-    @Override
-    public boolean isImplements() {
-        return schema.isImplements();
-    }
 
     @Override
     public @Nullable Set<NamedTypeDescription> getInterfaces() {

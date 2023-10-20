@@ -12,13 +12,13 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
     }
 
     @Override
-    public @NonNull String specify(IObjectScheme parameter) {
-        final var typeDescription = parameter.getSpecification();
+    public @NonNull String specify(IObjectScheme scheme) {
+        final var typeDescription = scheme.getSpecification();
         final var builder = new StringBuilder();
         builder.append(typeSpecifier.specify(typeDescription));
 
-        if (parameter.isParameterized()) {
-            final var formalParameters = parameter.getFormalParameters();
+        if (scheme.isParameterized()) {
+            final var formalParameters = scheme.getFormalParameters();
 
             var needsSeparator = false;
             builder.append("<");
@@ -36,15 +36,17 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
             builder.append(">");
         }
 
-        if (parameter.isExtends()) {
+        final var superSpec = scheme.getSuperClass();
+        if (superSpec != null) {
+
             builder.append(" extended ");
-            final var superSpec = parameter.getSuperClass();
             builder.append(typeSpecifier.specify(superSpec));
         }
 
+        final var interfaces = scheme.getInterfaces();
 
-        if (parameter.isImplements()) {
-            final var interfaces = parameter.getInterfaces();
+        if (interfaces != null && !interfaces.isEmpty()) {
+
             builder.append(" implement ");
 
             var needsSeparator = false;

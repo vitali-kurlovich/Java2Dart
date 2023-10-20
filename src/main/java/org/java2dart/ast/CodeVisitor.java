@@ -137,25 +137,19 @@ public class CodeVisitor implements CtVisitor {
         print("visitCtClass");
         newline();
 
-
         final var factory = Factory.Schema();
-
         final var schema = factory.schema(ctClass);
-
         final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
-
         final var source = schemeSpecifier.specify(schema);
+        Logging.info(source);
+
+       // final var path = ctClass.getPath();
+       // print(path.toString());
+
+      //  ctClass.getPackage().accept(this);
 
 
-        System.out.println(source);
-
-        final var path = ctClass.getPath();
-        print(path.toString());
-
-        ctClass.getPackage().accept(this);
-
-
-        ctClass.getFields().forEach(f -> f.accept(this));
+       // ctClass.getFields().forEach(f -> f.accept(this));
 
         // ctClass.getMethods().forEach(m -> m.accept(this));
 
@@ -274,6 +268,12 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtInterface(CtInterface<T> ctInterface) {
         print("visitCtInterface");
         newline();
+
+        final var factory = Factory.Schema();
+        final var schema = factory.schema(ctInterface);
+        final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
+        final var source = schemeSpecifier.specify(schema);
+        Logging.info(source);
     }
 
     @Override
@@ -450,14 +450,6 @@ public class CodeVisitor implements CtVisitor {
     public void visitCtPackageReference(CtPackageReference ctPackageReference) {
         print("visitCtPackageReference");
         newline();
-
-        //ctPackageReference.getDirectChildren().forEach( t -> t.accept(this));
-
-        // ctPackageReference.asIterable().forEach(el -> el.accept(this));
-
-        //final var fragment = ctPackageReference.getOriginalSourceFragment();
-        //print( fragment.getSourceCode() );
-
     }
 
     @Override

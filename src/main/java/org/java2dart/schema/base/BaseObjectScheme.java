@@ -42,16 +42,8 @@ public abstract class BaseObjectScheme implements IObjectScheme {
         return modifiers;
     }
 
-    public boolean isExtends() {
-        return getSuperClass() != null;
-    }
-
     public @Nullable NamedTypeDescription getSuperClass() {
         return superClass;
-    }
-
-    public boolean isImplements() {
-        return getInterfaces() != null && !getInterfaces().isEmpty();
     }
 
     public @Nullable Set<NamedTypeDescription> getInterfaces() {

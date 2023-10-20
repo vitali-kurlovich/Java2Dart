@@ -10,16 +10,11 @@ import java.util.Set;
 public interface IObjectScheme extends Modifible, NamedTypeDescription {
     NamedTypeDescription getSpecification();
 
-    boolean isExtends();
-
     @Nullable NamedTypeDescription getSuperClass();
-
-    boolean isImplements();
 
     @Nullable Set<NamedTypeDescription> getInterfaces();
 
     boolean isParameterized();
-
 
     @Nullable List<TypeParameter> getFormalParameters();
 
