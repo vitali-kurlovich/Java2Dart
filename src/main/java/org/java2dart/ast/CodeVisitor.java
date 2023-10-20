@@ -2,7 +2,6 @@ package org.java2dart.ast;
 
 
 import org.java2dart.factory.Factory;
-import org.java2dart.logging.Logger;
 import org.java2dart.logging.Logging;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
 import spoon.reflect.code.*;
@@ -143,13 +142,13 @@ public class CodeVisitor implements CtVisitor {
         final var source = schemeSpecifier.specify(schema);
         Logging.info(source);
 
-       // final var path = ctClass.getPath();
-       // print(path.toString());
+        // final var path = ctClass.getPath();
+        // print(path.toString());
 
-      //  ctClass.getPackage().accept(this);
+        //  ctClass.getPackage().accept(this);
 
 
-       // ctClass.getFields().forEach(f -> f.accept(this));
+        // ctClass.getFields().forEach(f -> f.accept(this));
 
         // ctClass.getMethods().forEach(m -> m.accept(this));
 
