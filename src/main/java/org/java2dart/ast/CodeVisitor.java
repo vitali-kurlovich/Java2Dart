@@ -1,4 +1,4 @@
-package org.java2dart.ast.generate;
+package org.java2dart.ast;
 
 
 import org.java2dart.factory.Factory;

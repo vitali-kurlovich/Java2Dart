@@ -1,7 +1,5 @@
 package org.java2dart.ast;
 
-import org.java2dart.ast.generate.CodeVisitor;
-
 import spoon.Launcher;
 
 public final class ASTLoader {
@@ -19,22 +17,14 @@ public final class ASTLoader {
         launcher.buildModel();
         final var model = launcher.getModel();
 
-
-
-
         final var visitor = new CodeVisitor();
-
-
 
         model.getAllModules().forEach(
                 t -> {
-                    System.out.println(t.toString());
+                    //System.out.println(t.toString());
                     t.accept(visitor);
                 }
         );
-
-
-
 
 
 
