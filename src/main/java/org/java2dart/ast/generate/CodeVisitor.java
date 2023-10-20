@@ -1,6 +1,6 @@
 package org.java2dart.ast.generate;
 
-import org.java2dart.ast.generate.builder.base.CodeBuilder;
+
 import org.java2dart.factory.Factory;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
 import spoon.reflect.code.*;
@@ -13,120 +13,129 @@ import java.lang.annotation.Annotation;
 
 public class CodeVisitor implements CtVisitor {
 
-    protected final CodeBuilder builder;
 
-    public CodeVisitor(CodeBuilder builder) {
-        this.builder = builder;
+
+
+    private void print(String string) {
+        System.out.print(string);
+    }
+
+    private void newline() {
+       print("\n");
+    }
+    
+    private  void whitespace() {
+        print(" ");
     }
 
     @Override
     public <A extends Annotation> void visitCtAnnotation(CtAnnotation<A> ctAnnotation) {
 
-        builder.append("visitCtAnnotation");
-        builder.newline();
+        print("visitCtAnnotation");
+        newline();
 
     }
 
     @Override
     public <T> void visitCtCodeSnippetExpression(CtCodeSnippetExpression<T> ctCodeSnippetExpression) {
-        builder.append("visitCtCodeSnippetExpression");
-        builder.newline();
+        print("visitCtCodeSnippetExpression");
+        newline();
     }
 
     @Override
     public void visitCtCodeSnippetStatement(CtCodeSnippetStatement ctCodeSnippetStatement) {
-        builder.append("visitCtCodeSnippetStatement");
-        builder.newline();
+        print("visitCtCodeSnippetStatement");
+        newline();
     }
 
     @Override
     public <A extends Annotation> void visitCtAnnotationType(CtAnnotationType<A> ctAnnotationType) {
 
-        builder.append("visitCtAnnotationType");
-        builder.newline();
+        print("visitCtAnnotationType");
+        newline();
 
     }
 
     @Override
     public void visitCtAnonymousExecutable(CtAnonymousExecutable ctAnonymousExecutable) {
-        builder.append("visitCtAnonymousExecutable");
-        builder.newline();
+        print("visitCtAnonymousExecutable");
+        newline();
     }
 
     @Override
     public <T> void visitCtArrayRead(CtArrayRead<T> ctArrayRead) {
-        builder.append("visitCtArrayRead");
-        builder.newline();
+        print("visitCtArrayRead");
+        newline();
     }
 
     @Override
     public <T> void visitCtArrayWrite(CtArrayWrite<T> ctArrayWrite) {
-        builder.append("visitCtArrayWrite");
-        builder.newline();
+        print("visitCtArrayWrite");
+        newline();
     }
 
     @Override
     public <T> void visitCtArrayTypeReference(CtArrayTypeReference<T> ctArrayTypeReference) {
-        builder.append("visitCtArrayTypeReference");
-        builder.newline();
+        print("visitCtArrayTypeReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtAssert(CtAssert<T> ctAssert) {
-        builder.append("visitCtAssert");
-        builder.newline();
+        print("visitCtAssert");
+        newline();
     }
 
 
     @Override
     public <T> void visitCtBinaryOperator(CtBinaryOperator<T> ctBinaryOperator) {
-        builder.newline();
-        builder.append("visitCtBinaryOperator");
+        newline();
+        print("visitCtBinaryOperator");
 
         final var leftExp = ctBinaryOperator.getLeftHandOperand();
         final var rightExp = ctBinaryOperator.getRightHandOperand();
 
         leftExp.accept(this);
-        builder.whitespace();
+        whitespace();
 
         final var king = ctBinaryOperator.getKind();
 
-        builder.append(king.toString());
+        print(king.toString());
 
-        builder.whitespace();
+        whitespace();
         rightExp.accept(this);
 
-        builder.newline();
+        newline();
     }
 
     @Override
     public <R> void visitCtBlock(CtBlock<R> ctBlock) {
-        builder.append("visitCtBlock");
-        builder.newline();
+        print("visitCtBlock");
+        newline();
     }
 
     @Override
     public void visitCtBreak(CtBreak ctBreak) {
-        builder.append("visitCtBreak");
-        builder.newline();
+        print("visitCtBreak");
+        newline();
     }
 
     @Override
     public <S> void visitCtCase(CtCase<S> ctCase) {
-        builder.append("visitCtCase");
-        builder.newline();
+        print("visitCtCase");
+        newline();
     }
 
     @Override
     public void visitCtCatch(CtCatch ctCatch) {
-        builder.append("visitCtCatch");
-        builder.newline();
+        print("visitCtCatch");
+        newline();
     }
 
     @Override
     public <T> void visitCtClass(CtClass<T> ctClass) {
-        builder.append("visitCtClass");
-        builder.newline();
+        print("visitCtClass");
+        newline();
 
 
         final var factory = Factory.Schema();
@@ -141,7 +150,7 @@ public class CodeVisitor implements CtVisitor {
        System.out.println( source );
 
         final var path = ctClass.getPath();
-        builder.append(path.toString());
+        print(path.toString());
 
         ctClass.getPackage().accept(this);
 
@@ -154,50 +163,50 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public void visitCtTypeParameter(CtTypeParameter ctTypeParameter) {
-        builder.append("visitCtTypeParameter");
-        builder.newline();
+        print("visitCtTypeParameter");
+        newline();
     }
 
     @Override
     public <T> void visitCtConditional(CtConditional<T> ctConditional) {
-        builder.append("CtConditional");
-        builder.newline();
+        print("CtConditional");
+        newline();
     }
 
     @Override
     public <T> void visitCtConstructor(CtConstructor<T> ctConstructor) {
-        builder.append("visitCtConstructor");
-        builder.newline();
+        print("visitCtConstructor");
+        newline();
     }
 
     @Override
     public void visitCtContinue(CtContinue ctContinue) {
-        builder.append("visitCtContinue");
-        builder.newline();
+        print("visitCtContinue");
+        newline();
     }
 
     @Override
     public void visitCtDo(CtDo ctDo) {
-        builder.append("visitCtDo");
-        builder.newline();
+        print("visitCtDo");
+        newline();
     }
 
     @Override
     public <T extends Enum<?>> void visitCtEnum(CtEnum<T> ctEnum) {
-        builder.append("visitCtEnum");
-        builder.newline();
+        print("visitCtEnum");
+        newline();
     }
 
     @Override
     public <T> void visitCtExecutableReference(CtExecutableReference<T> ctExecutableReference) {
-        builder.append("visitCtExecutableReference");
-        builder.newline();
+        print("visitCtExecutableReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtField(CtField<T> ctField) {
-        builder.append("visitCtField");
-        builder.newline();
+        print("visitCtField");
+        newline();
 
 
       final var type =  ctField.getType();
@@ -222,92 +231,92 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtEnumValue(CtEnumValue<T> ctEnumValue) {
-        builder.append("visitCtEnumValue");
-        builder.newline();
+        print("visitCtEnumValue");
+        newline();
     }
 
     @Override
     public <T> void visitCtThisAccess(CtThisAccess<T> ctThisAccess) {
-        builder.append("visitCtThisAccess");
-        builder.newline();
+        print("visitCtThisAccess");
+        newline();
     }
 
     @Override
     public <T> void visitCtFieldReference(CtFieldReference<T> ctFieldReference) {
-        builder.append("visitCtFieldReference");
-        builder.newline();
+        print("visitCtFieldReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtUnboundVariableReference(CtUnboundVariableReference<T> ctUnboundVariableReference) {
-        builder.append("visitCtUnboundVariableReference");
-        builder.newline();
+        print("visitCtUnboundVariableReference");
+        newline();
     }
 
     @Override
     public void visitCtFor(CtFor ctFor) {
-        builder.append("visitCtFor");
-        builder.newline();
+        print("visitCtFor");
+        newline();
     }
 
     @Override
     public void visitCtForEach(CtForEach ctForEach) {
-        builder.append("visitCtForEach");
-        builder.newline();
+        print("visitCtForEach");
+        newline();
     }
 
     @Override
     public void visitCtIf(CtIf ctIf) {
-        builder.append("visitCtIf");
-        builder.newline();
+        print("visitCtIf");
+        newline();
     }
 
     @Override
     public <T> void visitCtInterface(CtInterface<T> ctInterface) {
-        builder.append("visitCtInterface");
-        builder.newline();
+        print("visitCtInterface");
+        newline();
     }
 
     @Override
     public <T> void visitCtInvocation(CtInvocation<T> ctInvocation) {
-        builder.append("visitCtInvocation");
-        builder.newline();
+        print("visitCtInvocation");
+        newline();
     }
 
     @Override
     public <T> void visitCtLiteral(CtLiteral<T> ctLiteral) {
-        builder.newline();
-        builder.append("visitCtLiteral");
-        builder.newline();
+        newline();
+        print("visitCtLiteral");
+        newline();
 
         final var literalType = ctLiteral.getType().getSimpleName();
 
-        builder.append("type: " + literalType);
-        builder.newline();
+        print("type: " + literalType);
+        newline();
         final var value = ctLiteral.getValue();
 
-        builder.append(value.toString());
+        print(value.toString());
 
 
     }
 
     @Override
     public void visitCtTextBlock(CtTextBlock ctTextBlock) {
-        builder.append("visitCtTextBlock");
-        builder.newline();
+        print("visitCtTextBlock");
+        newline();
     }
 
     @Override
     public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> ctAssignment) {
-        builder.newline();
-        builder.append("visitCtAssignment");
-        builder.newline();
+        newline();
+        print("visitCtAssignment");
+        newline();
 
         var assigned = ctAssignment.getValueByRole(CtRole.ASSIGNED);
 
 
-        builder.append(assigned.toString());
-        builder.newline();
+        print(assigned.toString());
+        newline();
 
         final var assigmentExp = ctAssignment.getAssignment();
 
@@ -315,60 +324,60 @@ public class CodeVisitor implements CtVisitor {
         assigmentExp.accept(this);
 
 
-        builder.newline();
+        newline();
 
-        builder.append("------");
-        builder.newline();
+        print("------");
+        newline();
 
     }
 
 
     @Override
     public <T> void visitCtLocalVariable(CtLocalVariable<T> ctLocalVariable) {
-        builder.append("visitCtLocalVariable");
-        builder.newline();
+        print("visitCtLocalVariable");
+        newline();
 
 
         var assigned = ctLocalVariable.getReference().getSimpleName();   ///..getValueByRole(CtRole.ASSIGNED);
 
 
-        builder.append(assigned);
-        builder.newline();
+        print(assigned);
+        newline();
 
         var expression = ctLocalVariable.getDefaultExpression();
 
         expression.accept(this);
 
-        //builder.append(expression.toString());
-        builder.newline();
+        //print(expression.toString());
+        newline();
 
-        builder.append("------");
-        builder.newline();
+        print("------");
+        newline();
     }
 
 
     @Override
     public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> ctLocalVariableReference) {
-        builder.append("visitCtLocalVariableReference");
-        builder.newline();
+        print("visitCtLocalVariableReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtCatchVariable(CtCatchVariable<T> ctCatchVariable) {
-        builder.append("visitCtCatchVariable");
-        builder.newline();
+        print("visitCtCatchVariable");
+        newline();
     }
 
     @Override
     public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> ctCatchVariableReference) {
-        builder.append("visitCtCatchVariableReference");
-        builder.newline();
+        print("visitCtCatchVariableReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtMethod(CtMethod<T> ctMethod) {
-        builder.append("visitCtMethod");
-        builder.newline();
+        print("visitCtMethod");
+        newline();
 
        var ctTypeReference = ctMethod.getType();
 
@@ -387,157 +396,157 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtAnnotationMethod(CtAnnotationMethod<T> ctAnnotationMethod) {
-        builder.append("visitCtAnnotationMethod");
-        builder.newline();
+        print("visitCtAnnotationMethod");
+        newline();
     }
 
     @Override
     public <T> void visitCtNewArray(CtNewArray<T> ctNewArray) {
-        builder.append("visitCtNewArray");
-        builder.newline();
+        print("visitCtNewArray");
+        newline();
     }
 
     @Override
     public <T> void visitCtConstructorCall(CtConstructorCall<T> ctConstructorCall) {
-        builder.append("visitCtConstructorCall");
-        builder.newline();
+        print("visitCtConstructorCall");
+        newline();
     }
 
     @Override
     public <T> void visitCtNewClass(CtNewClass<T> ctNewClass) {
-        builder.append("visitCtNewClass");
-        builder.newline();
+        print("visitCtNewClass");
+        newline();
     }
 
     @Override
     public <T> void visitCtLambda(CtLambda<T> ctLambda) {
-        builder.append("visitCtLambda");
-        builder.newline();
+        print("visitCtLambda");
+        newline();
     }
 
     @Override
     public <T, E extends CtExpression<?>> void visitCtExecutableReferenceExpression(CtExecutableReferenceExpression<T, E> ctExecutableReferenceExpression) {
-        builder.append("visitCtExecutableReferenceExpression");
-        builder.newline();
+        print("visitCtExecutableReferenceExpression");
+        newline();
     }
 
     @Override
     public <T, A extends T> void visitCtOperatorAssignment(CtOperatorAssignment<T, A> ctOperatorAssignment) {
 
-        builder.append("visitCtOperatorAssignment");
-        builder.newline();
+        print("visitCtOperatorAssignment");
+        newline();
     }
 
     @Override
     public void visitCtPackage(CtPackage ctPackage) {
-        builder.append("visitCtPackage");
-        builder.whitespace();
-        builder.append(ctPackage.getSimpleName());
-        builder.newline();
+        print("visitCtPackage");
+        whitespace();
+        print(ctPackage.getSimpleName());
+        newline();
 
 
     }
 
     @Override
     public void visitCtPackageReference(CtPackageReference ctPackageReference) {
-        builder.append("visitCtPackageReference");
-        builder.newline();
+        print("visitCtPackageReference");
+        newline();
 
         //ctPackageReference.getDirectChildren().forEach( t -> t.accept(this));
 
         // ctPackageReference.asIterable().forEach(el -> el.accept(this));
 
         //final var fragment = ctPackageReference.getOriginalSourceFragment();
-        //builder.append( fragment.getSourceCode() );
+        //print( fragment.getSourceCode() );
 
     }
 
     @Override
     public <T> void visitCtParameter(CtParameter<T> ctParameter) {
-        builder.append("visitCtParameter");
-        builder.newline();
+        print("visitCtParameter");
+        newline();
     }
 
     @Override
     public <T> void visitCtParameterReference(CtParameterReference<T> ctParameterReference) {
-        builder.append("visitCtParameterReference");
-        builder.newline();
+        print("visitCtParameterReference");
+        newline();
     }
 
     @Override
     public <R> void visitCtReturn(CtReturn<R> ctReturn) {
-        builder.append("visitCtReturn");
-        builder.newline();
+        print("visitCtReturn");
+        newline();
     }
 
     @Override
     public <R> void visitCtStatementList(CtStatementList ctStatementList) {
-        builder.append("visitCtStatementList");
-        builder.newline();
+        print("visitCtStatementList");
+        newline();
     }
 
     @Override
     public <S> void visitCtSwitch(CtSwitch<S> ctSwitch) {
-        builder.append("visitCtSwitch");
-        builder.newline();
+        print("visitCtSwitch");
+        newline();
     }
 
     @Override
     public <T, S> void visitCtSwitchExpression(CtSwitchExpression<T, S> ctSwitchExpression) {
-        builder.append("visitCtSwitchExpression");
-        builder.newline();
+        print("visitCtSwitchExpression");
+        newline();
     }
 
     @Override
     public void visitCtSynchronized(CtSynchronized ctSynchronized) {
-        builder.append("visitCtSynchronized");
-        builder.newline();
+        print("visitCtSynchronized");
+        newline();
     }
 
     @Override
     public void visitCtThrow(CtThrow ctThrow) {
-        builder.append("visitCtThrow");
-        builder.newline();
+        print("visitCtThrow");
+        newline();
     }
 
     @Override
     public void visitCtTry(CtTry ctTry) {
-        builder.append("visitCtTry");
-        builder.newline();
+        print("visitCtTry");
+        newline();
     }
 
     @Override
     public void visitCtTryWithResource(CtTryWithResource ctTryWithResource) {
-        builder.append("visitCtTryWithResource");
-        builder.newline();
+        print("visitCtTryWithResource");
+        newline();
     }
 
     @Override
     public void visitCtTypeParameterReference(CtTypeParameterReference ctTypeParameterReference) {
-        builder.append("visitCtTypeParameterReference");
-        builder.newline();
+        print("visitCtTypeParameterReference");
+        newline();
     }
 
     @Override
     public void visitCtWildcardReference(CtWildcardReference ctWildcardReference) {
-        builder.append("visitCtWildcardReference");
-        builder.newline();
+        print("visitCtWildcardReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtIntersectionTypeReference(CtIntersectionTypeReference<T> ctIntersectionTypeReference) {
-        builder.append("visitCtIntersectionTypeReference");
-        builder.newline();
+        print("visitCtIntersectionTypeReference");
+        newline();
     }
 
     @Override
     public <T> void visitCtTypeReference(CtTypeReference<T> ctTypeReference) {
-        builder.append("visitCtTypeReference");
-        builder.append("    ");
+        print("visitCtTypeReference");
+        print("    ");
         final var simpleName = ctTypeReference.getSimpleName();
 
-        builder.append(simpleName);
-        builder.newline();
+        print(simpleName);
+        newline();
 
 //        final var factory = Factory.TypeDescription();
 //
@@ -562,94 +571,94 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtTypeAccess(CtTypeAccess<T> ctTypeAccess) {
-        builder.append("visitCtTypeAccess");
-        builder.newline();
+        print("visitCtTypeAccess");
+        newline();
     }
 
     @Override
     public <T> void visitCtUnaryOperator(CtUnaryOperator<T> ctUnaryOperator) {
-        builder.append("visitCtUnaryOperator");
-        builder.newline();
+        print("visitCtUnaryOperator");
+        newline();
     }
 
     @Override
     public <T> void visitCtVariableRead(CtVariableRead<T> ctVariableRead) {
 
-        builder.newline();
-        builder.append("visitCtVariableRead");
-        builder.newline();
+        newline();
+        print("visitCtVariableRead");
+        newline();
 
         final var varible = ctVariableRead.getVariable();
-        builder.append(varible.getSimpleName());
-        builder.newline();
+        print(varible.getSimpleName());
+        newline();
 
 
     }
 
     @Override
     public <T> void visitCtVariableWrite(CtVariableWrite<T> ctVariableWrite) {
-        builder.append("visitCtVariableWrite");
-        builder.newline();
+        print("visitCtVariableWrite");
+        newline();
     }
 
     @Override
     public void visitCtWhile(CtWhile ctWhile) {
-        builder.append("visitCtWhile");
-        builder.newline();
+        print("visitCtWhile");
+        newline();
     }
 
     @Override
     public <T> void visitCtAnnotationFieldAccess(CtAnnotationFieldAccess<T> ctAnnotationFieldAccess) {
-        builder.append("visitCtAnnotationFieldAccess");
-        builder.newline();
+        print("visitCtAnnotationFieldAccess");
+        newline();
     }
 
     @Override
     public <T> void visitCtFieldRead(CtFieldRead<T> ctFieldRead) {
-        builder.append("visitCtFieldRead");
-        builder.newline();
+        print("visitCtFieldRead");
+        newline();
     }
 
     @Override
     public <T> void visitCtFieldWrite(CtFieldWrite<T> ctFieldWrite) {
-        builder.append("visitCtFieldWrite");
-        builder.newline();
+        print("visitCtFieldWrite");
+        newline();
     }
 
     @Override
     public <T> void visitCtSuperAccess(CtSuperAccess<T> ctSuperAccess) {
-        builder.append("visitCtSuperAccess");
-        builder.newline();
+        print("visitCtSuperAccess");
+        newline();
     }
 
     @Override
     public void visitCtComment(CtComment ctComment) {
-        builder.append("visitCtComment");
-        builder.newline();
+        print("visitCtComment");
+        newline();
     }
 
     @Override
     public void visitCtJavaDoc(CtJavaDoc ctJavaDoc) {
-        builder.append("visitCtJavaDoc");
-        builder.newline();
+        print("visitCtJavaDoc");
+        newline();
     }
 
     @Override
     public void visitCtJavaDocTag(CtJavaDocTag ctJavaDocTag) {
-        builder.append("visitCtJavaDocTag");
-        builder.newline();
+        print("visitCtJavaDocTag");
+        newline();
     }
 
     @Override
     public void visitCtImport(CtImport ctImport) {
-        builder.append("visitCtImport");
-        builder.newline();
+        print("visitCtImport");
+        newline();
     }
 
     @Override
     public void visitCtModule(CtModule ctModule) {
-        builder.append("visitCtModule");
-        builder.newline();
+        print("visitCtModule");
+        newline();
 
         ctModule.getExportedPackages().forEach(pack -> pack.accept(this));
 
@@ -662,73 +671,73 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public void visitCtModuleReference(CtModuleReference ctModuleReference) {
-        builder.append("visitCtModuleReference");
-        builder.newline();
+        print("visitCtModuleReference");
+        newline();
     }
 
     @Override
     public void visitCtPackageExport(CtPackageExport ctPackageExport) {
-        builder.append("visitCtPackageExport");
-        builder.newline();
+        print("visitCtPackageExport");
+        newline();
     }
 
     @Override
     public void visitCtModuleRequirement(CtModuleRequirement ctModuleRequirement) {
-        builder.append("visitCtModuleRequirement");
-        builder.newline();
+        print("visitCtModuleRequirement");
+        newline();
     }
 
     @Override
     public void visitCtProvidedService(CtProvidedService ctProvidedService) {
-        builder.append("visitCtProvidedService");
-        builder.newline();
+        print("visitCtProvidedService");
+        newline();
     }
 
     @Override
     public void visitCtUsedService(CtUsedService ctUsedService) {
-        builder.append("visitCtUsedService");
-        builder.newline();
+        print("visitCtUsedService");
+        newline();
     }
 
     @Override
     public void visitCtCompilationUnit(CtCompilationUnit ctCompilationUnit) {
-        builder.append("visitCtCompilationUnit");
-        builder.newline();
+        print("visitCtCompilationUnit");
+        newline();
     }
 
     @Override
     public void visitCtPackageDeclaration(CtPackageDeclaration ctPackageDeclaration) {
-        builder.append("visitCtPackageDeclaration");
-        builder.newline();
+        print("visitCtPackageDeclaration");
+        newline();
     }
 
     @Override
     public void visitCtTypeMemberWildcardImportReference(CtTypeMemberWildcardImportReference ctTypeMemberWildcardImportReference) {
-        builder.append("visitCtTypeMemberWildcardImportReference");
-        builder.newline();
+        print("visitCtTypeMemberWildcardImportReference");
+        newline();
     }
 
     @Override
     public void visitCtYieldStatement(CtYieldStatement ctYieldStatement) {
-        builder.append("visitCtYieldStatement");
-        builder.newline();
+        print("visitCtYieldStatement");
+        newline();
     }
 
     @Override
     public void visitCtTypePattern(CtTypePattern ctTypePattern) {
-        builder.append("visitCtTypePattern");
-        builder.newline();
+        print("visitCtTypePattern");
+        newline();
     }
 
     @Override
     public void visitCtRecord(CtRecord ctRecord) {
-        builder.append("visitCtRecord");
-        builder.newline();
+        print("visitCtRecord");
+        newline();
     }
 
     @Override
     public void visitCtRecordComponent(CtRecordComponent ctRecordComponent) {
-        builder.append("visitCtRecordComponent");
-        builder.newline();
+        print("visitCtRecordComponent");
+        newline();
     }
 }

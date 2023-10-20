@@ -1,10 +1,10 @@
 package org.java2dart.ast.processing;
 
-import org.java2dart.ast.generate.CodeVisitor;
-import org.java2dart.ast.generate.builder.base.BaseCodeBuilder;
+
 import spoon.reflect.declaration.CtClass;
 import spoon.reflect.declaration.CtType;
 
+@Deprecated
 public final class ASTTypeProcessing {
 
   public  void process(CtType<?> type) {
@@ -16,12 +16,6 @@ public final class ASTTypeProcessing {
 
     private void processClass(CtClass c) {
 
-        final var builder = new BaseCodeBuilder();
-        final var visitor = new CodeVisitor(builder);
-
-
-
-      c.accept(visitor);
 
        //final var processor = new  ASTClassProcessing();
        // processor.process(c);
