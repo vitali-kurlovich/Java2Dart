@@ -28,7 +28,7 @@ public class SpecifierFactory {
     }
 
     public BaseSchemeDefinitionSpecifier schemeSpecifier() {
-        return new DartSchemeDefinitionSpecifier(typeParameterSpecifier());
+        return schemeSpecifier;
     }
 
 

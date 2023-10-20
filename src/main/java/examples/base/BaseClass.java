@@ -2,7 +2,14 @@ package examples.base;
 
 import org.jspecify.annotations.NonNull;
 
+import java.util.Set;
+
 public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K> implements BaseInterface, SecondInteface<Integer> {
+
+
+      enum InnerEnum {
+        FIRST, LAST;
+      }
 
     @Override
     public void method(Integer value) {

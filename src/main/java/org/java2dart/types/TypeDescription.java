@@ -18,9 +18,10 @@ public interface TypeDescription {
         ENUM,
         CLASS,
         INTERFACE,
+        GENERIC,
         PRIMITIVE,
+        NONE,
 
-        NONE
     }
 }
 

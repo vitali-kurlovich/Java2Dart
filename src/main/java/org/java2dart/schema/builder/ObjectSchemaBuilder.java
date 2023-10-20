@@ -1,8 +1,6 @@
 package org.java2dart.schema.builder;
 
-import org.java2dart.schema.ClassSchema;
-import org.java2dart.schema.IObjectScheme;
-import org.java2dart.schema.TypeParameter;
+import org.java2dart.schema.*;
 import org.java2dart.schema.modifier.Modifible;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
@@ -64,12 +62,37 @@ public class ObjectSchemaBuilder {
         }
     }
 
-   public IObjectScheme build() {
+   public IObjectScheme build() throws IllegalStateException{
         if (specification == null) {
             throw new RuntimeException("specification not set");
         }
 
-        return new ClassSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+        switch (specification.getTypeKing()) {
+
+            case ENUM -> {
+            }
+            case CLASS -> {
+                return new ClassSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+            }
+            case INTERFACE -> {
+                return new InterfaceSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+            }
+
+            case GENERIC ->   {
+                return new GenericSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+            }
+
+            case PRIMITIVE -> {
+                throw new IllegalStateException("Scheme can't be specify for primitive types");
+
+            }
+            case NONE -> {
+                throw new IllegalStateException("Scheme can't be specify for void types");
+            }
+        }
+
+       throw new RuntimeException("Implementation faild");
+
     }
 
 

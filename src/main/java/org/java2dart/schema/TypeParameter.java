@@ -55,4 +55,40 @@ public class TypeParameter implements IObjectScheme {
     public Set<ModifierKind> getModifiers() {
         return schema.getModifiers();
     }
+
+
+    @Override
+    public @NonNull String getTypeName() {
+        return getSpecification().getTypeName();
+    }
+
+    @Override
+    public boolean isVoid() {
+        return getSpecification().isVoid();
+    }
+
+    @Override
+    public boolean isPrimitive() {
+        return getSpecification().isPrimitive();
+    }
+
+    @Override
+    public boolean isNullable() {
+        return getSpecification().isNullable();
+    }
+
+    @Override
+    public boolean isArray() {
+        return getSpecification().isArray();
+    }
+
+    @Override
+    public boolean isGeneric() {
+        return getSpecification().isGeneric();
+    }
+
+    @Override
+    public TypeKind getTypeKing() {
+        return getSpecification().getTypeKing();
+    }
 }

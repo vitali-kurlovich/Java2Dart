@@ -15,7 +15,7 @@ public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier
 
         final var builder = new StringBuilder();
 
-        switch (scheme.getSpecification().getTypeKing()) {
+        switch (scheme.getTypeKing()) {
             case ENUM -> {
                 builder.append("enum ");
             }
@@ -29,7 +29,6 @@ public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier
         }
 
         builder.append( schemeSpecifier.specify(scheme));
-
 
         return builder.toString();
     }

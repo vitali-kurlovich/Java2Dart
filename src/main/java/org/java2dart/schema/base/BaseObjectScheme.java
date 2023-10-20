@@ -1,5 +1,7 @@
-package org.java2dart.schema;
+package org.java2dart.schema.base;
 
+import org.java2dart.schema.IObjectScheme;
+import org.java2dart.schema.TypeParameter;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -63,4 +65,41 @@ public abstract class BaseObjectScheme implements IObjectScheme {
     public @Nullable List<TypeParameter> getFormalParameters() {
         return formalParameters;
     }
+
+    @Override
+    public @NonNull String getTypeName() {
+        return getSpecification().getTypeName();
+    }
+
+    @Override
+    public boolean isVoid() {
+        return getSpecification().isVoid();
+    }
+
+    @Override
+    public boolean isPrimitive() {
+        return getSpecification().isPrimitive();
+    }
+
+    @Override
+    public boolean isNullable() {
+        return getSpecification().isNullable();
+    }
+
+    @Override
+    public boolean isArray() {
+        return getSpecification().isArray();
+    }
+
+    @Override
+    public boolean isGeneric() {
+        return getSpecification().isGeneric();
+    }
+
+    @Override
+    public TypeKind getTypeKing() {
+        return getSpecification().getTypeKing();
+    }
+
+
 }

@@ -8,7 +8,7 @@ import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
-import spoon.reflect.declaration.CtClass;
+import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.CtTypeParameter;
 import spoon.reflect.reference.CtTypeReference;
 
@@ -22,19 +22,19 @@ public class ASTSchemaFactory  {
         this.typeDescriptionFactory = typeDescriptionFactory;
     }
 
-    public IObjectScheme classSchema(CtClass<?> ctClass) throws IllegalStateException {
+    public IObjectScheme schema(CtType<?> ctType) throws IllegalStateException {
 
         final var builder = new ASTObjectSchemaBuilder(typeDescriptionFactory);
 
-        builder.setSpecification(ctClass.getTypeErasure());
-        builder.setSuperClass(ctClass.getSuperclass());
+        builder.setSpecification(ctType.getTypeErasure());
+        builder.setSuperClass(ctType.getSuperclass());
 
-        for (final var ref : ctClass.getSuperInterfaces()) {
+        for (final var ref : ctType.getSuperInterfaces()) {
             builder.appendInterface(ref);
         }
 
-        if (ctClass.isParameterized()) {
-            for (final var ref : ctClass.getFormalCtTypeParameters()) {
+        if (ctType.isParameterized()) {
+            for (final var ref : ctType.getFormalCtTypeParameters()) {
                 builder.appendFormalParameter(ref);
             }
         }

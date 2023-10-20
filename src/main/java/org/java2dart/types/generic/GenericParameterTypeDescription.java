@@ -10,6 +10,6 @@ public class GenericParameterTypeDescription extends GenericTypeDescription {
 
     @Override
     public TypeKind getTypeKing() {
-        return TypeKind.NONE;
+        return TypeKind.GENERIC;
     }
 }

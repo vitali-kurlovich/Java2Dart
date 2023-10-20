@@ -2,6 +2,8 @@ package org.java2dart.ast;
 
 
 import org.java2dart.factory.Factory;
+import org.java2dart.logging.Logger;
+import org.java2dart.logging.Logging;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
@@ -138,7 +140,7 @@ public class CodeVisitor implements CtVisitor {
 
         final var factory = Factory.Schema();
 
-        final var schema = factory.classSchema(ctClass);
+        final var schema = factory.schema(ctClass);
 
         final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
 
@@ -203,6 +205,8 @@ public class CodeVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtField(CtField<T> ctField) {
+
+
         print("visitCtField");
         newline();
 
@@ -215,7 +219,9 @@ public class CodeVisitor implements CtVisitor {
 
             final var specifier = new DartTypeSpecifier();
 
+
             print(specifier.specify(desc));
+
 
         } catch (Exception e) {
 

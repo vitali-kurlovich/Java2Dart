@@ -7,7 +7,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public interface IObjectScheme extends Modifible {
+public interface IObjectScheme extends Modifible, NamedTypeDescription {
     NamedTypeDescription getSpecification();
 
     boolean isExtends();
