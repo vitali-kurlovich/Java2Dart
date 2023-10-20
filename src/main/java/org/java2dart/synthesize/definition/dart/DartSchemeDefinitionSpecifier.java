@@ -1,6 +1,5 @@
 package org.java2dart.synthesize.definition.dart;
 
-import org.java2dart.schema.ClassSchema;
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.synthesize.scheme.BaseObjectSchemeSpecifier;
 import org.java2dart.synthesize.definition.BaseSchemeDefinitionSpecifier;
@@ -16,7 +15,7 @@ public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier
 
         final var builder = new StringBuilder();
 
-        switch (scheme.getSpecification().king()) {
+        switch (scheme.getSpecification().getTypeKing()) {
             case ENUM -> {
                 builder.append("enum ");
             }

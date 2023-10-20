@@ -8,7 +8,7 @@ public final class EnumTypeDescription extends ObjectTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.ENUM;
     }
 }

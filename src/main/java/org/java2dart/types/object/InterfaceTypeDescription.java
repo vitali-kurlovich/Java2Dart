@@ -9,7 +9,7 @@ public class InterfaceTypeDescription extends ObjectTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.INTERFACE;
     }
 

@@ -1,9 +1,8 @@
 package org.java2dart.factory;
 
-import org.java2dart.factory.schema.param.ast.ASTTypeParameterFactory;
+import org.java2dart.factory.schema.ast.ASTSchemaFactory;
 import org.java2dart.factory.synthesize.SpecifierFactory;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
-import org.java2dart.factory.schema.ast.ASTSchemaFactory;
 
 public final class Factory {
     private static final ASTTypeDescriptionFactory _typeDescription = new ASTTypeDescriptionFactory();

@@ -9,7 +9,7 @@ public class GenericInterfaceTypeDescription extends GenericTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.CLASS;
     }
 }

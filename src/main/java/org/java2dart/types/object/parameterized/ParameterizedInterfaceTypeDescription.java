@@ -11,7 +11,7 @@ public final class ParameterizedInterfaceTypeDescription extends ParameterizedTy
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.INTERFACE;
     }
 }

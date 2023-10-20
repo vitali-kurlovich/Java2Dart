@@ -50,7 +50,7 @@ public class ArrayTypeDescription extends BaseTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
-        return baseType.king();
+    public TypeKind getTypeKing() {
+        return baseType.getTypeKing();
     }
 }

@@ -12,7 +12,7 @@ public interface TypeDescription {
 
     boolean isGeneric();
 
-    TypeKind king();
+    TypeKind getTypeKing();
 
     enum TypeKind {
         ENUM,

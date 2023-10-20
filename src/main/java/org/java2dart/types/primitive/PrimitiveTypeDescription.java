@@ -80,7 +80,7 @@ public final class PrimitiveTypeDescription extends BaseTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.PRIMITIVE;
     }
 

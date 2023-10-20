@@ -8,7 +8,7 @@ public class ClassTypeDescription extends ObjectTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.CLASS;
     }
 }

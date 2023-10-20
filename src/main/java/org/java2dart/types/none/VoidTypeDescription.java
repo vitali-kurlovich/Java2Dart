@@ -35,7 +35,7 @@ public final class VoidTypeDescription extends BaseTypeDescription {
     }
 
     @Override
-    public TypeKind king() {
+    public TypeKind getTypeKing() {
         return TypeKind.NONE;
     }
 }
