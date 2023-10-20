@@ -2,6 +2,7 @@ package org.java2dart.factory.schema;
 
 import org.java2dart.schema.ClassSchema;
 import org.java2dart.schema.IObjectScheme;
+import org.java2dart.schema.modifier.Modifible;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -10,16 +11,36 @@ import java.util.List;
 import java.util.Set;
 
 public class SchemaFactory {
-    public @NonNull ClassSchema classSchema(NamedTypeDescription specification,
+
+
+
+    public @NonNull ClassSchema classSchema(Set<Modifible.ModifierKind> modifiers,
+                                            NamedTypeDescription specification,
                                             @Nullable NamedTypeDescription superClass,
                                             @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(specification, superClass, null, interfaces);
+        return new ClassSchema(modifiers, specification, superClass, null, interfaces);
     }
 
-    public @NonNull ClassSchema classSchema(NamedTypeDescription specification,
+    public @NonNull ClassSchema classSchema(
+                                            NamedTypeDescription specification,
+                                            @Nullable NamedTypeDescription superClass,
+                                            @Nullable Set<NamedTypeDescription> interfaces) {
+        return new ClassSchema(null, specification, superClass, null, interfaces);
+    }
+
+    public @NonNull ClassSchema classSchema(Set<Modifible.ModifierKind> modifiers,
+                                            NamedTypeDescription specification,
                                             @Nullable NamedTypeDescription superClass,
                                             @Nullable List<IObjectScheme> formalParameters,
                                             @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(specification, superClass, formalParameters, interfaces);
+        return new ClassSchema(modifiers, specification, superClass, formalParameters, interfaces);
+    }
+
+    public @NonNull ClassSchema classSchema(
+                                            NamedTypeDescription specification,
+                                            @Nullable NamedTypeDescription superClass,
+                                            @Nullable List<IObjectScheme> formalParameters,
+                                            @Nullable Set<NamedTypeDescription> interfaces) {
+        return new ClassSchema(null, specification, superClass, formalParameters, interfaces);
     }
 }

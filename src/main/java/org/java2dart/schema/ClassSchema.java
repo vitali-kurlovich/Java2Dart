@@ -9,31 +9,23 @@ import java.util.Set;
 
 public class ClassSchema extends BaseObjectScheme {
 
-    public ClassSchema(NamedTypeDescription specification,
-                       @Nullable NamedTypeDescription superClass,
-                       @Nullable List<IObjectScheme> formalParameters,
-                       @Nullable Set<NamedTypeDescription> interfaces) {
-        super(specification, superClass, formalParameters, interfaces);
+    public ClassSchema(Set<ModifierKind> modifiers, NamedTypeDescription specification, @Nullable NamedTypeDescription superClass, @Nullable List<IObjectScheme> formalParameters, @Nullable Set<NamedTypeDescription> interfaces) {
+        super(modifiers, specification, superClass, formalParameters, interfaces);
     }
 
-    public ClassSchema(@NonNull NamedTypeDescription specification,
-                       @Nullable NamedTypeDescription superClass,
-                       @Nullable List<IObjectScheme> formalParameters) {
-        super(specification, superClass, formalParameters);
+    public ClassSchema(Set<ModifierKind> modifiers, @NonNull NamedTypeDescription specification, @Nullable NamedTypeDescription superClass, @Nullable List<IObjectScheme> formalParameters) {
+        super(modifiers, specification, superClass, formalParameters);
     }
 
-    public ClassSchema(@NonNull NamedTypeDescription specification,
-                       @Nullable List<IObjectScheme> formalParameters,
-                       @Nullable Set<NamedTypeDescription> interfaces) {
-        super(specification, formalParameters, interfaces);
+    public ClassSchema(@NonNull NamedTypeDescription specification, @Nullable List<IObjectScheme> formalParameters, @Nullable Set<NamedTypeDescription> interfaces, Set<ModifierKind> modifiers) {
+        super(specification, formalParameters, interfaces, modifiers);
     }
 
-    public ClassSchema(@NonNull NamedTypeDescription specification,
-                       @Nullable List<IObjectScheme> formalParameters) {
-        super(specification, formalParameters);
+    public ClassSchema(@NonNull NamedTypeDescription specification, @Nullable List<IObjectScheme> formalParameters, Set<ModifierKind> modifiers) {
+        super(specification, formalParameters, modifiers);
     }
 
-    public ClassSchema(@NonNull NamedTypeDescription specification) {
-        super(specification);
+    public ClassSchema(@NonNull NamedTypeDescription specification, Set<ModifierKind> modifiers) {
+        super(specification, modifiers);
     }
 }
