@@ -1,7 +1,7 @@
 package org.java2dart.logging;
 
 public interface Logger {
-    public enum Level {
+    enum Level {
         DEBUG,
         INFO,
         WARNING,
