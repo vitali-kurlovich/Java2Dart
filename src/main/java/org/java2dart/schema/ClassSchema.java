@@ -7,8 +7,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class ClassSchema extends ObjectScheme {
-    
+public class ClassSchema extends BaseObjectScheme {
+
     public ClassSchema(NamedTypeDescription specification,
                        @Nullable NamedTypeDescription superClass,
                        @Nullable List<IObjectScheme> formalParameters,

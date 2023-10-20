@@ -1,9 +1,8 @@
 package org.java2dart.ast.generate.builder.base;
 
-import org.java2dart.ast.generate.builder.base.Builder;
 import org.java2dart.ast.generate.toplevel.AbstrcationType;
-import org.java2dart.ast.generate.toplevel.AccesLevel;
-import org.java2dart.ast.generate.toplevel.TypeModifier;
+import org.java2dart.schema.modifier.AccesLevel;
+import org.java2dart.schema.modifier.TypeModifier;
 
 public interface CodeBuilder extends Builder {
     void clean();

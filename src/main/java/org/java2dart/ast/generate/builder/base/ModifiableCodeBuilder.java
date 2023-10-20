@@ -1,7 +1,7 @@
 package org.java2dart.ast.generate.builder.base;
 
-import org.java2dart.ast.generate.toplevel.AccesLevel;
-import org.java2dart.ast.generate.toplevel.TypeModifier;
+import org.java2dart.schema.modifier.AccesLevel;
+import org.java2dart.schema.modifier.TypeModifier;
 import spoon.reflect.declaration.CtModifiable;
 
 import java.util.ArrayList;

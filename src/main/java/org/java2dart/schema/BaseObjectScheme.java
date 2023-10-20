@@ -8,17 +8,17 @@ import java.util.List;
 import java.util.Set;
 
 
-public abstract class ObjectScheme implements IObjectScheme {
+public abstract class BaseObjectScheme implements IObjectScheme {
     private final NamedTypeDescription specification;
     private final @Nullable NamedTypeDescription superClass;
     private final @Nullable Set<NamedTypeDescription> interfaces;
 
     private final @Nullable List<IObjectScheme> formalParameters;
 
-    public ObjectScheme(NamedTypeDescription specification,
-                        @Nullable NamedTypeDescription superClass,
-                        @Nullable List<IObjectScheme> formalParameters,
-                        @Nullable Set<NamedTypeDescription> interfaces
+    public BaseObjectScheme(NamedTypeDescription specification,
+                            @Nullable NamedTypeDescription superClass,
+                            @Nullable List<IObjectScheme> formalParameters,
+                            @Nullable Set<NamedTypeDescription> interfaces
                         ) {
         this.specification = specification;
         this.superClass = superClass;
@@ -26,28 +26,28 @@ public abstract class ObjectScheme implements IObjectScheme {
         this.formalParameters = formalParameters;
     }
 
-    public ObjectScheme(@NonNull NamedTypeDescription specification,
-                        @Nullable NamedTypeDescription superClass,
-                        @Nullable List<IObjectScheme> formalParameters) {
+    public BaseObjectScheme(@NonNull NamedTypeDescription specification,
+                            @Nullable NamedTypeDescription superClass,
+                            @Nullable List<IObjectScheme> formalParameters) {
 
         this(specification, superClass, formalParameters , null);
     }
 
-    public ObjectScheme(@NonNull NamedTypeDescription specification,
-                        @Nullable List<IObjectScheme> formalParameters,
-                        @Nullable Set<NamedTypeDescription> interfaces
+    public BaseObjectScheme(@NonNull NamedTypeDescription specification,
+                            @Nullable List<IObjectScheme> formalParameters,
+                            @Nullable Set<NamedTypeDescription> interfaces
                         ) {
 
         this(specification, null, formalParameters, interfaces );
     }
 
-    public ObjectScheme(@NonNull NamedTypeDescription specification,
-                        @Nullable List<IObjectScheme> formalParameters) {
+    public BaseObjectScheme(@NonNull NamedTypeDescription specification,
+                            @Nullable List<IObjectScheme> formalParameters) {
 
         this(specification, null, formalParameters,null);
     }
 
-    public ObjectScheme(@NonNull NamedTypeDescription specification) {
+    public BaseObjectScheme(@NonNull NamedTypeDescription specification) {
 
         this(specification, null, null, null);
     }

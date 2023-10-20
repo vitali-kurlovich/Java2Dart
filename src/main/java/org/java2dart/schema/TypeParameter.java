@@ -7,7 +7,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 import java.util.Set;
 
-public class TypeParameter extends ObjectScheme {
+public class TypeParameter extends BaseObjectScheme {
 
 
     public TypeParameter(NamedTypeDescription specification,

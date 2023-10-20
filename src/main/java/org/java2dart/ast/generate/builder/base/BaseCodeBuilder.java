@@ -3,8 +3,8 @@ package org.java2dart.ast.generate.builder.base;
 import org.java2dart.ast.dart.DartKeywordGenerator;
 import org.java2dart.ast.generate.KeywordGenerator;
 import org.java2dart.ast.generate.toplevel.AbstrcationType;
-import org.java2dart.ast.generate.toplevel.AccesLevel;
-import org.java2dart.ast.generate.toplevel.TypeModifier;
+import org.java2dart.schema.modifier.AccesLevel;
+import org.java2dart.schema.modifier.TypeModifier;
 
 
 public  class BaseCodeBuilder implements CodeBuilder {
