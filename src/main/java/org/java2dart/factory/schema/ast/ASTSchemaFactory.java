@@ -1,11 +1,8 @@
 package org.java2dart.factory.schema.ast;
 
-import org.java2dart.factory.schema.param.ast.ASTTypeParameterFactory;
+
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
-import org.java2dart.schema.ClassSchema;
-import org.java2dart.factory.schema.SchemaFactory;
 import org.java2dart.schema.IObjectScheme;
-import org.java2dart.schema.builder.ObjectSchemaBuilder;
 import org.java2dart.schema.builder.ast.ASTObjectSchemaBuilder;
 import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
@@ -16,12 +13,9 @@ import spoon.reflect.declaration.CtTypeParameter;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-public class ASTSchemaFactory extends SchemaFactory {
-
+public class ASTSchemaFactory  {
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
 
     public ASTSchemaFactory(ASTTypeDescriptionFactory typeDescriptionFactory) {
