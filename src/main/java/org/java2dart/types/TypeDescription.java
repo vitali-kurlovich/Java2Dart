@@ -13,7 +13,7 @@ public interface TypeDescription {
 
     TypeKind king();
 
-   public enum TypeKind {
+   enum TypeKind {
         ENUM,
         CLASS,
         INTERFACE,
