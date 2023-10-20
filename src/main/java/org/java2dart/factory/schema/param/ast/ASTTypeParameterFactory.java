@@ -4,9 +4,7 @@ import org.java2dart.factory.schema.param.TypeParameterFactory;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.TypeParameter;
 import org.java2dart.types.NamedTypeDescription;
-import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 import spoon.reflect.declaration.CtTypeParameter;
 
 import java.util.ArrayList;
@@ -26,9 +24,9 @@ public class ASTTypeParameterFactory extends TypeParameterFactory {
         final var specification = (NamedTypeDescription) typeDescriptionFactory.description(type);
         // TODO: Interfaces
 
-       final var superClass = parameter.getSuperclass();
-        if ( superClass != null) {
-            final var superClassSpec =  (NamedTypeDescription) typeDescriptionFactory.description(superClass);
+        final var superClass = parameter.getSuperclass();
+        if (superClass != null) {
+            final var superClassSpec = (NamedTypeDescription) typeDescriptionFactory.description(superClass);
             return typeParameter(specification, superClassSpec);
         }
 

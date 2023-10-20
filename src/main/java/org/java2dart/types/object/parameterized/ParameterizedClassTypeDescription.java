@@ -5,7 +5,6 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-
 public final class ParameterizedClassTypeDescription extends ParameterizedTypeDescription {
     public ParameterizedClassTypeDescription(@NonNull String typeName,
                                              List<TypeDescription> typeArguments,

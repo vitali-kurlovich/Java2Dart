@@ -11,7 +11,6 @@ import org.jspecify.annotations.NonNull;
 
 public abstract class BaseTypeSpecifier implements TypeSpecifier {
 
-
     public @NonNull String specify(TypeDescription description) throws IllegalStateException {
         if (description instanceof VoidTypeDescription) {
             return specify((VoidTypeDescription) description);

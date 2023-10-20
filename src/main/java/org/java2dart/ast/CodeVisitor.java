@@ -14,17 +14,15 @@ import java.lang.annotation.Annotation;
 public class CodeVisitor implements CtVisitor {
 
 
-
-
     private void print(String string) {
         System.out.print(string);
     }
 
     private void newline() {
-       print("\n");
+        print("\n");
     }
-    
-    private  void whitespace() {
+
+    private void whitespace() {
         print(" ");
     }
 
@@ -140,14 +138,14 @@ public class CodeVisitor implements CtVisitor {
 
         final var factory = Factory.Schema();
 
-       final var schema = factory.classSchema(ctClass);
+        final var schema = factory.classSchema(ctClass);
 
-       final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
+        final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
 
-       final var source = schemeSpecifier.specify(schema);
+        final var source = schemeSpecifier.specify(schema);
 
 
-       System.out.println( source );
+        System.out.println(source);
 
         final var path = ctClass.getPath();
         print(path.toString());
@@ -157,7 +155,7 @@ public class CodeVisitor implements CtVisitor {
 
         ctClass.getFields().forEach(f -> f.accept(this));
 
-       // ctClass.getMethods().forEach(m -> m.accept(this));
+        // ctClass.getMethods().forEach(m -> m.accept(this));
 
     }
 
@@ -208,25 +206,20 @@ public class CodeVisitor implements CtVisitor {
         print("visitCtField");
         newline();
 
+        final var type = ctField.getType();
 
-      final var type =  ctField.getType();
+        final var factory = Factory.TypeDescription();
 
+        try {
+            final var desc = factory.description(type);
 
-      final var factory = Factory.TypeDescription();
+            final var specifier = new DartTypeSpecifier();
 
-      try {
-         final var desc = factory.description(type);
+            print(specifier.specify(desc));
 
-        final var  specifier = new DartTypeSpecifier();
+        } catch (Exception e) {
 
-
-
-         System.out.println( specifier.specify(desc));
-
-      } catch (Exception e) {
-
-      }
-
+        }
     }
 
     @Override
@@ -379,7 +372,7 @@ public class CodeVisitor implements CtVisitor {
         print("visitCtMethod");
         newline();
 
-       var ctTypeReference = ctMethod.getType();
+        var ctTypeReference = ctMethod.getType();
 
         final var factory = Factory.TypeDescription();
 
@@ -566,7 +559,7 @@ public class CodeVisitor implements CtVisitor {
             decl.accept(this);
         }
 
-          // ctTypeReference.getDeclaration().accept(this);
+        // ctTypeReference.getDeclaration().accept(this);
     }
 
     @Override

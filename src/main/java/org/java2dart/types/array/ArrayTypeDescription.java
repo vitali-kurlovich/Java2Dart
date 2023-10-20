@@ -6,9 +6,9 @@ import org.jspecify.annotations.NonNull;
 
 public class ArrayTypeDescription extends BaseTypeDescription {
     @NonNull
-    public TypeDescription baseType;
-    @NonNull
     private final boolean nullable;
+    @NonNull
+    public TypeDescription baseType;
 
     public ArrayTypeDescription(@NonNull TypeDescription baseType, @NonNull boolean nullable) {
         this.baseType = baseType;
@@ -43,9 +43,9 @@ public class ArrayTypeDescription extends BaseTypeDescription {
     @Override
     public String toString() {
         return super.toString()
-               + "baseType: > -----------------\n" +
+                + "baseType: > -----------------\n" +
                 baseType.toString()
-                + "< -----------------\n" ;
+                + "< -----------------\n";
 
     }
 

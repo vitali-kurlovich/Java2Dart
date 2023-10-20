@@ -42,7 +42,6 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
             builder.append(typeSpecifier.specify(superSpec));
         }
 
-// TODO: interface spec
 
         if (parameter.isImplements()) {
             final var interfaces = parameter.getInterfaces();

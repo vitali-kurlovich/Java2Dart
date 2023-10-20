@@ -2,7 +2,6 @@ package org.java2dart.types.generic;
 
 import org.java2dart.types.BaseTypeDescription;
 import org.java2dart.types.NamedTypeDescription;
-import org.java2dart.types.object.ObjectTypeDescription;
 import org.jspecify.annotations.NonNull;
 
 
@@ -54,7 +53,6 @@ public abstract class GenericTypeDescription extends BaseTypeDescription impleme
 
                 + "typeName: " + getTypeName() + "\n";
     }
-
 
 
 }

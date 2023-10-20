@@ -2,24 +2,25 @@ package org.java2dart.types;
 
 public interface TypeDescription {
 
-    boolean isVoid() ;
+    boolean isVoid();
+
     boolean isPrimitive();
 
-    boolean isNullable() ;
+    boolean isNullable();
 
-    boolean isArray() ;
+    boolean isArray();
 
-    boolean isGeneric() ;
+    boolean isGeneric();
 
     TypeKind king();
 
-   enum TypeKind {
+    enum TypeKind {
         ENUM,
         CLASS,
         INTERFACE,
         PRIMITIVE,
 
-       NONE
+        NONE
     }
 }
 

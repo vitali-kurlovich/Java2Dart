@@ -1,13 +1,10 @@
 package org.java2dart.types.primitive;
 
 import org.java2dart.types.BaseTypeDescription;
-import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public final class PrimitiveTypeDescription extends BaseTypeDescription {
 
@@ -96,6 +93,6 @@ public final class PrimitiveTypeDescription extends BaseTypeDescription {
                 type.toString() +
                 "\n";
 
-      return builder;
+        return builder;
     }
 }

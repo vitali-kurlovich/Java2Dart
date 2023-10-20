@@ -21,66 +21,66 @@ import java.util.Set;
 public class ASTSchemaFactory extends SchemaFactory {
 
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
-   private final ASTTypeParameterFactory typeParameterFactory;
+    private final ASTTypeParameterFactory typeParameterFactory;
 
     public ASTSchemaFactory(ASTTypeDescriptionFactory typeDescriptionFactory, ASTTypeParameterFactory typeParameterFactory) {
         this.typeDescriptionFactory = typeDescriptionFactory;
-        this.typeParameterFactory =  typeParameterFactory;
+        this.typeParameterFactory = typeParameterFactory;
     }
 
     public ClassSchema classSchema(CtClass<?> ctClass) throws IllegalStateException {
 
-       final var type = ctClass.getTypeErasure();
-       final var superClass = ctClass.getSuperclass();
+        final var type = ctClass.getTypeErasure();
+        final var superClass = ctClass.getSuperclass();
 
-       final var description  = description(type);
-       assert ( description != null);
+        final var description = description(type);
+        assert (description != null);
 // ctClass.getNestedTypes()  internals
 
-       final var superInterfaces =  ctClass.getSuperInterfaces();
+        final var superInterfaces = ctClass.getSuperInterfaces();
 
         Set<NamedTypeDescription> interfaces = null;
 
-       if (  superInterfaces != null) {
-           interfaces  = new HashSet<NamedTypeDescription>();
-           for (final var ref:superInterfaces) {
-              final var desc = typeDescriptionFactory.description(ref);
-               interfaces.add((NamedTypeDescription) desc);
-           }
-       }
+        if (superInterfaces != null) {
+            interfaces = new HashSet<NamedTypeDescription>();
+            for (final var ref : superInterfaces) {
+                final var desc = typeDescriptionFactory.description(ref);
+                interfaces.add((NamedTypeDescription) desc);
+            }
+        }
 
-       if (ctClass.isParameterized() ) {
-          final var params = ctClass.getFormalCtTypeParameters();
+        if (ctClass.isParameterized()) {
+            final var params = ctClass.getFormalCtTypeParameters();
 
-          final var formalParameters = typeParameterFactory.typeParameters(params);
+            final var formalParameters = typeParameterFactory.typeParameters(params);
 
-          final var  parameters = new ArrayList< IObjectScheme >();
+            final var parameters = new ArrayList<IObjectScheme>();
 
-           for (final var formal: formalParameters
-                ) {
-               parameters.add(formal);
-           }
+            for (final var formal : formalParameters
+            ) {
+                parameters.add(formal);
+            }
 
-           return classSchema(description,  description(superClass), parameters, interfaces );
-       }
+            return classSchema(description, description(superClass), parameters, interfaces);
+        }
 
-       return classSchema(description, description(superClass), interfaces );
+        return classSchema(description, description(superClass), interfaces);
     }
 
 
-    private  NamedTypeDescription description(@Nullable CtTypeReference<?> ctTypeReference) throws IllegalStateException {
+    private NamedTypeDescription description(@Nullable CtTypeReference<?> ctTypeReference) throws IllegalStateException {
         if (ctTypeReference == null) {
             return null;
         }
-       return (NamedTypeDescription) typeDescriptionFactory.description(ctTypeReference);
+        return (NamedTypeDescription) typeDescriptionFactory.description(ctTypeReference);
     }
 
     private @NonNull List<TypeDescription> descriptions(List<CtTypeParameter> parameters) throws IllegalStateException {
         final var params = new ArrayList<TypeDescription>();
 
-        for (final var param: parameters) {
-           final var ref = param.getReference();
-            params.add(description(ref))  ;
+        for (final var param : parameters) {
+            final var ref = param.getReference();
+            params.add(description(ref));
         }
 
         return params;

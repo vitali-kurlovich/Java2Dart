@@ -13,13 +13,13 @@ public class SchemaFactory {
     public @NonNull ClassSchema classSchema(NamedTypeDescription specification,
                                             @Nullable NamedTypeDescription superClass,
                                             @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(specification, superClass, null,interfaces);
+        return new ClassSchema(specification, superClass, null, interfaces);
     }
 
     public @NonNull ClassSchema classSchema(NamedTypeDescription specification,
                                             @Nullable NamedTypeDescription superClass,
                                             @Nullable List<IObjectScheme> formalParameters,
                                             @Nullable Set<NamedTypeDescription> interfaces) {
-        return new ClassSchema(specification, superClass,  formalParameters, interfaces);
+        return new ClassSchema(specification, superClass, formalParameters, interfaces);
     }
 }

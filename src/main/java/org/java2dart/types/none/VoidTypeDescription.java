@@ -1,14 +1,13 @@
 package org.java2dart.types.none;
 
 import org.java2dart.types.BaseTypeDescription;
-import org.java2dart.types.TypeDescription;
 
 public final class VoidTypeDescription extends BaseTypeDescription {
 
     public static VoidTypeDescription VOID = new VoidTypeDescription();
 
-    private
-    VoidTypeDescription() {}
+    private VoidTypeDescription() {
+    }
 
     @Override
     public boolean isVoid() {

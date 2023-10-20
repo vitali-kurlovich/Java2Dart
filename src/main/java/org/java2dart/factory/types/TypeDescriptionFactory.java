@@ -26,10 +26,7 @@ public class TypeDescriptionFactory {
     }
 
     public @NonNull PrimitiveTypeDescription primitiveDescription(String name) throws IllegalStateException {
-
-            return  PrimitiveTypeDescription.descriptionByName(name);
-
-
+        return PrimitiveTypeDescription.descriptionByName(name);
     }
 
     public @NonNull PrimitiveTypeDescription primitiveDescription(PrimitiveType type) {
@@ -113,14 +110,13 @@ public class TypeDescriptionFactory {
     }
 
 
-
     public @NonNull InterfaceTypeDescription interfaceDescription(@NonNull String name, @NonNull boolean nullable) {
         return new InterfaceTypeDescription(name, nullable);
     }
 
     public @NonNull ParameterizedInterfaceTypeDescription parameterizedInterfaceDescription(@NonNull String name,
-                                                                                        @NonNull List<TypeDescription> typeArguments,
-                                                                                        @NonNull boolean nullable) {
+                                                                                            @NonNull List<TypeDescription> typeArguments,
+                                                                                            @NonNull boolean nullable) {
 
         return new ParameterizedInterfaceTypeDescription(name, typeArguments, nullable);
     }
@@ -140,8 +136,4 @@ public class TypeDescriptionFactory {
     public @NonNull GenericTypeDescription genericParameterDescription(@NonNull String name) {
         return new GenericParameterTypeDescription(name);
     }
-
-
-
-
 }

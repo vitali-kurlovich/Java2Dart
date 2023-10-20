@@ -8,30 +8,27 @@ import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
 
 public class SpecifierFactory {
-    private final BaseTypeSpecifier typeSpecifier ;
+    private final BaseTypeSpecifier typeSpecifier;
     private final BaseObjectSchemeSpecifier typeParameterSpecifier;
-
     private final BaseSchemeDefinitionSpecifier schemeSpecifier;
 
     public SpecifierFactory() {
         typeSpecifier = new DartTypeSpecifier();
-
         typeParameterSpecifier = new DartObjectSchemeSpecifier(typeSpecifier);
-
-        schemeSpecifier =  new DartSchemeDefinitionSpecifier( typeParameterSpecifier);
+        schemeSpecifier = new DartSchemeDefinitionSpecifier(typeParameterSpecifier);
     }
 
     public BaseTypeSpecifier typeSpecifier() {
         return typeSpecifier;
     }
 
-  //  public BaseSchemeSpecifier BaseSchemeSpecifier
+    //  public BaseSchemeSpecifier BaseSchemeSpecifier
     public BaseObjectSchemeSpecifier typeParameterSpecifier() {
         return typeParameterSpecifier;
     }
 
     public BaseSchemeDefinitionSpecifier schemeSpecifier() {
-        return new DartSchemeDefinitionSpecifier( typeParameterSpecifier());
+        return new DartSchemeDefinitionSpecifier(typeParameterSpecifier());
     }
 
 

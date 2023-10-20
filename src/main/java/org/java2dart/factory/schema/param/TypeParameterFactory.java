@@ -9,16 +9,17 @@ import java.util.Set;
 
 public class TypeParameterFactory {
 
-public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification,
-                                            @Nullable NamedTypeDescription superClass,
-                                            @Nullable Set<NamedTypeDescription> interfaces) {
-    return new TypeParameter(specification, superClass, null, interfaces);
-}
+    public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification,
+                                                @Nullable NamedTypeDescription superClass,
+                                                @Nullable Set<NamedTypeDescription> interfaces) {
+        return new TypeParameter(specification, superClass, null, interfaces);
+    }
 
     public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification,
                                                 @Nullable NamedTypeDescription superClass) {
         return new TypeParameter(specification, superClass, null);
     }
+
     public @NonNull TypeParameter typeParameter(@NonNull NamedTypeDescription specification,
                                                 @Nullable Set<NamedTypeDescription> interfaces) {
         return new TypeParameter(specification, null, interfaces);

@@ -19,6 +19,7 @@ public final class Factory {
     public static ASTTypeParameterFactory TypeParameter() {
         return _typeParameterFactory;
     }
+
     public static ASTSchemaFactory Schema() {
         return _schemaFactory;
     }

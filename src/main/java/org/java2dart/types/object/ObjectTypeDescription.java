@@ -2,7 +2,6 @@ package org.java2dart.types.object;
 
 import org.java2dart.types.BaseTypeDescription;
 import org.java2dart.types.NamedTypeDescription;
-import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 
 public abstract class ObjectTypeDescription extends BaseTypeDescription implements NamedTypeDescription {
