@@ -2,9 +2,11 @@ package org.java2dart.schema.base;
 
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.TypeParameter;
+import org.java2dart.schema.modifier.AccesLevel;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import spoon.reflect.declaration.ModifierKind;
 
 import java.util.List;
 import java.util.Set;
@@ -33,6 +35,28 @@ public abstract class BaseObjectScheme implements IObjectScheme {
     }
 
 
+    public  AccesLevel getAccessLevel() {
+
+        for (final var kind: getModifiers()) {
+            switch (kind) {
+                case PUBLIC -> {
+                    return AccesLevel.PUBLIC;
+                }
+                case PROTECTED -> {
+                    return AccesLevel.PROTECTED;
+                }
+                case PRIVATE -> {
+                    return AccesLevel.PRIVATE;
+                }
+                default -> {
+
+                }
+            }
+        }
+
+
+        return AccesLevel.DEFAULT;
+    }
 
     public NamedTypeDescription getSpecification() {
         return specification;

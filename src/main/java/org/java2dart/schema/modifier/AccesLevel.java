@@ -2,6 +2,6 @@ package org.java2dart.schema.modifier;
 
 
 public enum AccesLevel {
-    PUBLIC, PROTECTED, PRIVATE
+    PUBLIC, PROTECTED, PRIVATE, DEFAULT
 }
 

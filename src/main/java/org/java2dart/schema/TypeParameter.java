@@ -1,8 +1,10 @@
 package org.java2dart.schema;
 
+import org.java2dart.schema.modifier.AccesLevel;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import spoon.reflect.declaration.ModifierKind;
 
 import java.util.List;
 import java.util.Set;
@@ -48,39 +50,46 @@ public class TypeParameter implements IObjectScheme {
         return schema.getModifiers();
     }
 
+    @Override
+    public AccesLevel getAccessLevel() {
+        return schema.getAccessLevel();
+    }
+
 
     @Override
     public @NonNull String getTypeName() {
-        return getSpecification().getTypeName();
+        return schema.getTypeName();
     }
 
     @Override
     public boolean isVoid() {
-        return getSpecification().isVoid();
+        return schema.isVoid();
     }
 
     @Override
     public boolean isPrimitive() {
-        return getSpecification().isPrimitive();
+        return schema.isPrimitive();
     }
 
     @Override
     public boolean isNullable() {
-        return getSpecification().isNullable();
+        return schema.isNullable();
     }
 
     @Override
     public boolean isArray() {
-        return getSpecification().isArray();
+        return schema.isArray();
     }
 
     @Override
     public boolean isGeneric() {
-        return getSpecification().isGeneric();
+        return schema.isGeneric();
     }
 
     @Override
     public TypeKind getTypeKing() {
-        return getSpecification().getTypeKing();
+        return schema.getTypeKing();
     }
+
+
 }

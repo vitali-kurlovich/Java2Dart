@@ -4,6 +4,7 @@ import org.java2dart.schema.base.BaseObjectScheme;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import spoon.reflect.declaration.ModifierKind;
 
 import java.util.List;
 import java.util.Set;

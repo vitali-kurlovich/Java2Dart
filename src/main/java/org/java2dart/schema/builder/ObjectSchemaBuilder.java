@@ -5,6 +5,7 @@ import org.java2dart.schema.modifier.Modifible;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import spoon.reflect.declaration.ModifierKind;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ObjectSchemaBuilder {
-    private  HashSet<Modifible.ModifierKind> modifiers = new HashSet<Modifible.ModifierKind>();
+    private  HashSet<ModifierKind> modifiers = new HashSet<ModifierKind>();
     private  NamedTypeDescription specification;
     private  @Nullable NamedTypeDescription superClass;
     private  HashSet<NamedTypeDescription> interfaces = new HashSet<NamedTypeDescription>();
@@ -29,12 +30,12 @@ public class ObjectSchemaBuilder {
         this.superClass = superClass;
     }
 
-    public void append(Modifible.ModifierKind modifierKind) {
+    public void append(ModifierKind modifierKind) {
         this.modifiers.add(modifierKind);
     }
 
-    public void setModifiers( Set<Modifible.ModifierKind> modifiers) {
-        this.modifiers = new HashSet<Modifible.ModifierKind>();
+    public void setModifiers( Set<ModifierKind> modifiers) {
+        this.modifiers = new HashSet<ModifierKind>();
         this.modifiers.addAll(modifiers);
     }
 

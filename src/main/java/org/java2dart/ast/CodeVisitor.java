@@ -1,6 +1,5 @@
 package org.java2dart.ast;
 
-
 import org.java2dart.factory.Factory;
 import org.java2dart.logging.Logging;
 import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
