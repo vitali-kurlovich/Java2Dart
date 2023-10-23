@@ -19,13 +19,11 @@ public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier
     @Override
     public @NonNull String specify(IObjectScheme scheme) {
 
-        final var builder = new StringBuilder();
-        builder.append( specify(scheme.getModifiers()) + " " );
-        builder.append( specify(scheme.getTypeKing()) + " " );
+        String builder = specify(scheme.getModifiers()) + " " +
+                specify(scheme.getTypeKing()) + " " +
+                schemeSpecifier.specify(scheme);
 
-        builder.append( schemeSpecifier.specify(scheme));
-
-        return builder.toString();
+        return builder;
     }
 
     private  @NonNull String specify(TypeDescription.TypeKind kind) {
@@ -40,7 +38,7 @@ public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier
                 return "interface";
             }
             default -> {
-              throw  new IllegalStateException("Incorrect TypeKind: " + kind.toString());
+              throw  new IllegalStateException("Incorrect TypeKind: " + kind);
             }
         }
 
