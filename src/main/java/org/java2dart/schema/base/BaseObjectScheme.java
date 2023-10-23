@@ -8,11 +8,13 @@ import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import spoon.reflect.declaration.ModifierKind;
 
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class BaseObjectScheme implements IObjectScheme {
-    private final Set<ModifierKind> modifiers;
+   // private final Set<ModifierKind> modifiers;
+
+    private final ModifiersSchema modifiersSchema;
+
     private final NamedTypeDescription specification;
     private final @Nullable NamedTypeDescription superClass;
     private final @Nullable Set<NamedTypeDescription> interfaces;
@@ -27,7 +29,10 @@ public abstract class BaseObjectScheme implements IObjectScheme {
 
         assert (specification != null);
 
-        this.modifiers = modifiers;
+        //this.modifiers = modifiers;
+
+       this.modifiersSchema = new  ModifiersSchema(modifiers);
+
         this.specification = specification;
         this.superClass = superClass;
         this.interfaces = interfaces;
@@ -36,26 +41,7 @@ public abstract class BaseObjectScheme implements IObjectScheme {
 
 
     public  AccesLevel getAccessLevel() {
-
-        for (final var kind: getModifiers()) {
-            switch (kind) {
-                case PUBLIC -> {
-                    return AccesLevel.PUBLIC;
-                }
-                case PROTECTED -> {
-                    return AccesLevel.PROTECTED;
-                }
-                case PRIVATE -> {
-                    return AccesLevel.PRIVATE;
-                }
-                default -> {
-
-                }
-            }
-        }
-
-
-        return AccesLevel.DEFAULT;
+        return modifiersSchema.getAccessLevel();
     }
 
     public NamedTypeDescription getSpecification() {
@@ -63,7 +49,7 @@ public abstract class BaseObjectScheme implements IObjectScheme {
     }
 
     public Set<ModifierKind> getModifiers() {
-        return modifiers;
+        return modifiersSchema.getModifiers();
     }
 
     public @Nullable NamedTypeDescription getSuperClass() {

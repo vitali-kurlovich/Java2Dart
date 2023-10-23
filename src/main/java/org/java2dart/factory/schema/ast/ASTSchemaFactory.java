@@ -9,6 +9,7 @@ import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.CtTypeParameter;
 import spoon.reflect.declaration.ModifierKind;
@@ -45,9 +46,18 @@ public class ASTSchemaFactory {
                 builder.appendFormalParameter(ref);
             }
         }
+
+
+       final var fields = ctType.getFields();
+
+
         return builder.build();
     }
 
+
+    void field(CtField<?> ctField) {
+
+    }
 
     private NamedTypeDescription description(@Nullable CtTypeReference<?> ctTypeReference) throws IllegalStateException {
         if (ctTypeReference == null) {

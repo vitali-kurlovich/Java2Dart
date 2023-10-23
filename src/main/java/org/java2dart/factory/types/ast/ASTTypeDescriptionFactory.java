@@ -15,15 +15,7 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
     public @Nullable TypeDescription description(CtTypeReference<?> ctTypeReference) throws IllegalStateException {
 
         if (ctTypeReference.isArray()) {
-            if (ctTypeReference instanceof CtArrayTypeReference<?> arrayTypeReference) {
-                final var componentTypeReference = arrayTypeReference.getComponentType();
-
-                final var component = description(componentTypeReference);
-
-                return arrayTypeDescription(component, true);
-            } else {
-                throw new IllegalStateException("Can't resolve array type");
-            }
+            return arrayDescription(ctTypeReference);
         }
 
         final var simpleName = ctTypeReference.getSimpleName();
@@ -72,6 +64,23 @@ public class ASTTypeDescriptionFactory extends TypeDescriptionFactory {
 
         throw new RuntimeException();
     }
+
+
+  private   TypeDescription arrayDescription(CtTypeReference<?> ctTypeReference) {
+        assert (ctTypeReference.isArray());
+
+        if (ctTypeReference instanceof CtArrayTypeReference<?> arrayTypeReference) {
+            final var componentTypeReference = arrayTypeReference.getComponentType();
+
+            final var component = description(componentTypeReference);
+
+            return arrayTypeDescription(component, true);
+        }
+
+        throw new IllegalStateException("Can't resolve array type");
+
+    }
+
 
     private @NonNull List<TypeDescription> descriptions(List<CtTypeReference<?>> ctTypeReferences) throws IllegalStateException {
         final var descriptions = new ArrayList<TypeDescription>();
