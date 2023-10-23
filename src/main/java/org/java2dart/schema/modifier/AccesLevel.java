@@ -9,5 +9,12 @@ public enum AccesLevel {
         return this == AccesLevel.PUBLIC;
     }
 
+    public boolean isProtected() {
+        return this == AccesLevel.PROTECTED;
+    }
+
+    public boolean isPrivate() {
+        return this == AccesLevel.PRIVATE;
+    }
 }
 

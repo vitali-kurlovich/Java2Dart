@@ -16,7 +16,7 @@ public final class ModifiersSchema implements Accesable {
 
     @Override
     public AccesLevel getAccessLevel() {
-        for (final var kind: getModifiers()) {
+        for (final var kind : getModifiers()) {
             switch (kind) {
                 case PUBLIC -> {
                     return AccesLevel.PUBLIC;
@@ -39,6 +39,30 @@ public final class ModifiersSchema implements Accesable {
     @Override
     public Set<ModifierKind> getModifiers() {
         return modifiers;
+    }
+
+    public boolean isFinal() {
+        return getModifiers().contains(ModifierKind.FINAL);
+    }
+
+    public boolean isAbstract() {
+        return getModifiers().contains(ModifierKind.ABSTRACT);
+    }
+
+    public boolean isStatic() {
+        return getModifiers().contains(ModifierKind.STATIC);
+    }
+
+    public boolean isPublic() {
+        return getAccessLevel().isPublic();
+    }
+
+    public boolean isProtected() {
+        return getAccessLevel().isProtected();
+    }
+
+    public boolean isPrivate() {
+        return getAccessLevel().isPrivate();
     }
 
 
