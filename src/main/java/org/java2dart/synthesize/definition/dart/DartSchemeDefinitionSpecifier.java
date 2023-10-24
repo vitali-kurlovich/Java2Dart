@@ -18,12 +18,9 @@ public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier
 
     @Override
     public @NonNull String specify(IObjectScheme scheme) {
-
-        String builder = specify(scheme.getModifiers()) + " " +
+        return specify(scheme.getModifiers()) + " " +
                 specify(scheme.getTypeKing()) + " " +
                 schemeSpecifier.specify(scheme);
-
-        return builder;
     }
 
     private  @NonNull String specify(TypeDescription.TypeKind kind) {

@@ -7,7 +7,6 @@ public abstract class BaseSchemeDefinitionSpecifier implements SchemeDefinitionS
     protected final BaseObjectSchemeSpecifier schemeSpecifier;
 
     public BaseSchemeDefinitionSpecifier(BaseObjectSchemeSpecifier schemeSpecifier) {
-
         this.schemeSpecifier = schemeSpecifier;
     }
 }

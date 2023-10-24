@@ -1,6 +1,5 @@
 package org.java2dart.factory.schema.ast;
 
-
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.builder.ast.ASTObjectSchemaBuilder;
@@ -51,9 +50,7 @@ public class ASTSchemaFactory {
         builder.setFields(fields);
 
         final var methods = methodFactory.methods(ctType.getMethods());
-
         builder.setMethods(methods);
-
 
         return builder.build();
     }

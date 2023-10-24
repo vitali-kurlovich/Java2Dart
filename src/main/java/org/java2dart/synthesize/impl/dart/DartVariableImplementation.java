@@ -1,6 +1,7 @@
 package org.java2dart.synthesize.impl.dart;
 
 import org.java2dart.schema.base.ModifiersSchema;
+import org.java2dart.schema.varible.IVariable;
 import org.java2dart.synthesize.impl.varible.BaseVaribleImplementation;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
@@ -12,18 +13,16 @@ import spoon.reflect.declaration.ModifierKind;
 import java.util.Set;
 
 
-public final class  DartVaribleImplementation extends BaseVaribleImplementation {
+public final class DartVariableImplementation extends BaseVaribleImplementation {
 
-    public DartVaribleImplementation(ModifiersSpecifier modifiersSpecifier,  BaseTypeSpecifier typeSpecifier) {
+    public DartVariableImplementation(ModifiersSpecifier modifiersSpecifier, BaseTypeSpecifier typeSpecifier) {
         super(modifiersSpecifier, typeSpecifier);
     }
 
     @Override
-    public @NonNull String varible(@Nullable Set<ModifierKind> modifires, @NonNull String name, @NonNull TypeDescription type) {
-
-        final var modifiersSchema = new  ModifiersSchema(modifires);
+    public @NonNull String variable(@Nullable Set<ModifierKind> modifiers, @NonNull String name, @NonNull TypeDescription type) {
         final var typeDsc =  typeSpecifier.specify(type);
-
-        return modifiersSpecifier.specify(modifires)  + typeDsc + " " + name;
+        return modifiersSpecifier.specify(modifiers)  + typeDsc + " " + name;
     }
+
 }

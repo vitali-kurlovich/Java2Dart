@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 
-public class BaseVarible  implements IVarible {
+public class BaseVarible  implements IVariable {
     @NonNull
     private final String name;
     @NonNull
