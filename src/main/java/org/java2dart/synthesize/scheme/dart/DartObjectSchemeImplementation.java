@@ -14,15 +14,16 @@ import java.util.Set;
 
 public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementation {
 
-  private final VaribleImplementation varibleImplementation;
+    private final VaribleImplementation varibleImplementation;
 
-  private  final ObjectSchemeSpecifier objectSchemeSpecifier;
+    private final ObjectSchemeSpecifier objectSchemeSpecifier;
 
     public DartObjectSchemeImplementation(BaseTypeSpecifier typeSpecifier) {
         super(typeSpecifier);
 
-      this.varibleImplementation = new DartVaribleImplementation(typeSpecifier);
-      this.objectSchemeSpecifier = new DartObjectSchemeSpecifier(typeSpecifier);
+        final var modifiersSpecifier = new DartModifiersSpecifier();
+        this.varibleImplementation = new DartVaribleImplementation(modifiersSpecifier, typeSpecifier);
+        this.objectSchemeSpecifier = new DartObjectSchemeSpecifier(typeSpecifier);
 
     }
 
@@ -34,11 +35,9 @@ public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementati
 
         builder.append(" {\n");
 
-        for (final var field: schema.getFields() ) {
+        for (final var field : schema.getFields()) {
 
-
-
-          final var implVar =  varibleImplementation.varible(field.getModifiers(), field.getName(), field.getType());
+            final var implVar = varibleImplementation.varible(field.getModifiers(), field.getName(), field.getType());
 
             builder.append(implVar);
             builder.append(";\n");
