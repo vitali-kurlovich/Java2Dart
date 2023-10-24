@@ -2,10 +2,13 @@ package org.java2dart.synthesize.scheme.dart;
 
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.synthesize.scheme.BaseObjectSchemeSpecifier;
+import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.jspecify.annotations.NonNull;
 
 public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
+
+  private final ModifiersSpecifier modifiersSpecifier = new DartModifiersSpecifier();
 
     public DartObjectSchemeSpecifier(BaseTypeSpecifier typeSpecifier) {
         super(typeSpecifier);
@@ -15,6 +18,9 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
     public @NonNull String specify(IObjectScheme scheme) {
         final var typeDescription = scheme.getSpecification();
         final var builder = new StringBuilder();
+
+        builder.append( modifiersSpecifier.specify(scheme.getModifiers()));
+
         builder.append(typeSpecifier.specify(typeDescription));
 
         if (scheme.isParameterized()) {
