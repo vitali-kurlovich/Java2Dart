@@ -1,5 +1,6 @@
 package org.java2dart.schema;
 
+import org.java2dart.schema.method.Method;
 import org.java2dart.schema.modifier.Accesable;
 import org.java2dart.schema.modifier.Modifible;
 import org.java2dart.schema.varible.Field;
@@ -22,5 +23,7 @@ public interface IObjectScheme extends Accesable, Modifible, NamedTypeDescriptio
     @Nullable List<TypeParameter> getFormalParameters();
 
     List<Field> getFields();
+
+    Set<Method> getMethods();
 
 }

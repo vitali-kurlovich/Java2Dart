@@ -1,26 +1,29 @@
 package org.java2dart.schema.builder;
 
 import org.java2dart.schema.*;
-import org.java2dart.schema.modifier.Modifible;
+import org.java2dart.schema.method.Method;
 import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import spoon.reflect.declaration.ModifierKind;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ObjectSchemaBuilder {
-    private  HashSet<ModifierKind> modifiers = new HashSet<ModifierKind>();
-    private  NamedTypeDescription specification;
-    private  @Nullable NamedTypeDescription superClass;
-    private  HashSet<NamedTypeDescription> interfaces = new HashSet<NamedTypeDescription>();
-    private  @Nullable ArrayList<TypeParameter> formalParameters = new ArrayList<TypeParameter>();
+    private HashSet<ModifierKind> modifiers = new HashSet<>();
+    private NamedTypeDescription specification;
+    private @Nullable NamedTypeDescription superClass;
+    private HashSet<NamedTypeDescription> interfaces = new HashSet<>();
+    private @Nullable ArrayList<TypeParameter> formalParameters = new ArrayList<>();
 
-    private ArrayList<Field> fields = new ArrayList<Field>();
+    private ArrayList<Field> fields = new ArrayList<>();
+    private HashSet<Method> methods = new HashSet<>();
 
-// CtTypeReference<T>
+    // CtTypeReference<T>
     public void setSpecification(@NonNull NamedTypeDescription specification) {
         assert (specification != null);
         this.specification = specification;
@@ -34,8 +37,8 @@ public class ObjectSchemaBuilder {
         this.modifiers.add(modifierKind);
     }
 
-    public void setModifiers( Set<ModifierKind> modifiers) {
-        this.modifiers = new HashSet<ModifierKind>();
+    public void setModifiers(Set<ModifierKind> modifiers) {
+        this.modifiers = new HashSet<>();
         this.modifiers.addAll(modifiers);
     }
 
@@ -43,40 +46,51 @@ public class ObjectSchemaBuilder {
         this.formalParameters.add(parameter);
     }
 
-    public void setFormalParameters(List<TypeParameter> formalParameters ) {
-        this.formalParameters = new ArrayList<TypeParameter>();
-        for (final var param:formalParameters) {
+    public void setFormalParameters(List<TypeParameter> formalParameters) {
+        this.formalParameters = new ArrayList<>();
+        for (final var param : formalParameters) {
             appendFormalParameter(param);
         }
     }
 
-    public void appendInterface( @NonNull NamedTypeDescription supportedInterface) {
+    public void appendInterface(@NonNull NamedTypeDescription supportedInterface) {
         assert (supportedInterface != null);
         this.interfaces.add(supportedInterface);
     }
 
-    public void setInterfaces( @Nullable Set<NamedTypeDescription> interfaces) {
+    public void setInterfaces(@Nullable Set<NamedTypeDescription> interfaces) {
 
-        this.interfaces = new HashSet<NamedTypeDescription>();
-        for (final var i: interfaces) {
+        this.interfaces = new HashSet<>();
+        for (final var i : interfaces) {
             appendInterface(i);
         }
     }
 
-    public void appendField(  Field field) {
+    public void appendField(@NonNull Field field) {
         assert (field != null);
         fields.add(field);
 
     }
 
-    public void setFields( @Nullable List<Field> fields) {
-        this.fields = new ArrayList<Field>();
-        for (final var f: fields) appendField(f);
+    public void setFields(@Nullable List<Field> fields) {
+        this.fields = new ArrayList<>();
+        for (final var f : fields) appendField(f);
+    }
+
+    public void appendMethod(@NonNull Method method) {
+        assert (method != null);
+
+        methods.add(method);
+
+    }
+
+    public void setMethods(@Nullable Set<Method> methods) {
+        this.methods = new HashSet<>();
+        for (final var m : methods) appendMethod(m);
     }
 
 
-
-   public IObjectScheme build() throws IllegalStateException{
+    public IObjectScheme build() throws IllegalStateException {
         if (specification == null) {
             throw new RuntimeException("specification not set");
         }
@@ -86,14 +100,14 @@ public class ObjectSchemaBuilder {
             case ENUM -> {
             }
             case CLASS -> {
-                return new ClassSchema(modifiers, specification, formalParameters, superClass,  interfaces, fields);
+                return new ClassSchema(modifiers, specification, formalParameters, superClass, interfaces, fields, methods);
             }
             case INTERFACE -> {
-                return new InterfaceSchema(modifiers, specification, formalParameters, superClass,  interfaces,  fields);
+                return new InterfaceSchema(modifiers, specification, formalParameters, superClass, interfaces, fields, methods);
             }
 
-            case GENERIC ->   {
-                return new GenericSchema(modifiers, specification, formalParameters, superClass,  interfaces, fields);
+            case GENERIC -> {
+                return new GenericSchema(modifiers, specification, formalParameters, superClass, interfaces, fields, methods);
             }
 
             case PRIMITIVE -> {
@@ -105,7 +119,7 @@ public class ObjectSchemaBuilder {
             }
         }
 
-       throw new RuntimeException("Implementation faild");
+        throw new RuntimeException("Implementation faild");
 
     }
 

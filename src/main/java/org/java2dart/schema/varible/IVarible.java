@@ -6,8 +6,6 @@ import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 
 
-
-
 public interface IVarible extends Accesable, Modifible {
     @NonNull String getName();
 

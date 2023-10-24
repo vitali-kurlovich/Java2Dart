@@ -1,5 +1,6 @@
 package org.java2dart.schema;
 
+import org.java2dart.schema.method.Method;
 import org.java2dart.schema.modifier.AccesLevel;
 import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
@@ -49,6 +50,11 @@ public class TypeParameter implements IObjectScheme {
     @Override
     public List<Field> getFields() {
         return schema.getFields();
+    }
+
+    @Override
+    public Set<Method> getMethods() {
+        return schema.getMethods();
     }
 
     @Override

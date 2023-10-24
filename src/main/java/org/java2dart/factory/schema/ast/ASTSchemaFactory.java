@@ -19,9 +19,13 @@ import java.util.List;
 
 public class ASTSchemaFactory {
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
+    private final ASTSchemaFieldFactory fieldsFactory;
+    private final ASTSchemaMethodFactory methodFactory;
 
     public ASTSchemaFactory(ASTTypeDescriptionFactory typeDescriptionFactory) {
         this.typeDescriptionFactory = typeDescriptionFactory;
+        fieldsFactory = new ASTSchemaFieldFactory(typeDescriptionFactory);
+        methodFactory = new ASTSchemaMethodFactory(typeDescriptionFactory);
     }
 
     public IObjectScheme schema(CtType<?> ctType) throws IllegalStateException {
@@ -43,10 +47,13 @@ public class ASTSchemaFactory {
             }
         }
 
-
-        final var fieldsFactory = new ASTSchemaFieldFactory(typeDescriptionFactory);
         final var fields = fieldsFactory.fields(ctType.getFields());
         builder.setFields(fields);
+
+        final var methods = methodFactory.methods(ctType.getMethods());
+
+        builder.setMethods(methods);
+
 
         return builder.build();
     }

@@ -29,10 +29,9 @@ public class ASTSchemaFieldFactory {
     public Field field(CtField<?> ctField) {
         final var name = ctField.getSimpleName();
         final var type = typeDescriptionFactory.description(ctField.getType());
-        final var modifires = ctField.getModifiers();
+        final var modifiers = ctField.getModifiers();
 
-
-        return new Field(name, type, modifires);
+        return new Field(name, type, modifiers);
     }
 
 

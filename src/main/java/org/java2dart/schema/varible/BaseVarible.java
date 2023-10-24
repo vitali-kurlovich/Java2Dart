@@ -8,6 +8,8 @@ import spoon.reflect.declaration.ModifierKind;
 
 import java.util.Set;
 
+
+
 public class BaseVarible  implements IVarible {
     @NonNull
     private final String name;
