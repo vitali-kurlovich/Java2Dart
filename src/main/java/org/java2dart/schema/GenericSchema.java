@@ -1,6 +1,7 @@
 package org.java2dart.schema;
 
 import org.java2dart.schema.base.BaseObjectScheme;
+import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -15,7 +16,8 @@ public class GenericSchema extends BaseObjectScheme {
                          @NonNull NamedTypeDescription specification,
                          @Nullable List<TypeParameter> formalParameters,
                          @Nullable NamedTypeDescription superClass,
-                         @Nullable Set<NamedTypeDescription> interfaces) {
-        super(modifiers, specification, formalParameters, superClass, interfaces);
+                         @Nullable Set<NamedTypeDescription> interfaces,
+                         @Nullable List<Field> fields ) {
+        super(modifiers, specification, formalParameters, superClass, interfaces, fields);
     }
 }

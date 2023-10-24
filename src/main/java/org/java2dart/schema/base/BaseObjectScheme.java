@@ -3,6 +3,7 @@ package org.java2dart.schema.base;
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.TypeParameter;
 import org.java2dart.schema.modifier.AccesLevel;
+import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -11,7 +12,7 @@ import spoon.reflect.declaration.ModifierKind;
 import java.util.*;
 
 public abstract class BaseObjectScheme implements IObjectScheme {
-   // private final Set<ModifierKind> modifiers;
+    // private final Set<ModifierKind> modifiers;
 
     private final ModifiersSchema modifiersSchema;
 
@@ -19,28 +20,29 @@ public abstract class BaseObjectScheme implements IObjectScheme {
     private final @Nullable NamedTypeDescription superClass;
     private final @Nullable Set<NamedTypeDescription> interfaces;
     private final @Nullable List<TypeParameter> formalParameters;
+    private final @Nullable List<Field> fields;
 
     public BaseObjectScheme(Set<ModifierKind> modifiers,
                             @NonNull NamedTypeDescription specification,
                             @Nullable List<TypeParameter> formalParameters,
                             @Nullable NamedTypeDescription superClass,
-                            @Nullable Set<NamedTypeDescription> interfaces
+                            @Nullable Set<NamedTypeDescription> interfaces,
+                            @Nullable List<Field> fields
     ) {
 
         assert (specification != null);
 
-        //this.modifiers = modifiers;
-
-       this.modifiersSchema = new  ModifiersSchema(modifiers);
+        this.modifiersSchema = new ModifiersSchema(modifiers);
 
         this.specification = specification;
         this.superClass = superClass;
         this.interfaces = interfaces;
         this.formalParameters = formalParameters;
+        this.fields = fields;
     }
 
 
-    public  AccesLevel getAccessLevel() {
+    public AccesLevel getAccessLevel() {
         return modifiersSchema.getAccessLevel();
     }
 
@@ -58,6 +60,10 @@ public abstract class BaseObjectScheme implements IObjectScheme {
 
     public @Nullable Set<NamedTypeDescription> getInterfaces() {
         return interfaces;
+    }
+
+    public List<Field> getFields() {
+        return this.fields;
     }
 
     public boolean isParameterized() {

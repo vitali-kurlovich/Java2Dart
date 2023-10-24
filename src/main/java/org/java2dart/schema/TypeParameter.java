@@ -1,6 +1,7 @@
 package org.java2dart.schema;
 
 import org.java2dart.schema.modifier.AccesLevel;
+import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -43,6 +44,11 @@ public class TypeParameter implements IObjectScheme {
     @Override
     public @Nullable List<TypeParameter> getFormalParameters() {
         return schema.getFormalParameters();
+    }
+
+    @Override
+    public List<Field> getFields() {
+        return schema.getFields();
     }
 
     @Override

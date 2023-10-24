@@ -4,7 +4,6 @@ package org.java2dart.factory.schema.ast;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.builder.ast.ASTObjectSchemaBuilder;
-import org.java2dart.schema.modifier.Modifible;
 import org.java2dart.types.NamedTypeDescription;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
@@ -12,12 +11,11 @@ import org.jspecify.annotations.Nullable;
 import spoon.reflect.declaration.CtField;
 import spoon.reflect.declaration.CtType;
 import spoon.reflect.declaration.CtTypeParameter;
-import spoon.reflect.declaration.ModifierKind;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 public class ASTSchemaFactory {
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
@@ -39,8 +37,6 @@ public class ASTSchemaFactory {
 
         builder.setModifiers(ctType.getModifiers());
 
-        //ctType.getModifiers()
-// CtModifiable
         if (ctType.isParameterized()) {
             for (final var ref : ctType.getFormalCtTypeParameters()) {
                 builder.appendFormalParameter(ref);
@@ -48,8 +44,9 @@ public class ASTSchemaFactory {
         }
 
 
-       final var fields = ctType.getFields();
-
+        final var fieldsFactory = new ASTSchemaFieldFactory(typeDescriptionFactory);
+        final var fields = fieldsFactory.fields(ctType.getFields());
+        builder.setFields(fields);
 
         return builder.build();
     }

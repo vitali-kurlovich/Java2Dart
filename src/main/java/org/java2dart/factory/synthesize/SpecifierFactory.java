@@ -22,7 +22,6 @@ public class SpecifierFactory {
         return typeSpecifier;
     }
 
-    //  public BaseSchemeSpecifier BaseSchemeSpecifier
     public BaseObjectSchemeSpecifier typeParameterSpecifier() {
         return typeParameterSpecifier;
     }

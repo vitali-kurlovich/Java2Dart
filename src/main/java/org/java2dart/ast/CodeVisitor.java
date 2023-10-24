@@ -137,8 +137,14 @@ public class CodeVisitor implements CtVisitor {
 
         final var factory = Factory.Schema();
         final var schema = factory.schema(ctClass);
-        final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
-        final var source = schemeSpecifier.specify(schema);
+//        final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
+//        final var source = schemeSpecifier.specify(schema);
+
+
+
+     final var impl =  Factory.SchemeImplementation();
+
+        final var source =    impl.implementation(schema);
         Logging.info(source);
 
         // final var path = ctClass.getPath();

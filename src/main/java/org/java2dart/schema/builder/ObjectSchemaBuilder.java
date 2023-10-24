@@ -2,16 +2,14 @@ package org.java2dart.schema.builder;
 
 import org.java2dart.schema.*;
 import org.java2dart.schema.modifier.Modifible;
+import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 import spoon.reflect.declaration.ModifierKind;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ObjectSchemaBuilder {
     private  HashSet<ModifierKind> modifiers = new HashSet<ModifierKind>();
@@ -19,6 +17,8 @@ public class ObjectSchemaBuilder {
     private  @Nullable NamedTypeDescription superClass;
     private  HashSet<NamedTypeDescription> interfaces = new HashSet<NamedTypeDescription>();
     private  @Nullable ArrayList<TypeParameter> formalParameters = new ArrayList<TypeParameter>();
+
+    private ArrayList<Field> fields = new ArrayList<Field>();
 
 // CtTypeReference<T>
     public void setSpecification(@NonNull NamedTypeDescription specification) {
@@ -63,6 +63,19 @@ public class ObjectSchemaBuilder {
         }
     }
 
+    public void appendField(  Field field) {
+        assert (field != null);
+        fields.add(field);
+
+    }
+
+    public void setFields( @Nullable List<Field> fields) {
+        this.fields = new ArrayList<Field>();
+        for (final var f: fields) appendField(f);
+    }
+
+
+
    public IObjectScheme build() throws IllegalStateException{
         if (specification == null) {
             throw new RuntimeException("specification not set");
@@ -73,14 +86,14 @@ public class ObjectSchemaBuilder {
             case ENUM -> {
             }
             case CLASS -> {
-                return new ClassSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+                return new ClassSchema(modifiers, specification, formalParameters, superClass,  interfaces, fields);
             }
             case INTERFACE -> {
-                return new InterfaceSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+                return new InterfaceSchema(modifiers, specification, formalParameters, superClass,  interfaces,  fields);
             }
 
             case GENERIC ->   {
-                return new GenericSchema(modifiers, specification, formalParameters, superClass,  interfaces);
+                return new GenericSchema(modifiers, specification, formalParameters, superClass,  interfaces, fields);
             }
 
             case PRIMITIVE -> {

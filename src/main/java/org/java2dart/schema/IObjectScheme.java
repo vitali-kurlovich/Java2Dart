@@ -2,9 +2,11 @@ package org.java2dart.schema;
 
 import org.java2dart.schema.modifier.Accesable;
 import org.java2dart.schema.modifier.Modifible;
+import org.java2dart.schema.varible.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -18,5 +20,7 @@ public interface IObjectScheme extends Accesable, Modifible, NamedTypeDescriptio
     boolean isParameterized();
 
     @Nullable List<TypeParameter> getFormalParameters();
+
+    List<Field> getFields();
 
 }

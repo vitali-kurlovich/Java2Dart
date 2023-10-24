@@ -49,7 +49,7 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
         FIRST, LAST
     }
 
-    protected class InnerClass<T> {
+    protected final class InnerClass<T> {
         private final T field;
 
         public InnerClass(T field) {

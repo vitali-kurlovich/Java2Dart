@@ -13,7 +13,6 @@ public class BaseVarible  implements IVarible {
     private final String name;
     @NonNull
     private final TypeDescription type;
-
     private final ModifiersSchema modifiersSchema;
 
     public BaseVarible(@NonNull String name, @NonNull TypeDescription type, Set<ModifierKind> modifiers) {
