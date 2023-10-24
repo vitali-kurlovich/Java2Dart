@@ -8,7 +8,7 @@ import org.jspecify.annotations.NonNull;
 
 public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
 
-  private final ModifiersSpecifier modifiersSpecifier = new DartModifiersSpecifier();
+    private final ModifiersSpecifier modifiersSpecifier = new DartModifiersSpecifier();
 
     public DartObjectSchemeSpecifier(BaseTypeSpecifier typeSpecifier) {
         super(typeSpecifier);
@@ -19,7 +19,7 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
         final var typeDescription = scheme.getSpecification();
         final var builder = new StringBuilder();
 
-        builder.append( modifiersSpecifier.specify(scheme.getModifiers()));
+        builder.append(modifiersSpecifier.specify(scheme.getModifiers()));
 
         builder.append(typeSpecifier.specify(typeDescription));
 
@@ -76,7 +76,6 @@ public class DartObjectSchemeSpecifier extends BaseObjectSchemeSpecifier {
                 needsSeparator = true;
             }
         }
-
 
 
         return builder.toString();
