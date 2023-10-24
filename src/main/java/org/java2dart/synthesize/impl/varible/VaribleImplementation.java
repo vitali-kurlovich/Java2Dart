@@ -1,4 +1,4 @@
-package org.java2dart.synthesize.impl;
+package org.java2dart.synthesize.impl.varible;
 
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;

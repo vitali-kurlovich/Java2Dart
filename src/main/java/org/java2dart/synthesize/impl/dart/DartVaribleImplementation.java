@@ -1,7 +1,7 @@
 package org.java2dart.synthesize.impl.dart;
 
 import org.java2dart.schema.base.ModifiersSchema;
-import org.java2dart.synthesize.impl.BaseVaribleImplementation;
+import org.java2dart.synthesize.impl.varible.BaseVaribleImplementation;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.java2dart.types.TypeDescription;
@@ -23,7 +23,7 @@ public final class  DartVaribleImplementation extends BaseVaribleImplementation 
 
         final var modifiersSchema = new  ModifiersSchema(modifires);
         final var typeDsc =  typeSpecifier.specify(type);
-        
+
         return modifiersSpecifier.specify(modifires)  + typeDsc + " " + name;
     }
 }

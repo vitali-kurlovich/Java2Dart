@@ -1,16 +1,12 @@
 package org.java2dart.synthesize.scheme.dart;
 
 import org.java2dart.schema.IObjectScheme;
-import org.java2dart.synthesize.impl.VaribleImplementation;
+import org.java2dart.synthesize.impl.varible.VaribleImplementation;
 import org.java2dart.synthesize.impl.dart.DartVaribleImplementation;
 import org.java2dart.synthesize.scheme.BaseObjectSchemeImplementation;
-import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.scheme.ObjectSchemeSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.jspecify.annotations.NonNull;
-import spoon.reflect.declaration.ModifierKind;
-
-import java.util.Set;
 
 public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementation {
 
