@@ -1,5 +1,6 @@
-package org.java2dart.schema.varible;
+package org.java2dart.schema.method;
 
+import org.java2dart.schema.varible.BaseVarible;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.ModifierKind;

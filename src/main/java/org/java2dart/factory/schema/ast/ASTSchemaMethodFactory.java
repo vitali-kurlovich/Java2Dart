@@ -1,9 +1,8 @@
 package org.java2dart.factory.schema.ast;
 
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
-import org.java2dart.schema.method.IMethod;
 import org.java2dart.schema.method.Method;
-import org.java2dart.schema.varible.Parameter;
+import org.java2dart.schema.method.Parameter;
 import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.CtParameter;
 
@@ -19,7 +18,6 @@ public class ASTSchemaMethodFactory {
     public ASTSchemaMethodFactory(ASTTypeDescriptionFactory typeDescriptionFactory) {
         this.typeDescriptionFactory = typeDescriptionFactory;
     }
-
 
     public Set<Method> methods(Set<CtMethod<?>> methods) {
         final var result = new HashSet<Method>();
@@ -40,11 +38,9 @@ public class ASTSchemaMethodFactory {
 
     public List<Parameter> parameters(List<CtParameter<?>> ctParameters) {
         final var fields = new ArrayList<Parameter>();
-
         for (final var ref : ctParameters) {
             fields.add(parameter(ref));
         }
-
         return fields;
     }
 

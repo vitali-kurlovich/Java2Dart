@@ -2,7 +2,6 @@ package org.java2dart.schema.method;
 
 import org.java2dart.schema.base.ModifiersSchema;
 import org.java2dart.schema.modifier.AccesLevel;
-import org.java2dart.schema.varible.Parameter;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
