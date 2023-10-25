@@ -9,6 +9,6 @@ import spoon.reflect.declaration.ModifierKind;
 import java.util.Set;
 
 public interface VariableImplementation {
-    @NonNull String variable(@Nullable Set<ModifierKind> modifires, @NonNull String name, @NonNull TypeDescription type);
+    @NonNull String variable( @NonNull String name, @NonNull TypeDescription type);
     @NonNull String variable(@NonNull IVariable variable);
 }

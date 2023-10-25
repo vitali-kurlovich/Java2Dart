@@ -10,10 +10,10 @@ import java.util.Set;
 public class DartModifiersSpecifier implements ModifiersSpecifier {
 
     @Override
-    public @NonNull String specify(Set<ModifierKind> modifires) {
+    public @NonNull String specify(Set<ModifierKind> modifiers) {
         final var builder = new StringBuilder();
 
-       final var modifiresSchema = new ModifiersSchema(modifires);
+       final var modifiresSchema = new ModifiersSchema(modifiers);
 
 
        if (modifiresSchema.isPublic()) {

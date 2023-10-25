@@ -10,6 +10,7 @@ import spoon.reflect.reference.*;
 import spoon.reflect.visitor.CtVisitor;
 
 import java.lang.annotation.Annotation;
+import java.util.Objects;
 
 public class CodeVisitor implements CtVisitor {
 
@@ -110,6 +111,11 @@ public class CodeVisitor implements CtVisitor {
     public <R> void visitCtBlock(CtBlock<R> ctBlock) {
         print("visitCtBlock");
         newline();
+
+        ctBlock.getStatement(0).accept(this);
+
+        //ctBlock.get
+
     }
 
     @Override
@@ -134,20 +140,17 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtClass(CtClass<T> ctClass) {
         print("visitCtClass");
         newline();
-
+/*
         final var factory = Factory.Schema();
         final var schema = factory.schema(ctClass);
-//        final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
-//        final var source = schemeSpecifier.specify(schema);
-
 
 
      final var impl =  Factory.SchemeImplementation();
 
-        final var source =    impl.implementation(schema);
+     final var source =    impl.implementation(schema);
         Logging.info(source);
 
-
+*/
 
         // final var path = ctClass.getPath();
         // print(path.toString());
@@ -157,7 +160,14 @@ public class CodeVisitor implements CtVisitor {
 
         // ctClass.getFields().forEach(f -> f.accept(this));
 
-        // ctClass.getMethods().forEach(m -> m.accept(this));
+         ctClass.getMethods().forEach(m -> {
+             if (Objects.equals(m.getSimpleName(), "retStringMethod")) {
+                 m.getBody().accept(this);
+
+                // m.accept(this);
+             }
+         }
+         );
 
     }
 
@@ -277,9 +287,17 @@ public class CodeVisitor implements CtVisitor {
 
         final var factory = Factory.Schema();
         final var schema = factory.schema(ctInterface);
-        final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
-        final var source = schemeSpecifier.specify(schema);
-        Logging.info(source);
+      //  final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
+
+
+        final var impl =  Factory.SchemeImplementation();
+
+        final var source =    impl.implementation(schema);
+       // Logging.info(source);
+
+
+       // final var source = schemeSpecifier.specify(schema);
+       // Logging.info(source);
     }
 
     @Override

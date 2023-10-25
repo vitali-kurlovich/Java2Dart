@@ -7,8 +7,8 @@ import org.jspecify.annotations.NonNull;
 
 public abstract class BaseVaribleImplementation implements VariableImplementation {
     protected final BaseTypeSpecifier typeSpecifier;
-    protected final ModifiersSpecifier modifiersSpecifier;
 
+    protected final ModifiersSpecifier modifiersSpecifier;
     public BaseVaribleImplementation(ModifiersSpecifier modifiersSpecifier, BaseTypeSpecifier typeSpecifier) {
         this.typeSpecifier = typeSpecifier;
         this.modifiersSpecifier = modifiersSpecifier;
@@ -16,7 +16,7 @@ public abstract class BaseVaribleImplementation implements VariableImplementatio
 
     public @NonNull String variable(@NonNull IVariable variable) {
 
-        return  variable(variable.getModifiers(), variable.getName(), variable.getType() );
+        return  variable( variable.getName(), variable.getType() );
 
     }
 }

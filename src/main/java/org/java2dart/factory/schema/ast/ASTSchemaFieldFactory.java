@@ -1,7 +1,7 @@
 package org.java2dart.factory.schema.ast;
 
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
-import org.java2dart.schema.varible.Field;
+import org.java2dart.schema.field.Field;
 import spoon.reflect.declaration.CtField;
 
 import java.util.ArrayList;

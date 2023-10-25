@@ -1,7 +1,5 @@
 package org.java2dart.synthesize.impl.dart;
 
-import org.java2dart.schema.base.ModifiersSchema;
-import org.java2dart.schema.varible.IVariable;
 import org.java2dart.synthesize.impl.varible.BaseVaribleImplementation;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
@@ -20,9 +18,9 @@ public final class DartVariableImplementation extends BaseVaribleImplementation 
     }
 
     @Override
-    public @NonNull String variable(@Nullable Set<ModifierKind> modifiers, @NonNull String name, @NonNull TypeDescription type) {
-        final var typeDsc =  typeSpecifier.specify(type);
-        return modifiersSpecifier.specify(modifiers)  + typeDsc + " " + name;
+    public @NonNull String variable( @NonNull String name, @NonNull TypeDescription type) {
+        final var typeDsc = typeSpecifier.specify(type);
+        return   typeDsc + " " + name;
     }
 
 }

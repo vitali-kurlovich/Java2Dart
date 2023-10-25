@@ -1,6 +1,9 @@
 package org.java2dart.synthesize.scheme.dart;
 
 import org.java2dart.schema.IObjectScheme;
+import org.java2dart.synthesize.definition.dart.DartMethodDefinitionSpecifier;
+import org.java2dart.synthesize.definition.dart.DartVariableDefinitionSpecifier;
+import org.java2dart.synthesize.definition.method.MethodDefinitionSpecifier;
 import org.java2dart.synthesize.impl.dart.DartMethodImplementation;
 import org.java2dart.synthesize.impl.method.MethodImplementation;
 import org.java2dart.synthesize.impl.varible.VariableImplementation;
@@ -17,13 +20,24 @@ public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementati
 
     private final ObjectSchemeSpecifier objectSchemeSpecifier;
 
+
+
     public DartObjectSchemeImplementation(BaseTypeSpecifier typeSpecifier) {
         super(typeSpecifier);
 
         final var modifiersSpecifier = new DartModifiersSpecifier();
+        final var variableImplementation = new DartVariableImplementation(modifiersSpecifier, typeSpecifier);
+
+
         this.variableImplementation = new DartVariableImplementation(modifiersSpecifier, typeSpecifier);
-        this.methodImplementation = new DartMethodImplementation(modifiersSpecifier, typeSpecifier);
+
+        final var variableDefinitionSpecifier = new DartVariableDefinitionSpecifier(typeSpecifier);
+        final var methodDefinitionSpecifier = new DartMethodDefinitionSpecifier(modifiersSpecifier, typeSpecifier, variableDefinitionSpecifier);
+
+
+        this.methodImplementation = new DartMethodImplementation(methodDefinitionSpecifier);
         this.objectSchemeSpecifier = new DartObjectSchemeSpecifier(typeSpecifier);
+
 
     }
 
@@ -47,7 +61,6 @@ public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementati
         for (final var method : schema.getMethods()) {
             final var implMethod = methodImplementation.method(method);
             builder.append(implMethod);
-            builder.append(";\n");
         }
 
 

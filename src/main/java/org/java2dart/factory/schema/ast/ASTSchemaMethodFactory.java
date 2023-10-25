@@ -33,6 +33,10 @@ public class ASTSchemaMethodFactory {
         final var type = typeDescriptionFactory.description(method.getType());
         final var modifiers = method.getModifiers();
 
+
+
+
+
         return new Method(name, type, modifiers, parameters( method.getParameters() ));
     }
 
@@ -49,7 +53,7 @@ public class ASTSchemaMethodFactory {
         final var type = typeDescriptionFactory.description(parameter.getType());
         final var modifiers = parameter.getModifiers();
 
-        return new Parameter(name, type, modifiers);
+        return new Parameter(name, type);
     }
 
 }

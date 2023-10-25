@@ -1,15 +1,15 @@
 package org.java2dart.schema.method;
 
-import org.java2dart.schema.varible.BaseVarible;
+import org.java2dart.schema.varible.BaseVariable;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.ModifierKind;
 
 import java.util.Set;
 
-public class Parameter extends BaseVarible {
-    public Parameter(@NonNull String name, @NonNull TypeDescription type, Set<ModifierKind> modifiers) {
-        super(name, type, modifiers);
+public class Parameter extends BaseVariable {
+    public Parameter(@NonNull String name, @NonNull TypeDescription type) {
+        super(name, type);
     }
 
     public boolean isVarArgs() {

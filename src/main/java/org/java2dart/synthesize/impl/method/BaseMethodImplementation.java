@@ -1,24 +1,29 @@
 package org.java2dart.synthesize.impl.method;
 
-import org.java2dart.schema.method.Method;
+import org.java2dart.schema.base.ModifiersSchema;
+import org.java2dart.schema.method.IMethod;
+import org.java2dart.synthesize.definition.method.MethodDefinitionSpecifier;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
-import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.jspecify.annotations.NonNull;
 
 
 public abstract class BaseMethodImplementation implements MethodImplementation {
-    protected final BaseTypeSpecifier typeSpecifier;
-    protected final ModifiersSpecifier modifiersSpecifier;
 
-    public BaseMethodImplementation(ModifiersSpecifier modifiersSpecifier, BaseTypeSpecifier typeSpecifier) {
-        this.typeSpecifier = typeSpecifier;
-        this.modifiersSpecifier = modifiersSpecifier;
+    protected final MethodDefinitionSpecifier methodDefinitionSpecifier;
+
+    public BaseMethodImplementation(MethodDefinitionSpecifier methodDefinitionSpecifier) {
+        this.methodDefinitionSpecifier = methodDefinitionSpecifier;
     }
 
 
     @Override
-    public @NonNull String method( @NonNull Method method) {
+    public @NonNull String method(@NonNull IMethod method) {
+        final var modifiersSchema = new ModifiersSchema(method.getModifiers());
 
-        return method(method.getModifiers(), method.getName(), method.getReturnType(), method.getArguments());
+        if (modifiersSchema.isAbstract()) {
+            return methodDefinitionSpecifier.specify(method) + ";\n";
+        }
+
+        return methodDefinitionSpecifier.specify(method) + " {\n" + "}\n";
     }
 }

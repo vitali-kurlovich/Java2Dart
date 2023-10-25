@@ -4,7 +4,7 @@ import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.TypeParameter;
 import org.java2dart.schema.method.Method;
 import org.java2dart.schema.modifier.AccesLevel;
-import org.java2dart.schema.varible.Field;
+import org.java2dart.schema.field.Field;
 import org.java2dart.types.NamedTypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;

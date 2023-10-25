@@ -21,7 +21,7 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     @Override
     public void method(Integer value) {
-
+    final var prefix = "sdf";
     }
 
     public void method() {
