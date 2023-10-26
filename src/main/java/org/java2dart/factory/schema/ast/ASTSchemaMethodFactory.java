@@ -1,5 +1,8 @@
 package org.java2dart.factory.schema.ast;
 
+import org.java2dart.expression.builder.ExpressionBuilder;
+import org.java2dart.expression.ExpressionVisitor;
+import org.java2dart.expression.builder.IExpressionBuilder;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.method.Method;
 import org.java2dart.schema.method.Parameter;
@@ -14,15 +17,17 @@ import java.util.Set;
 public class ASTSchemaMethodFactory {
 
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
+    private final IExpressionBuilder executableBuilder;
 
-    public ASTSchemaMethodFactory(ASTTypeDescriptionFactory typeDescriptionFactory) {
+    public ASTSchemaMethodFactory(ASTTypeDescriptionFactory typeDescriptionFactory, IExpressionBuilder executableBuilder) {
         this.typeDescriptionFactory = typeDescriptionFactory;
+        this.executableBuilder = executableBuilder;
     }
 
     public Set<Method> methods(Set<CtMethod<?>> methods) {
         final var result = new HashSet<Method>();
 
-        for (final var ref: methods) {
+        for (final var ref : methods) {
             result.add(method(ref));
         }
         return result;
@@ -33,11 +38,17 @@ public class ASTSchemaMethodFactory {
         final var type = typeDescriptionFactory.description(method.getType());
         final var modifiers = method.getModifiers();
 
+    final var body = method.getBody();
+    final var statements = body.getStatements();
+
+       final var visitor = new  ExpressionVisitor( new ExpressionBuilder());
+
+        for (final var statement: statements) {
+            statement.accept(visitor);
+        }
 
 
-
-
-        return new Method(name, type, modifiers, parameters( method.getParameters() ));
+        return new Method(name, type, modifiers, parameters(method.getParameters()));
     }
 
     public List<Parameter> parameters(List<CtParameter<?>> ctParameters) {

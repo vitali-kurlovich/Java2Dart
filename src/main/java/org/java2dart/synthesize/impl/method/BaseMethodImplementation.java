@@ -16,14 +16,5 @@ public abstract class BaseMethodImplementation implements MethodImplementation {
     }
 
 
-    @Override
-    public @NonNull String method(@NonNull IMethod method) {
-        final var modifiersSchema = new ModifiersSchema(method.getModifiers());
 
-        if (modifiersSchema.isAbstract()) {
-            return methodDefinitionSpecifier.specify(method) + ";\n";
-        }
-
-        return methodDefinitionSpecifier.specify(method) + " {\n" + "}\n";
-    }
 }

@@ -1,5 +1,6 @@
 package org.java2dart.factory.schema.ast;
 
+import org.java2dart.expression.builder.IExpressionBuilder;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.builder.ast.ASTObjectSchemaBuilder;
@@ -21,10 +22,14 @@ public class ASTSchemaFactory {
     private final ASTSchemaFieldFactory fieldsFactory;
     private final ASTSchemaMethodFactory methodFactory;
 
-    public ASTSchemaFactory(ASTTypeDescriptionFactory typeDescriptionFactory) {
+   // private final IExecutableBuilder executableBuilder;
+
+    public ASTSchemaFactory(@NonNull ASTTypeDescriptionFactory typeDescriptionFactory,
+                            @NonNull IExpressionBuilder executableBuilder) {
         this.typeDescriptionFactory = typeDescriptionFactory;
         fieldsFactory = new ASTSchemaFieldFactory(typeDescriptionFactory);
-        methodFactory = new ASTSchemaMethodFactory(typeDescriptionFactory);
+        methodFactory = new ASTSchemaMethodFactory(typeDescriptionFactory, executableBuilder);
+
     }
 
     public IObjectScheme schema(CtType<?> ctType) throws IllegalStateException {

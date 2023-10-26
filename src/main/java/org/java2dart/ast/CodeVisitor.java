@@ -16,7 +16,7 @@ public class CodeVisitor implements CtVisitor {
 
 
     private void print(String string) {
-        System.out.print(string);
+       // System.out.print(string);
     }
 
     private void newline() {
@@ -140,7 +140,7 @@ public class CodeVisitor implements CtVisitor {
     public <T> void visitCtClass(CtClass<T> ctClass) {
         print("visitCtClass");
         newline();
-/*
+
         final var factory = Factory.Schema();
         final var schema = factory.schema(ctClass);
 
@@ -150,7 +150,7 @@ public class CodeVisitor implements CtVisitor {
      final var source =    impl.implementation(schema);
         Logging.info(source);
 
-*/
+
 
         // final var path = ctClass.getPath();
         // print(path.toString());
@@ -160,14 +160,7 @@ public class CodeVisitor implements CtVisitor {
 
         // ctClass.getFields().forEach(f -> f.accept(this));
 
-         ctClass.getMethods().forEach(m -> {
-             if (Objects.equals(m.getSimpleName(), "retStringMethod")) {
-                 m.getBody().accept(this);
 
-                // m.accept(this);
-             }
-         }
-         );
 
     }
 
