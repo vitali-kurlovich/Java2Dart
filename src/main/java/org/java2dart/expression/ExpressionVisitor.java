@@ -1,18 +1,12 @@
 package org.java2dart.expression;
 
 import org.java2dart.expression.builder.IExpressionBuilder;
-import org.java2dart.logging.Logging;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.*;
 
-import java.lang.annotation.Annotation;
-
 
 public class ExpressionVisitor extends BaseExpressionVisitor {
-
-
-
 
     public ExpressionVisitor(IExpressionBuilder buider) {
         super(buider);
@@ -48,11 +42,6 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
         print("." + name);
 
     }
-
-
-
-
-
 
 
     @Override

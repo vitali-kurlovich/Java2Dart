@@ -5,7 +5,6 @@ import org.java2dart.schema.varible.IVariable;
 
 public class ExpressionBuilder implements IExpressionBuilder {
 
-
     private final StringBuilder builder = new StringBuilder();
 
     public  void thisAccess() {
