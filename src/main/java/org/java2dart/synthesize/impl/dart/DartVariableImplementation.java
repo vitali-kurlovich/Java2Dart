@@ -10,11 +10,11 @@ import spoon.reflect.declaration.CtVariable;
 public final class DartVariableImplementation   implements VariableImplementation {
 
     private final TypeSpecifier typeSpecifier;
-    private final ModifiersSpecifier modifiersSpecifier;
 
-    public DartVariableImplementation(ModifiersSpecifier modifiersSpecifier, TypeSpecifier typeSpecifier) {
+
+    public DartVariableImplementation(TypeSpecifier typeSpecifier) {
        this.typeSpecifier = typeSpecifier;
-       this.modifiersSpecifier = modifiersSpecifier;
+
     }
 
 

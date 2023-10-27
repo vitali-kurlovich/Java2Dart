@@ -22,10 +22,8 @@ public class DartObjectSchemeImplementation  implements ObjectSchemeImplementati
         this.typeSpecifier = typeSpecifier;
 
         final var modifiersSpecifier = new DartModifiersSpecifier();
-        final var variableImplementation = new DartVariableImplementation(modifiersSpecifier, typeSpecifier);
 
-
-        this.variableImplementation = new DartVariableImplementation(modifiersSpecifier, typeSpecifier);
+        this.variableImplementation = new DartVariableImplementation( typeSpecifier);
 
         final var variableDefinitionSpecifier = new DartVariableDefinitionSpecifier(typeSpecifier);
         final var methodDefinitionSpecifier = new DartMethodDefinitionSpecifier(modifiersSpecifier, typeSpecifier, variableDefinitionSpecifier);
