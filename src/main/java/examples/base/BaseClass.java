@@ -58,3 +58,4 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
     }
 
 }
+

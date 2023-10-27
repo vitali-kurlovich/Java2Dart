@@ -23,21 +23,21 @@ public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
     public @NonNull String specify(CtType<?> type) {
         final var builder = new StringBuilder();
 
-        builder.append(  modifiersSpecifier.specify(type.getModifiers()));
-
-        builder.append(  typeSpecifier.specify( type.getReference() ) );
+        builder.append(modifiersSpecifier.specify(type.getModifiers()))
+                .append(prototype(type)).append(" ")
+                .append(typeSpecifier.specify(type.getReference()));
 
         if (type.isParameterized()) {
-          final var parameters = type.getFormalCtTypeParameters();
+            final var parameters = type.getFormalCtTypeParameters();
 
             builder.append("<");
 
             var needsSeparator = false;
-            for (final var param:parameters) {
+            for (final var param : parameters) {
                 if (needsSeparator) {
                     builder.append(", ");
                 }
-                builder.append( specify(param));
+                builder.append(specify(param));
                 needsSeparator = true;
             }
 
@@ -52,7 +52,7 @@ public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
             builder.append(typeSpecifier.specify(superSpec));
         }
 
-       final var  superInterfaces = type.getSuperInterfaces();
+        final var superInterfaces = type.getSuperInterfaces();
 
         if (superInterfaces != null && !superInterfaces.isEmpty()) {
             builder.append(" implement ");
@@ -73,6 +73,26 @@ public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
 
 
         return builder.toString();
+    }
+
+
+    public @NonNull String prototype(CtType<?> type) {
+
+        if (type.isEnum()) {
+            return "enum";
+        }
+
+        if (type.isInterface()) {
+
+            return "interface";
+        }
+
+        if (type.isClass()) {
+
+            return "class";
+        }
+
+        return "";
     }
 
     /*

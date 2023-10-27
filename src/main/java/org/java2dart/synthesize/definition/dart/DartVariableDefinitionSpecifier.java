@@ -15,6 +15,9 @@ public class DartVariableDefinitionSpecifier implements VariableDefinitionSpecif
 
     @Override
     public @NonNull String specify(CtVariable<?> variable) {
+
+        //variable.isFinal()
+
         return variable.getSimpleName();
     }
 }
