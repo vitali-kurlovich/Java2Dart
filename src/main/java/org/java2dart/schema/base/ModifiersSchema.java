@@ -7,16 +7,14 @@ import spoon.reflect.declaration.ModifierKind;
 import java.util.Collections;
 import java.util.Set;
 
-public final class ModifiersSchema implements Accesable {
-    public final Set<ModifierKind> modifiers;
-
+public record ModifiersSchema(Set<ModifierKind> modifiers) implements Accesable {
     public ModifiersSchema(Set<ModifierKind> modifiers) {
         this.modifiers = Collections.unmodifiableSet(modifiers);
     }
 
     @Override
     public AccesLevel getAccessLevel() {
-        for (final var kind : getModifiers()) {
+        for (final var kind : modifiers()) {
             switch (kind) {
                 case PUBLIC -> {
                     return AccesLevel.PUBLIC;
@@ -36,21 +34,16 @@ public final class ModifiersSchema implements Accesable {
         return AccesLevel.DEFAULT;
     }
 
-    @Override
-    public Set<ModifierKind> getModifiers() {
-        return modifiers;
-    }
-
     public boolean isFinal() {
-        return getModifiers().contains(ModifierKind.FINAL);
+        return modifiers().contains(ModifierKind.FINAL);
     }
 
     public boolean isAbstract() {
-        return getModifiers().contains(ModifierKind.ABSTRACT);
+        return modifiers().contains(ModifierKind.ABSTRACT);
     }
 
     public boolean isStatic() {
-        return getModifiers().contains(ModifierKind.STATIC);
+        return modifiers().contains(ModifierKind.STATIC);
     }
 
     public boolean isPublic() {
