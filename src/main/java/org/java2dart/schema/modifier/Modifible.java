@@ -5,5 +5,5 @@ import spoon.reflect.declaration.ModifierKind;
 import java.util.Set;
 
 public interface Modifible {
-    Set<ModifierKind> getModifiers();
+    Set<ModifierKind> modifiers();
 }
