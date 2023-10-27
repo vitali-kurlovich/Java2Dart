@@ -1,27 +1,25 @@
 package org.java2dart.synthesize.scheme.dart;
 
-import org.java2dart.schema.IObjectScheme;
 import org.java2dart.synthesize.definition.dart.DartMethodDefinitionSpecifier;
 import org.java2dart.synthesize.definition.dart.DartVariableDefinitionSpecifier;
-import org.java2dart.synthesize.definition.method.MethodDefinitionSpecifier;
 import org.java2dart.synthesize.impl.dart.DartMethodImplementation;
 import org.java2dart.synthesize.impl.method.MethodImplementation;
 import org.java2dart.synthesize.impl.varible.VariableImplementation;
 import org.java2dart.synthesize.impl.dart.DartVariableImplementation;
-import org.java2dart.synthesize.scheme.BaseObjectSchemeImplementation;
+import org.java2dart.synthesize.scheme.ObjectSchemeImplementation;
 import org.java2dart.synthesize.scheme.ObjectSchemeSpecifier;
-import org.java2dart.synthesize.type.BaseTypeSpecifier;
 import org.java2dart.synthesize.type.TypeSpecifier;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.CtType;
 
-public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementation {
+public class DartObjectSchemeImplementation  implements ObjectSchemeImplementation {
+    private final  TypeSpecifier typeSpecifier;
     private final VariableImplementation variableImplementation;
     private final MethodImplementation methodImplementation;
     private final ObjectSchemeSpecifier objectSchemeSpecifier;
 
     public DartObjectSchemeImplementation(TypeSpecifier typeSpecifier) {
-        super(typeSpecifier);
+        this.typeSpecifier = typeSpecifier;
 
         final var modifiersSpecifier = new DartModifiersSpecifier();
         final var variableImplementation = new DartVariableImplementation(modifiersSpecifier, typeSpecifier);
@@ -35,7 +33,7 @@ public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementati
 
         this.methodImplementation = new DartMethodImplementation(methodDefinitionSpecifier);
         this.objectSchemeSpecifier = new DartObjectSchemeSpecifier(typeSpecifier, modifiersSpecifier);
-        
+
     }
 
     @Override

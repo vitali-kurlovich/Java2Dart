@@ -1,20 +1,20 @@
 package org.java2dart.synthesize.definition.dart;
 
-import org.java2dart.schema.varible.IVariable;
-import org.java2dart.synthesize.definition.varible.BaseVariableDefinitionSpecifier;
-import org.java2dart.synthesize.type.BaseTypeSpecifier;
+import org.java2dart.synthesize.definition.varible.VariableDefinitionSpecifier;
 import org.java2dart.synthesize.type.TypeSpecifier;
 import org.jspecify.annotations.NonNull;
+import spoon.reflect.declaration.CtVariable;
 
-public class DartVariableDefinitionSpecifier extends BaseVariableDefinitionSpecifier {
+public class DartVariableDefinitionSpecifier implements VariableDefinitionSpecifier {
 
+    private final TypeSpecifier typeSpecifier;
     public DartVariableDefinitionSpecifier(TypeSpecifier typeSpecifier) {
-        super(typeSpecifier);
+        this.typeSpecifier = typeSpecifier;
     }
 
+
     @Override
-    public @NonNull String specify(IVariable variable) {
-      //  final var typeDsc = typeSpecifier.specify(variable.getType());
-        return  variable.getName();
+    public @NonNull String specify(CtVariable<?> variable) {
+        return variable.getSimpleName();
     }
 }

@@ -1,14 +1,8 @@
 package org.java2dart.synthesize.impl.varible;
 
-import org.java2dart.schema.varible.IVariable;
-import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
-import spoon.reflect.declaration.ModifierKind;
-
-import java.util.Set;
+import spoon.reflect.declaration.CtVariable;
 
 public interface VariableImplementation {
-    @NonNull String variable( @NonNull String name, @NonNull TypeDescription type);
-    @NonNull String variable(@NonNull IVariable variable);
+    @NonNull String variable(@NonNull CtVariable<?> variable);
 }

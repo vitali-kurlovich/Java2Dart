@@ -1,13 +1,13 @@
 package org.java2dart.synthesize.type.dart;
 
 import org.java2dart.synthesize.type.TypeSpecifier;
-import org.java2dart.types.primitive.PrimitiveType;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.reference.CtArrayTypeReference;
 import spoon.reflect.reference.CtTypeReference;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class DartTypeSpecifier  implements TypeSpecifier {
 
@@ -95,6 +95,18 @@ public class DartTypeSpecifier  implements TypeSpecifier {
         map.put("char", PrimitiveType.CHAR);
         map.put("void", PrimitiveType.VOID);
         return map;
+    }
+
+    public enum PrimitiveType {
+        BYTE,
+        SHORT,
+        INT,
+        LONG,
+        FLOAT,
+        DOUBLE,
+        BOOLEAN,
+        CHAR,
+        VOID
     }
 
     /*

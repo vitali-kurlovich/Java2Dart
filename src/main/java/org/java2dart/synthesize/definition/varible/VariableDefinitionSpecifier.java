@@ -1,9 +1,9 @@
 package org.java2dart.synthesize.definition.varible;
 
-import org.java2dart.schema.varible.IVariable;
 import org.jspecify.annotations.NonNull;
+import spoon.reflect.declaration.CtVariable;
 
 
 public interface VariableDefinitionSpecifier {
-    @NonNull String specify(IVariable variable);
+    @NonNull String specify(CtVariable<?> variable);
 }

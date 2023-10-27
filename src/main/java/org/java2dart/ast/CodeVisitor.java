@@ -10,7 +10,6 @@ import spoon.reflect.reference.*;
 import spoon.reflect.visitor.CtVisitor;
 
 import java.lang.annotation.Annotation;
-import java.util.Objects;
 
 public class CodeVisitor implements CtVisitor {
 
@@ -141,9 +140,6 @@ public class CodeVisitor implements CtVisitor {
         print("visitCtClass");
         newline();
 
-        final var factory = Factory.Schema();
-        final var schema = factory.schema(ctClass);
-
 
      final var impl =  Factory.SchemeImplementation();
 
@@ -215,7 +211,7 @@ public class CodeVisitor implements CtVisitor {
 
         final var type = ctField.getType();
 
-        final var factory = Factory.TypeDescription();
+
 
         try {
            // final var desc = factory.description(type);
@@ -278,8 +274,7 @@ public class CodeVisitor implements CtVisitor {
         print("visitCtInterface");
         newline();
 
-        final var factory = Factory.Schema();
-        final var schema = factory.schema(ctInterface);
+
       //  final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
 
 
@@ -395,17 +390,7 @@ public class CodeVisitor implements CtVisitor {
         print("visitCtMethod");
         newline();
 
-        var ctTypeReference = ctMethod.getType();
 
-        final var factory = Factory.TypeDescription();
-
-        try {
-            final var desc = factory.description(ctTypeReference);
-            System.out.println(desc.toString());
-        } catch (Exception e) {
-
-            System.out.println(e.getMessage());
-        }
 
 
     }
