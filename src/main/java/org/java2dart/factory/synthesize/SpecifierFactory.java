@@ -4,7 +4,6 @@ import org.java2dart.synthesize.definition.scheme.SchemeDefinitionSpecifier;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.scheme.ObjectSchemeSpecifier;
 import org.java2dart.synthesize.scheme.dart.DartModifiersSpecifier;
-import org.java2dart.synthesize.definition.scheme.BaseSchemeDefinitionSpecifier;
 import org.java2dart.synthesize.definition.dart.DartSchemeDefinitionSpecifier;
 import org.java2dart.synthesize.scheme.dart.DartObjectSchemeSpecifier;
 import org.java2dart.synthesize.type.TypeSpecifier;

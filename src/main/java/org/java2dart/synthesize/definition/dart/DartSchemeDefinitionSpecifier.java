@@ -1,6 +1,6 @@
 package org.java2dart.synthesize.definition.dart;
 
-import org.java2dart.synthesize.definition.scheme.BaseSchemeDefinitionSpecifier;
+import org.java2dart.synthesize.definition.scheme.SchemeDefinitionSpecifier;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.scheme.ObjectSchemeSpecifier;
 import org.jspecify.annotations.NonNull;
@@ -9,10 +9,14 @@ import spoon.reflect.declaration.ModifierKind;
 
 import java.util.Set;
 
-public class DartSchemeDefinitionSpecifier extends BaseSchemeDefinitionSpecifier {
-    public DartSchemeDefinitionSpecifier(@NonNull ObjectSchemeSpecifier typeParameterSpecifier,
+public class DartSchemeDefinitionSpecifier implements SchemeDefinitionSpecifier {
+
+    private final @NonNull ObjectSchemeSpecifier schemeSpecifier;
+    private final @NonNull ModifiersSpecifier modifiersSpecifier;
+    public DartSchemeDefinitionSpecifier(@NonNull ObjectSchemeSpecifier schemeSpecifier,
                                          @NonNull ModifiersSpecifier modifiersSpecifier) {
-        super(typeParameterSpecifier, modifiersSpecifier);
+        this.schemeSpecifier = schemeSpecifier;
+        this.modifiersSpecifier = modifiersSpecifier;
     }
 
     @Override
