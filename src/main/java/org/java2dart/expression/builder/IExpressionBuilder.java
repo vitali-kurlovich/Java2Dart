@@ -13,5 +13,7 @@ public interface IExpressionBuilder {
     void read(IVariable variable);
     void read(Field field);
 
+    void append(IExpressionBuilder builder);
+
     String toString();
 }

@@ -8,19 +8,20 @@ import org.java2dart.synthesize.scheme.ObjectSchemeImplementation;
 import org.java2dart.synthesize.scheme.dart.DartObjectSchemeImplementation;
 
 public final class Factory {
-    private static final ASTTypeDescriptionFactory _typeDescription = new ASTTypeDescriptionFactory();
-    private static final ASTSchemaFactory _schemaFactory = new ASTSchemaFactory(TypeDescription(), new ExpressionBuilder());
+
+    private static final ASTFactories astFactories = new ASTFactories();
+
 
     private static final SpecifierFactory _specifierFactory = new SpecifierFactory();
 
-    private static  final ObjectSchemeImplementation _schemeImplementation = new DartObjectSchemeImplementation(Specifier().typeSpecifier());
+    private static final ObjectSchemeImplementation _schemeImplementation = new DartObjectSchemeImplementation(Specifier().typeSpecifier());
 
     public static ASTTypeDescriptionFactory TypeDescription() {
-        return _typeDescription;
+        return astFactories.typeDescriptionFactory;
     }
 
     public static ASTSchemaFactory Schema() {
-        return _schemaFactory;
+        return astFactories.schemaFactory;
     }
 
     public static SpecifierFactory Specifier() {
@@ -30,6 +31,5 @@ public final class Factory {
     public static ObjectSchemeImplementation SchemeImplementation() {
         return _schemeImplementation;
     }
-
 
 }

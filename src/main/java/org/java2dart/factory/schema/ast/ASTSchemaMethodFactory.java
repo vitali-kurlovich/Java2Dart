@@ -1,5 +1,6 @@
 package org.java2dart.factory.schema.ast;
 
+import org.java2dart.expression.ExpressionBuilderFactory;
 import org.java2dart.expression.builder.ExpressionBuilder;
 import org.java2dart.expression.ExpressionVisitor;
 import org.java2dart.expression.builder.IExpressionBuilder;
@@ -17,11 +18,11 @@ import java.util.Set;
 public class ASTSchemaMethodFactory {
 
     private final ASTTypeDescriptionFactory typeDescriptionFactory;
-    private final IExpressionBuilder executableBuilder;
+    private final ExpressionBuilderFactory expressionBuilderFactory;
 
-    public ASTSchemaMethodFactory(ASTTypeDescriptionFactory typeDescriptionFactory, IExpressionBuilder executableBuilder) {
+    public ASTSchemaMethodFactory(ASTTypeDescriptionFactory typeDescriptionFactory,  ExpressionBuilderFactory expressionBuilderFactory) {
         this.typeDescriptionFactory = typeDescriptionFactory;
-        this.executableBuilder = executableBuilder;
+        this.expressionBuilderFactory = expressionBuilderFactory;
     }
 
     public Set<Method> methods(Set<CtMethod<?>> methods) {
@@ -41,7 +42,7 @@ public class ASTSchemaMethodFactory {
     final var body = method.getBody();
     final var statements = body.getStatements();
 
-       final var visitor = new  ExpressionVisitor( new ExpressionBuilder());
+       final var visitor = new  ExpressionVisitor(  expressionBuilderFactory.builder() );
 
         for (final var statement: statements) {
             statement.accept(visitor);

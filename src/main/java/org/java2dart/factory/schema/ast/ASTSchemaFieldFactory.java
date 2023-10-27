@@ -24,6 +24,4 @@ public class ASTSchemaFieldFactory extends ASTVariableFactory {
     public Field field(CtField<?> ctField) {
         return new Field(variable(ctField), ctField.getModifiers());
     }
-
-
 }

@@ -11,18 +11,16 @@ import org.java2dart.synthesize.impl.dart.DartVariableImplementation;
 import org.java2dart.synthesize.scheme.BaseObjectSchemeImplementation;
 import org.java2dart.synthesize.scheme.ObjectSchemeSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
+import org.java2dart.synthesize.type.TypeSpecifier;
 import org.jspecify.annotations.NonNull;
+import spoon.reflect.declaration.CtType;
 
 public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementation {
-
     private final VariableImplementation variableImplementation;
     private final MethodImplementation methodImplementation;
-
     private final ObjectSchemeSpecifier objectSchemeSpecifier;
 
-
-
-    public DartObjectSchemeImplementation(BaseTypeSpecifier typeSpecifier) {
+    public DartObjectSchemeImplementation(TypeSpecifier typeSpecifier) {
         super(typeSpecifier);
 
         final var modifiersSpecifier = new DartModifiersSpecifier();
@@ -36,19 +34,18 @@ public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementati
 
 
         this.methodImplementation = new DartMethodImplementation(methodDefinitionSpecifier);
-        this.objectSchemeSpecifier = new DartObjectSchemeSpecifier(typeSpecifier);
-
-
+        this.objectSchemeSpecifier = new DartObjectSchemeSpecifier(typeSpecifier, modifiersSpecifier);
+        
     }
 
     @Override
-    public @NonNull String implementation(IObjectScheme schema) {
+    public @NonNull String implementation(CtType<?> type) {
 
         final var builder = new StringBuilder();
-        builder.append(objectSchemeSpecifier.specify(schema));
+        builder.append(objectSchemeSpecifier.specify(type));
 
         builder.append(" {\n");
-
+/*
         for (final var field : schema.getFields()) {
 
             final var implVar = variableImplementation.variable(field);
@@ -62,7 +59,7 @@ public class DartObjectSchemeImplementation extends BaseObjectSchemeImplementati
             final var implMethod = methodImplementation.method(method);
             builder.append(implMethod);
         }
-
+*/
 
         builder.append("}");
 

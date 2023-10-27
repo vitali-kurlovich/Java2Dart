@@ -6,9 +6,11 @@ import org.java2dart.synthesize.definition.method.BaseMethodDefinitionSpecifier;
 import org.java2dart.synthesize.definition.varible.VariableDefinitionSpecifier;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
+import org.java2dart.synthesize.type.TypeSpecifier;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
+import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.declaration.ModifierKind;
 
 import java.util.List;
@@ -17,12 +19,23 @@ import java.util.Set;
 public class DartMethodDefinitionSpecifier extends BaseMethodDefinitionSpecifier {
 
     public DartMethodDefinitionSpecifier(@NonNull ModifiersSpecifier modifiersSpecifier,
-                                         @NonNull BaseTypeSpecifier typeSpecifier,
+                                         @NonNull TypeSpecifier typeSpecifier,
                                          @NonNull VariableDefinitionSpecifier variableSpecifier) {
         super(modifiersSpecifier, typeSpecifier, variableSpecifier);
     }
 
     @Override
+    public @NonNull String specify(CtMethod<?> method) {
+        final var builder = new StringBuilder();
+        builder.append(modifiersSpecifier.specify(method.getModifiers()));
+        builder.append(" ")
+                .append(method.getSimpleName())
+                .append("(")
+                .append(")");
+
+        return builder.toString();
+    }
+
     public @NonNull String method(@Nullable Set<ModifierKind> modifiers,
                                   @NonNull String name,
                                   @NonNull TypeDescription returnType,
@@ -32,7 +45,7 @@ public class DartMethodDefinitionSpecifier extends BaseMethodDefinitionSpecifier
         final var builder = new StringBuilder();
 
         builder.append(modifiersSpecifier.specify(modifiers))
-                .append(typeSpecifier.specify(returnType))
+              //  .append(typeSpecifier.specify(returnType))
                 .append(" ")
                 .append(name)
                 .append("(");
@@ -52,5 +65,6 @@ public class DartMethodDefinitionSpecifier extends BaseMethodDefinitionSpecifier
 
         return builder.toString();
     }
+
 
 }

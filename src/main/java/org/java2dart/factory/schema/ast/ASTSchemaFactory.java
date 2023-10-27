@@ -1,19 +1,10 @@
 package org.java2dart.factory.schema.ast;
 
-import org.java2dart.expression.builder.IExpressionBuilder;
 import org.java2dart.factory.types.ast.ASTTypeDescriptionFactory;
 import org.java2dart.schema.IObjectScheme;
 import org.java2dart.schema.builder.ast.ASTObjectSchemaBuilder;
-import org.java2dart.types.NamedTypeDescription;
-import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 import spoon.reflect.declaration.CtType;
-import spoon.reflect.declaration.CtTypeParameter;
-import spoon.reflect.reference.CtTypeReference;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class ASTSchemaFactory {
@@ -24,10 +15,11 @@ public class ASTSchemaFactory {
    // private final IExecutableBuilder executableBuilder;
 
     public ASTSchemaFactory(@NonNull ASTTypeDescriptionFactory typeDescriptionFactory,
-                            @NonNull IExpressionBuilder executableBuilder) {
+                            @NonNull ASTSchemaFieldFactory fieldsFactory,
+                            @NonNull ASTSchemaMethodFactory methodFactory) {
         this.typeDescriptionFactory = typeDescriptionFactory;
-        fieldsFactory = new ASTSchemaFieldFactory(typeDescriptionFactory);
-        methodFactory = new ASTSchemaMethodFactory(typeDescriptionFactory, executableBuilder);
+      this.fieldsFactory = fieldsFactory;
+      this.methodFactory = methodFactory;
 
     }
 
@@ -60,21 +52,5 @@ public class ASTSchemaFactory {
     }
 
 
-    private NamedTypeDescription description(@Nullable CtTypeReference<?> ctTypeReference) throws IllegalStateException {
-        if (ctTypeReference == null) {
-            return null;
-        }
-        return (NamedTypeDescription) typeDescriptionFactory.description(ctTypeReference);
-    }
 
-    private @NonNull List<TypeDescription> descriptions(List<CtTypeParameter> parameters) throws IllegalStateException {
-        final var params = new ArrayList<TypeDescription>();
-
-        for (final var param : parameters) {
-            final var ref = param.getReference();
-            params.add(description(ref));
-        }
-
-        return params;
-    }
 }

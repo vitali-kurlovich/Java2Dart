@@ -8,5 +8,6 @@ public enum PrimitiveType {
     FLOAT,
     DOUBLE,
     BOOLEAN,
-    CHAR
+    CHAR,
+    VOID
 }

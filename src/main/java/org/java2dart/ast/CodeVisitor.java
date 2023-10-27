@@ -147,7 +147,7 @@ public class CodeVisitor implements CtVisitor {
 
      final var impl =  Factory.SchemeImplementation();
 
-     final var source =    impl.implementation(schema);
+     final var source =    impl.implementation(ctClass);
         Logging.info(source);
 
 
@@ -218,12 +218,12 @@ public class CodeVisitor implements CtVisitor {
         final var factory = Factory.TypeDescription();
 
         try {
-            final var desc = factory.description(type);
+           // final var desc = factory.description(type);
 
             final var specifier = new DartTypeSpecifier();
 
 
-            print(specifier.specify(desc));
+            print(specifier.specify(type));
 
 
         } catch (Exception e) {
@@ -285,7 +285,7 @@ public class CodeVisitor implements CtVisitor {
 
         final var impl =  Factory.SchemeImplementation();
 
-        final var source =    impl.implementation(schema);
+        final var source =    impl.implementation(ctInterface);
        // Logging.info(source);
 
 

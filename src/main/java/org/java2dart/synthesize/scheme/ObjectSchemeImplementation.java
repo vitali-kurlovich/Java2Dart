@@ -1,9 +1,9 @@
 package org.java2dart.synthesize.scheme;
 
-import org.java2dart.schema.IObjectScheme;
 import org.jspecify.annotations.NonNull;
+import spoon.reflect.declaration.CtType;
 
 
 public interface ObjectSchemeImplementation {
-    @NonNull String implementation(IObjectScheme schema);
+    @NonNull String implementation(CtType<?> type );
 }

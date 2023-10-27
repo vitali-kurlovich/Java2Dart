@@ -7,6 +7,7 @@ import org.java2dart.synthesize.definition.dart.DartSchemeDefinitionSpecifier;
 import org.java2dart.synthesize.definition.varible.VariableDefinitionSpecifier;
 import org.java2dart.synthesize.scheme.ModifiersSpecifier;
 import org.java2dart.synthesize.type.BaseTypeSpecifier;
+import org.java2dart.synthesize.type.TypeSpecifier;
 import org.java2dart.types.TypeDescription;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
@@ -20,24 +21,15 @@ public abstract class BaseMethodDefinitionSpecifier implements MethodDefinitionS
 
     protected final @NonNull ModifiersSpecifier modifiersSpecifier;
 
-    protected final @NonNull BaseTypeSpecifier typeSpecifier;
+    protected final @NonNull TypeSpecifier typeSpecifier;
     protected final @NonNull VariableDefinitionSpecifier variableSpecifier;
 
     public BaseMethodDefinitionSpecifier(@NonNull ModifiersSpecifier modifiersSpecifier,
-                                         @NonNull BaseTypeSpecifier typeSpecifier,
+                                         @NonNull TypeSpecifier typeSpecifier,
                                          @NonNull VariableDefinitionSpecifier variableSpecifier) {
         this.modifiersSpecifier = modifiersSpecifier;
         this.typeSpecifier = typeSpecifier;
         this.variableSpecifier = variableSpecifier;
     }
 
-    @Override
-    public @NonNull String specify(IMethod method) {
-        return method(method.getModifiers(), method.getName(), method.getReturnType(), method.getArguments());
-    }
-
-    public abstract @NonNull String method(@Nullable Set<ModifierKind> modifiers,
-                                  @NonNull String name,
-                                  @NonNull TypeDescription returnType,
-                                  @Nullable List<Parameter> arguments);
 }

@@ -13,30 +13,30 @@ public class DartModifiersSpecifier implements ModifiersSpecifier {
     public @NonNull String specify(Set<ModifierKind> modifiers) {
         final var builder = new StringBuilder();
 
-       final var modifiresSchema = new ModifiersSchema(modifiers);
+       final var modifiersSchema = new ModifiersSchema(modifiers);
 
 
-       if (modifiresSchema.isPublic()) {
+       if (modifiersSchema.isPublic()) {
            builder.append("public ");
        }
 
-        if (modifiresSchema.isProtected()) {
+        if (modifiersSchema.isProtected()) {
             builder.append("protected ");
         }
 
-        if (modifiresSchema.isPrivate()) {
+        if (modifiersSchema.isPrivate()) {
             builder.append("private ");
         }
 
-        if (modifiresSchema.isStatic()) {
+        if (modifiersSchema.isStatic()) {
             builder.append("static ");
         }
 
-        if (modifiresSchema.isFinal()) {
+        if (modifiersSchema.isFinal()) {
             builder.append("final ");
         }
 
-        if (modifiresSchema.isAbstract()) {
+        if (modifiersSchema.isAbstract()) {
             builder.append("abstract ");
         }
 

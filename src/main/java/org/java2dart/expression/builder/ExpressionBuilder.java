@@ -18,18 +18,28 @@ public class ExpressionBuilder implements IExpressionBuilder {
     public void read(IVariable variable) {
      final var name =  variable.getName();
 
-     builder.append(".").append(name);
-
+        builder.append(name);
 
     }
 
     public void read(Field field) {
-        read((IVariable) field);
+        final var name =  field.getName();
+
+
+        builder.append(".").append(name);
+    }
+
+
+
+    public void append(IExpressionBuilder builder) {
+        this.builder.append(builder.toString());
     }
 
 
     public  String toString() {
       return   builder.toString();
     }
+
+
 
 }
