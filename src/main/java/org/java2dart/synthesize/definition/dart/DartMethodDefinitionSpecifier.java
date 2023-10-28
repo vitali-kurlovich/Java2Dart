@@ -13,6 +13,7 @@ public final class DartMethodDefinitionSpecifier implements MethodDefinitionSpec
     protected final @NonNull ModifiersSpecifier modifiersSpecifier;
     protected final @NonNull TypeSpecifier typeSpecifier;
     protected final @NonNull VariableDefinitionSpecifier variableSpecifier;
+
     public DartMethodDefinitionSpecifier(@NonNull ModifiersSpecifier modifiersSpecifier,
                                          @NonNull TypeSpecifier typeSpecifier,
                                          @NonNull VariableDefinitionSpecifier variableSpecifier) {
@@ -25,23 +26,30 @@ public final class DartMethodDefinitionSpecifier implements MethodDefinitionSpec
     public @NonNull String specify(CtMethod<?> method) {
         final var builder = new StringBuilder();
 
-
-
-      final var returnType =  typeSpecifier.specify( method.getType());
-
+        final var returnType = typeSpecifier.specify(method.getType());
 
         builder.append(modifiersSpecifier.specify(method.getModifiers()))
                 .append(" ")
                 .append(returnType)
                 .append(" ")
                 .append(method.getSimpleName())
-                .append("(")
-                .append(")");
+                .append("(");
+
+        var neesdsSeparator = false;
+        for (final var param : method.getParameters()) {
+            if (neesdsSeparator) {
+                builder.append(", ");
+            }
+
+            final var spec = variableSpecifier.specify(param);
+            builder.append(spec);
+            neesdsSeparator = true;
+        }
+
+        builder.append(")");
 
         return builder.toString();
     }
-
-
 
 
 }
