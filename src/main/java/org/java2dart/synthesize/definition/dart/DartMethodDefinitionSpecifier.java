@@ -8,7 +8,7 @@ import org.java2dart.synthesize.type.TypeSpecifier;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.CtMethod;
 
-public class DartMethodDefinitionSpecifier implements MethodDefinitionSpecifier {
+public final class DartMethodDefinitionSpecifier implements MethodDefinitionSpecifier {
 
     protected final @NonNull ModifiersSpecifier modifiersSpecifier;
     protected final @NonNull TypeSpecifier typeSpecifier;
@@ -24,8 +24,16 @@ public class DartMethodDefinitionSpecifier implements MethodDefinitionSpecifier 
     @Override
     public @NonNull String specify(CtMethod<?> method) {
         final var builder = new StringBuilder();
-        builder.append(modifiersSpecifier.specify(method.getModifiers()));
-        builder.append(" ")
+
+
+
+      final var returnType =  typeSpecifier.specify( method.getType());
+
+
+        builder.append(modifiersSpecifier.specify(method.getModifiers()))
+                .append(" ")
+                .append(returnType)
+                .append(" ")
                 .append(method.getSimpleName())
                 .append("(")
                 .append(")");

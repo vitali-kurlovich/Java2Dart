@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class DartTypeSpecifier  implements TypeSpecifier {
+public final class DartTypeSpecifier  implements TypeSpecifier {
 
     @Override
     public @NonNull String specify(CtTypeReference<?> typeReference) {

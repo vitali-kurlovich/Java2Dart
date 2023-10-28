@@ -6,7 +6,7 @@ import org.java2dart.synthesize.impl.method.MethodImplementation;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.CtMethod;
 
-public class DartMethodImplementation implements MethodImplementation {
+public final class DartMethodImplementation implements MethodImplementation {
     private final MethodDefinitionSpecifier methodDefinitionSpecifier;
 
     public DartMethodImplementation(@NonNull MethodDefinitionSpecifier methodDefinitionSpecifier) {

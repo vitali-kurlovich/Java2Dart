@@ -9,7 +9,7 @@ import spoon.reflect.declaration.CtType;
 
 // CtVariable<?> variable
 
-public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
+public final class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
     private final TypeSpecifier typeSpecifier;
     private final ModifiersSpecifier modifiersSpecifier;
 
@@ -24,7 +24,9 @@ public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
         final var builder = new StringBuilder();
 
         builder.append(modifiersSpecifier.specify(type.getModifiers()))
-                .append(prototype(type)).append(" ")
+                .append(" ")
+                .append(prototype(type))
+                .append(" ")
                 .append(typeSpecifier.specify(type.getReference()));
 
         if (type.isParameterized()) {
@@ -43,7 +45,6 @@ public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
 
             builder.append(">");
         }
-
 
         final var superSpec = type.getSuperclass();
         if (superSpec != null) {
@@ -68,99 +69,27 @@ public class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
 
                 needsSeparator = true;
             }
-
         }
 
-
-        return builder.toString();
+        return builder.toString().trim();
     }
 
 
     public @NonNull String prototype(CtType<?> type) {
-
         if (type.isEnum()) {
             return "enum";
         }
 
         if (type.isInterface()) {
-
             return "interface";
         }
 
         if (type.isClass()) {
-
             return "class";
         }
 
         return "";
     }
 
-    /*
-    public @NonNull String specify(IObjectScheme scheme) {
-        final var typeDescription = scheme.getSpecification();
-        final var builder = new StringBuilder();
-
-        builder.append(modifiersSpecifier.specify(scheme.getModifiers()));
-
-       // builder.append(typeSpecifier.specify(typeDescription));
-
-        if (scheme.isParameterized()) {
-            final var formalParameters = scheme.getFormalParameters();
-
-            var needsSeparator = false;
-            builder.append("<");
-            for (final var param : formalParameters) {
-
-                if (needsSeparator) {
-                    builder.append(", ");
-                }
-
-                final var paramSpec = specify(param);
-                builder.append(paramSpec);
-
-                needsSeparator = true;
-            }
-            builder.append(">");
-        }
-
-        final var superSpec = scheme.getSuperClass();
-        if (superSpec != null) {
-
-            builder.append(" extended ");
-            builder.append(typeSpecifier.specify(superSpec));
-        }
-
-        final var interfaces = scheme.getInterfaces();
-
-        if (interfaces != null && !interfaces.isEmpty()) {
-            switch (scheme.getTypeKing()) {
-
-                case ENUM, NONE, PRIMITIVE, GENERIC -> {
-                    throw new RuntimeException("Not implemented");
-                }
-                case CLASS -> {
-                    builder.append(" implement ");
-                }
-                case INTERFACE -> {
-                    builder.append(" extends ");
-                }
-            }
-
-            var needsSeparator = false;
-            for (final var ref : interfaces) {
-                if (needsSeparator) {
-                    builder.append(", ");
-                }
-                final var spec = typeSpecifier.specify(ref);
-                builder.append(spec);
-
-                needsSeparator = true;
-            }
-        }
-
-
-        return builder.toString();
-    }
-*/
 
 }

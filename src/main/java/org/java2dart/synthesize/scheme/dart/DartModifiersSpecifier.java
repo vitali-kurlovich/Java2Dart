@@ -7,14 +7,13 @@ import spoon.reflect.declaration.ModifierKind;
 
 import java.util.Set;
 
-public class DartModifiersSpecifier implements ModifiersSpecifier {
+public final class DartModifiersSpecifier implements ModifiersSpecifier {
 
     @Override
     public @NonNull String specify(Set<ModifierKind> modifiers) {
         final var builder = new StringBuilder();
 
        final var modifiersSchema = new ModifiersSchema(modifiers);
-
 
        if (modifiersSchema.isPublic()) {
            builder.append("public ");
@@ -40,7 +39,6 @@ public class DartModifiersSpecifier implements ModifiersSpecifier {
             builder.append("abstract ");
         }
 
-
-        return builder.toString();
+        return builder.toString().trim();
     }
 }

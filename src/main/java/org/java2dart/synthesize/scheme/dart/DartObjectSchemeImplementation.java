@@ -12,7 +12,7 @@ import org.java2dart.synthesize.type.TypeSpecifier;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.CtType;
 
-public class DartObjectSchemeImplementation  implements ObjectSchemeImplementation {
+public final class DartObjectSchemeImplementation  implements ObjectSchemeImplementation {
     private final  TypeSpecifier typeSpecifier;
     private final VariableImplementation variableImplementation;
     private final MethodImplementation methodImplementation;
@@ -41,8 +41,8 @@ public class DartObjectSchemeImplementation  implements ObjectSchemeImplementati
         builder.append(objectSchemeSpecifier.specify(type));
 
         builder.append(" {\n");
-/*
-        for (final var field : schema.getFields()) {
+
+        for (final var field : type.getFields()) {
 
             final var implVar = variableImplementation.variable(field);
 
@@ -51,11 +51,11 @@ public class DartObjectSchemeImplementation  implements ObjectSchemeImplementati
 
         }
 
-        for (final var method : schema.getMethods()) {
+        for (final var method : type.getMethods()) {
             final var implMethod = methodImplementation.method(method);
             builder.append(implMethod);
         }
-*/
+
 
         builder.append("}");
 

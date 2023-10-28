@@ -5,7 +5,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.java2dart.ast.ASTLoader;
 
-public class CLI {
+public final class CLI {
     public static final String inputKey = "input";
     public static final String inputShortKey = "i";
     public static final String outputKey = "output";
