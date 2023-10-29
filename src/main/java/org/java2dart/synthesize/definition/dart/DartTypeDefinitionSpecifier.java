@@ -1,33 +1,30 @@
-package org.java2dart.synthesize.scheme.dart;
+package org.java2dart.synthesize.definition.dart;
 
-import org.java2dart.synthesize.scheme.ModifiersSpecifier;
-import org.java2dart.synthesize.scheme.ObjectSchemeSpecifier;
-import org.java2dart.synthesize.type.TypeSpecifier;
+import org.java2dart.synthesize.definition.scheme.TypeDefinitionSpecifier;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.CtType;
 
 
-// CtVariable<?> variable
+public final class DartTypeDefinitionSpecifier implements TypeDefinitionSpecifier {
 
-public final class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
-    private final TypeSpecifier typeSpecifier;
-    private final ModifiersSpecifier modifiersSpecifier;
+    private final @NonNull DartModifiersDefinitionSpecifier modifiersSpecifier;
+    private final @NonNull DartTypeReferenceSpecifier typeReferenceSpecifier;
 
-    public DartObjectSchemeSpecifier(TypeSpecifier typeSpecifier, ModifiersSpecifier modifiersSpecifier) {
-
-        this.typeSpecifier = typeSpecifier;
+    public DartTypeDefinitionSpecifier(@NonNull DartModifiersDefinitionSpecifier modifiersSpecifier,
+                                       @NonNull DartTypeReferenceSpecifier typeReferenceSpecifier) {
         this.modifiersSpecifier = modifiersSpecifier;
+        this.typeReferenceSpecifier = typeReferenceSpecifier;
     }
 
     @Override
     public @NonNull String specify(CtType<?> type) {
         final var builder = new StringBuilder();
 
-        builder.append(modifiersSpecifier.specify(type.getModifiers()))
+        builder.append(modifiersSpecifier.specify(type))
                 .append(" ")
                 .append(prototype(type))
                 .append(" ")
-                .append(typeSpecifier.specify(type.getReference()));
+                .append(typeReferenceSpecifier.specify(type.getReference()));
 
         if (type.isParameterized()) {
             final var parameters = type.getFormalCtTypeParameters();
@@ -50,7 +47,7 @@ public final class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
         if (superSpec != null) {
 
             builder.append(" extended ");
-            builder.append(typeSpecifier.specify(superSpec));
+            builder.append(typeReferenceSpecifier.specify(superSpec));
         }
 
         final var superInterfaces = type.getSuperInterfaces();
@@ -64,7 +61,7 @@ public final class DartObjectSchemeSpecifier implements ObjectSchemeSpecifier {
                 if (needsSeparator) {
                     builder.append(", ");
                 }
-                final var spec = typeSpecifier.specify(ref);
+                final var spec = typeReferenceSpecifier.specify(ref);
                 builder.append(spec);
 
                 needsSeparator = true;

@@ -1,10 +1,10 @@
-package org.java2dart.synthesize.scheme;
+package org.java2dart.synthesize.definition.scheme;
 
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.declaration.CtType;
 
 
-public interface ObjectSchemeSpecifier {
+public interface TypeDefinitionSpecifier {
     @NonNull String specify(CtType<?> type);
 }
 

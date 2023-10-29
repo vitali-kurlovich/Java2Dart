@@ -1,8 +1,6 @@
 package org.java2dart.ast;
 
-import org.java2dart.factory.Factory;
-import org.java2dart.logging.Logging;
-import org.java2dart.synthesize.type.dart.DartTypeSpecifier;
+import org.java2dart.synthesize.definition.dart.DartTypeReferenceSpecifier;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.path.CtRole;
@@ -141,10 +139,10 @@ public class CodeVisitor implements CtVisitor {
         newline();
 
 
-     final var impl =  Factory.SchemeImplementation();
-
-     final var source =    impl.implementation(ctClass);
-        Logging.info(source);
+//     final var impl =  Factory.SchemeImplementation();
+//
+//     final var source =    impl.implementation(ctClass);
+//        Logging.info(source);
 
 
 
@@ -216,7 +214,7 @@ public class CodeVisitor implements CtVisitor {
         try {
            // final var desc = factory.description(type);
 
-            final var specifier = new DartTypeSpecifier();
+            final var specifier = new DartTypeReferenceSpecifier();
 
 
             print(specifier.specify(type));
@@ -278,9 +276,9 @@ public class CodeVisitor implements CtVisitor {
       //  final var schemeSpecifier = Factory.Specifier().schemeSpecifier();
 
 
-        final var impl =  Factory.SchemeImplementation();
-
-        final var source =    impl.implementation(ctInterface);
+//        final var impl =  Factory.SchemeImplementation();
+//
+//        final var source =    impl.implementation(ctInterface);
        // Logging.info(source);
 
 

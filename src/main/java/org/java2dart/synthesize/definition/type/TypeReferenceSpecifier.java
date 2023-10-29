@@ -1,9 +1,9 @@
-package org.java2dart.synthesize.type;
+package org.java2dart.synthesize.definition.type;
 
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.reference.CtTypeReference;
 
 
-public interface TypeSpecifier {
+public interface TypeReferenceSpecifier {
     @NonNull String specify(CtTypeReference<?> typeReference);
 }

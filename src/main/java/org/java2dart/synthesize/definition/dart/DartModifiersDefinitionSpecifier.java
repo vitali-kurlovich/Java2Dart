@@ -1,23 +1,27 @@
-package org.java2dart.synthesize.scheme.dart;
+package org.java2dart.synthesize.definition.dart;
 
 import org.java2dart.schema.base.ModifiersSchema;
-import org.java2dart.synthesize.scheme.ModifiersSpecifier;
+import org.java2dart.synthesize.definition.modifiers.ModifiersDefinitionSpecifier;
 import org.jspecify.annotations.NonNull;
+import spoon.reflect.declaration.CtModifiable;
 import spoon.reflect.declaration.ModifierKind;
 
 import java.util.Set;
 
-public final class DartModifiersSpecifier implements ModifiersSpecifier {
+public final class DartModifiersDefinitionSpecifier implements ModifiersDefinitionSpecifier {
 
-    @Override
-    public @NonNull String specify(Set<ModifierKind> modifiers) {
+    public @NonNull String specify(CtModifiable modifiable) {
+        return specify(modifiable.getModifiers());
+    }
+
+    private @NonNull String specify(Set<ModifierKind> modifiers) {
         final var builder = new StringBuilder();
 
-       final var modifiersSchema = new ModifiersSchema(modifiers);
+        final var modifiersSchema = new ModifiersSchema(modifiers);
 
-       if (modifiersSchema.isPublic()) {
-           builder.append("public ");
-       }
+        if (modifiersSchema.isPublic()) {
+            builder.append("public ");
+        }
 
         if (modifiersSchema.isProtected()) {
             builder.append("protected ");

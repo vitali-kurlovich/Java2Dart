@@ -1,7 +1,5 @@
 package org.java2dart.ast;
 
-import org.java2dart.factory.Factory;
-import org.java2dart.logging.Logging;
 import spoon.Launcher;
 
 public final class ASTLoader {
@@ -23,10 +21,10 @@ public final class ASTLoader {
       final var allTypes =  model.getAllTypes();
 
         for (final var type: allTypes) {
-            final var impl =  Factory.SchemeImplementation();
-
-            final var source =    impl.implementation(type);
-            Logging.info(source);
+//            final var impl = DartObjectSchemeSpecifier();
+//
+//            final var source =    impl.implementation(type);
+//            Logging.info(source);
         }
 
 
