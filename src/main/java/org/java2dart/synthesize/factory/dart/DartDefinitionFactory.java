@@ -1,8 +1,7 @@
-package org.java2dart.synthesize.scheme;
+package org.java2dart.synthesize.factory.dart;
 
 import org.java2dart.synthesize.definition.dart.*;
-import org.java2dart.synthesize.definition.scheme.TypeDefinitionSpecifier;
-import org.java2dart.synthesize.definition.varible.FieldDefinitionSpecifier;
+import org.java2dart.synthesize.factory.DefinitionFactory;
 import org.jspecify.annotations.NonNull;
 
 public class DartDefinitionFactory implements DefinitionFactory {

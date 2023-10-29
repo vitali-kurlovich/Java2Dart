@@ -1,4 +1,4 @@
-package org.java2dart.synthesize.scheme;
+package org.java2dart.synthesize.factory;
 
 
 import org.java2dart.synthesize.definition.method.MethodDefinitionSpecifier;
