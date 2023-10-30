@@ -1,23 +1,22 @@
-package org.java2dart.expression;
+package org.java2dart.expression.dart;
 
+import org.java2dart.expression.BaseExpressionVisitor;
 import org.java2dart.expression.builder.IExpressionBuilder;
+import org.java2dart.logging.Logging;
 import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.*;
 
 
-public class ExpressionVisitor extends BaseExpressionVisitor {
+public class DartExpressionVisitor extends BaseExpressionVisitor {
 
-    public ExpressionVisitor(IExpressionBuilder buider) {
+    public DartExpressionVisitor(IExpressionBuilder buider) {
         super(buider);
     }
 
     @Override
     public <T> void visitCtThisAccess(CtThisAccess<T> thisAccess) {
-        // Logging.info("visitCtThisAccess");
         builder.thisAccess();
-        //print("this");
-
     }
 
     @Override
@@ -27,38 +26,43 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtFieldRead(CtFieldRead<T> fieldRead) {
-
+        builder.fieldRead(fieldRead);
     }
 
     @Override
     public <T> void visitCtFieldWrite(CtFieldWrite<T> fieldWrite) {
-        //Logging.info("visitCtFieldWrite");
-
-
-        fieldWrite.getTarget().accept(this);
-
-        final var name = fieldWrite.getVariable().getSimpleName();
-
-        print("." + name);
-
+        builder.fieldWrite(fieldWrite);
     }
 
 
     @Override
     public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> assignement) {
         //  Logging.info("visitCtAssignment");
+        builder.assignment(assignement);
+    }
 
-        final var assigned = assignement.getAssigned();
+    @Override
+    public <T> void visitCtLiteral(CtLiteral<T> literal) {
+        builder.literal(literal);
+    }
 
-        assigned.accept(this);
+    @Override
+    public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
+        builder.localVariable(localVariable);
+    }
 
-        print(" = ");
+    @Override
+    public <T> void visitCtVariableRead(CtVariableRead<T> variableRead) {
+        builder.variableRead(variableRead);
+    }
 
-        final var exp = assignement.getAssignment();
-        exp.accept(this);
+    @Override
+    public <T> void visitCtVariableWrite(CtVariableWrite<T> variableWrite) {
+        final var name = variableWrite.getVariable().getSimpleName();
 
-        print(";\n");
+         Logging.debug("visitCtVariableWrite: " + name);
 
+        //  variableWrite.
     }
 
 
@@ -72,10 +76,6 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
 
     }
 
-    @Override
-    public <T> void visitCtArrayTypeReference(CtArrayTypeReference<T> reference) {
-
-    }
 
     @Override
     public <T> void visitCtAssert(CtAssert<T> asserted) {
@@ -83,67 +83,9 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
     @Override
     public <T> void visitCtBinaryOperator(CtBinaryOperator<T> operator) {
-        //Logging.info("visitCtBinaryOperator");
-        operator.getLeftHandOperand().accept(this);
-
-
-        switch (operator.getKind()) {
-
-            case OR -> {
-                print(" || ");
-            }
-            case AND -> {
-                print(" && ");
-            }
-            case BITOR -> {
-            }
-            case BITXOR -> {
-            }
-            case BITAND -> {
-            }
-            case EQ -> {
-            }
-            case NE -> {
-            }
-            case LT -> {
-            }
-            case GT -> {
-            }
-            case LE -> {
-            }
-            case GE -> {
-            }
-            case SL -> {
-            }
-            case SR -> {
-            }
-            case USR -> {
-            }
-            case PLUS -> {
-                print(" + ");
-            }
-            case MINUS -> {
-                print(" - ");
-            }
-            case MUL -> {
-                print(" * ");
-            }
-            case DIV -> {
-                print(" / ");
-            }
-            case MOD -> {
-                print(" % ");
-            }
-            case INSTANCEOF -> {
-            }
-        }
-
-        operator.getRightHandOperand().accept(this);
-
-
+        builder.binaryOperator(operator);
     }
 
     @Override
@@ -167,14 +109,8 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
     @Override
     public <T> void visitCtConditional(CtConditional<T> conditional) {
-
-    }
-
-    @Override
-    public <T> void visitCtConstructor(CtConstructor<T> c) {
 
     }
 
@@ -195,17 +131,6 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
-    @Override
-    public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
-
-    }
-
-    @Override
-    public <T> void visitCtUnboundVariableReference(CtUnboundVariableReference<T> reference) {
-
-    }
-
     @Override
     public void visitCtFor(CtFor forLoop) {
 
@@ -222,68 +147,16 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
     @Override
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
 
     }
-
-//    @Override
-//    public <T> void visitCtLiteral(CtLiteral<T> literal) {
-//        final var value =  literal.getValue();
-//    }
-
-    @Override
-    public <T> void visitCtLiteral(CtLiteral<T> literal) {
-
-        if (literal.getValue() == null) {
-            print("null");
-        }
-
-        if (literal.getValue() instanceof Integer) {
-            final Integer value = (Integer) literal.getValue();
-            print(String.valueOf(value));
-        }
-
-        if (literal.getValue() instanceof String) {
-            final String value = (String) literal.getValue();
-            print("\"" + value + "\"" );
-        }
-
-
-    }
-
-
 
     @Override
     public void visitCtTextBlock(CtTextBlock ctTextBlock) {
 
     }
 
-    @Override
-    public <T> void visitCtLocalVariable(CtLocalVariable<T> localVariable) {
-
-        final var name = localVariable.getSimpleName();
-
-        print("var " + name);
-
-        final var expr = localVariable.getDefaultExpression();
-        if (expr != null) {
-            print(" = ");
-            expr.accept(this);
-        }
-
-
-        print(";\n");
-
-        //localVariable.getAssignment().accept(this);
-
-    }
-
-    @Override
-    public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {
-
-    }
 
     @Override
     public <T> void visitCtCatchVariable(CtCatchVariable<T> catchVariable) {
@@ -327,13 +200,10 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
-
     @Override
     public <R> void visitCtReturn(CtReturn<R> returnStatement) {
 
     }
-
 
 
     @Override
@@ -366,10 +236,7 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
 
     }
 
-    @Override
-    public <T> void visitCtTypeReference(CtTypeReference<T> reference) {
 
-    }
 
     @Override
     public <T> void visitCtTypeAccess(CtTypeAccess<T> typeAccess) {
@@ -381,27 +248,12 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
 
     }
 
-    @Override
-    public <T> void visitCtVariableRead(CtVariableRead<T> variableRead) {
 
-        final var name = variableRead.getVariable().getSimpleName();
-        print(name);
-
-    }
-
-    @Override
-    public <T> void visitCtVariableWrite(CtVariableWrite<T> variableWrite) {
-       // Logging.info("visitCtVariableWrite");
-
-        //  variableWrite.
-    }
 
     @Override
     public void visitCtWhile(CtWhile whileLoop) {
 
     }
-
-
 
 
     @Override
@@ -418,9 +270,6 @@ public class ExpressionVisitor extends BaseExpressionVisitor {
     public void visitCtJavaDocTag(CtJavaDocTag docTag) {
 
     }
-
-
-
 
 
     @Override

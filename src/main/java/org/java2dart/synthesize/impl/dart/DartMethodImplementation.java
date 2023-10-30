@@ -9,8 +9,11 @@ public final class DartMethodImplementation implements MethodImplementation {
 
     private final @NonNull DartDefinitionFactory factory;
 
+    private final DartStatementListImplementation statementImpl ;
+
     public DartMethodImplementation(@NonNull DartDefinitionFactory factory) {
         this.factory = factory;
+        statementImpl = new DartStatementListImplementation(factory);
     }
 
     @Override
@@ -20,10 +23,16 @@ public final class DartMethodImplementation implements MethodImplementation {
         final var builder = new StringBuilder();
         builder.append(methodDefinition.specify(method));
 
-        if (method.isAbstract()) {
+        final var body = method.getBody();
+
+        if (body == null) {
             builder.append(";\n");
+
         } else {
             builder.append(" {\n");
+
+            final var source = statementImpl.source(body);
+            builder.append(source);
             builder.append("}\n");
         }
 

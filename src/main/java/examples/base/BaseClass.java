@@ -34,8 +34,8 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     }
 
-    public String retStringMethod() {
-        stringField = "Adb" + "Cda";
+    public String retStringMethod(String stringField) {
+        this.stringField = "Adb" + "Cda" + stringField;
         return stringField;
     }
 

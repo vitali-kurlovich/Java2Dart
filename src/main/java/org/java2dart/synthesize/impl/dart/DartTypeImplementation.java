@@ -13,6 +13,7 @@ public class DartTypeImplementation implements TypeImplementation {
 
     @Override
     public @NonNull String source(CtType<?> type) {
+
         final var builder = new StringBuilder();
 
         final var typeDefinition = factory.typeDefinitionSpecifier();
@@ -33,13 +34,12 @@ public class DartTypeImplementation implements TypeImplementation {
 
         for (final var method : methods) {
             final var source = dartMethodImpl.source(method);
-            builder.append(source).append("\n\n");
+            builder.append(source).append("\n");
         }
 
         builder.append("}\n");
 
         return builder.toString().trim();
     }
-
 
 }

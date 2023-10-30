@@ -60,6 +60,27 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
 
     }
 
+
+    @Override
+    public <T> void visitCtFieldReference(CtFieldReference<T> reference) {
+
+    }
+
+    @Override
+    public <T> void visitCtUnboundVariableReference(CtUnboundVariableReference<T> reference) {
+
+    }
+
+    @Override
+    public <T> void visitCtArrayTypeReference(CtArrayTypeReference<T> reference) {
+
+    }
+
+    @Override
+    public <T> void visitCtLocalVariableReference(CtLocalVariableReference<T> reference) {
+
+    }
+
     @Override
     public void visitCtTypeParameter(CtTypeParameter typeParameter) {
 
@@ -79,6 +100,13 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
     public <T> void visitCtAnnotationMethod(CtAnnotationMethod<T> annotationMethod) {
 
     }
+
+
+    @Override
+    public <T> void visitCtConstructor(CtConstructor<T> c) {
+
+    }
+
 
     @Override
     public void visitCtPackage(CtPackage ctPackage) {
@@ -107,6 +135,12 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
 
     @Override
     public void visitCtWildcardReference(CtWildcardReference wildcardReference) {
+
+    }
+
+
+    @Override
+    public <T> void visitCtTypeReference(CtTypeReference<T> reference) {
 
     }
 
