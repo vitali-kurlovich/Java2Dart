@@ -9,6 +9,8 @@ public interface IExpressionBuilder {
 
     void superAccess();
 
+    void returnStatement(CtReturn<?> returnStatement);
+
     void assignment(CtAssignment<?, ?> assignment);
 
     void binaryOperator(CtBinaryOperator<?> operator);
@@ -25,8 +27,8 @@ public interface IExpressionBuilder {
 
     void variableWrite(CtVariableWrite<?> variableWrite);
 
-//    void read(IVariable variable);
-//    void read(Field field);
+
+    void  newArray(CtNewArray<?> newArray);
 
     void append(IExpressionBuilder builder);
 

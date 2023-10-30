@@ -1,10 +1,7 @@
 package org.java2dart.expression;
 
 import org.java2dart.expression.builder.IExpressionBuilder;
-import spoon.reflect.code.CtAnnotationFieldAccess;
-import spoon.reflect.code.CtCodeSnippetExpression;
-import spoon.reflect.code.CtCodeSnippetStatement;
-import spoon.reflect.code.CtStatementList;
+import spoon.reflect.code.*;
 import spoon.reflect.declaration.*;
 import spoon.reflect.reference.*;
 import spoon.reflect.visitor.CtVisitor;
@@ -70,6 +67,12 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
     public <T> void visitCtUnboundVariableReference(CtUnboundVariableReference<T> reference) {
 
     }
+
+    @Override
+    public <T> void visitCtEnumValue(CtEnumValue<T> enumValue) {
+
+    }
+
 
     @Override
     public <T> void visitCtArrayTypeReference(CtArrayTypeReference<T> reference) {
@@ -161,6 +164,7 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
     }
 
 
+
     @Override
     public void visitCtPackageDeclaration(CtPackageDeclaration packageDeclaration) {
 
@@ -213,6 +217,22 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
 
     @Override
     public <T> void visitCtExecutableReference(CtExecutableReference<T> reference) {
+
+    }
+
+
+    @Override
+    public void visitCtComment(CtComment comment) {
+
+    }
+
+    @Override
+    public void visitCtJavaDoc(CtJavaDoc comment) {
+
+    }
+
+    @Override
+    public void visitCtJavaDocTag(CtJavaDocTag docTag) {
 
     }
 
