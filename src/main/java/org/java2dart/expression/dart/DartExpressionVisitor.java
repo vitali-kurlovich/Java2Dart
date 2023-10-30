@@ -155,7 +155,8 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-        Logging.warning("Do not implemented - visitCtInvocation");
+
+        builder.invocation(invocation);
     }
 
     @Override

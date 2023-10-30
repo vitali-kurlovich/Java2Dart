@@ -9,7 +9,10 @@ public interface IExpressionBuilder {
 
     void superAccess();
 
+    void invocation(CtInvocation<?> invocation);
+
     void returnStatement(CtReturn<?> returnStatement);
+
 
     void assignment(CtAssignment<?, ?> assignment);
 
