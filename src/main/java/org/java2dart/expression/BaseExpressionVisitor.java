@@ -160,6 +160,17 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
 
     }
 
+
+    @Override
+    public void visitCtPackageDeclaration(CtPackageDeclaration packageDeclaration) {
+
+    }
+
+    @Override
+    public void visitCtTypeMemberWildcardImportReference(CtTypeMemberWildcardImportReference wildcardReference) {
+
+    }
+
     @Override
     public void visitCtModule(CtModule module) {
 
