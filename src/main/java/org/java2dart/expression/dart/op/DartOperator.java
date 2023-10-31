@@ -2,8 +2,9 @@ package org.java2dart.expression.dart.op;
 
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.code.BinaryOperatorKind;
+import spoon.reflect.code.UnaryOperatorKind;
 
-public final class DartBinaryOperator {
+public final class DartOperator {
 
     public @NonNull String source(BinaryOperatorKind kind) {
         switch (kind) {
@@ -71,6 +72,31 @@ public final class DartBinaryOperator {
             }
         }
 
+        throw new RuntimeException("None");
+    }
+
+    public @NonNull String source(UnaryOperatorKind kind) {
+        switch (kind) {
+
+            case POS -> {
+                return "+";
+            }
+            case NEG -> {
+                return "-";
+            }
+            case NOT -> {
+                return "!";
+            }
+            case COMPL -> {
+                return "~";
+            }
+            case PREINC, POSTINC -> {
+                return "++";
+            }
+            case PREDEC, POSTDEC -> {
+                return "--";
+            }
+        }
         throw new RuntimeException("None");
     }
 

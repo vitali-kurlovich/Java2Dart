@@ -35,9 +35,14 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
     }
 
     public String retStringMethod(String stringField) {
+
+        assert ( !stringField.isEmpty());
+
         this.stringField = "Adb" + "Cda" + stringField;
 
         int[] x = new int[] { 0, 1, 42};
+
+        x[1] = stringField.length() > 3 ? x[0] : x[2];
 
         return stringField;
     }

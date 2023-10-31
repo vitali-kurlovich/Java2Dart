@@ -5,6 +5,8 @@ import spoon.reflect.code.*;
 
 public interface IExpressionBuilder {
 
+    void assertBlock(CtAssert<?> asserted);
+
     void thisAccess();
 
     void superAccess();
@@ -18,6 +20,8 @@ public interface IExpressionBuilder {
 
     void binaryOperator(CtBinaryOperator<?> operator);
 
+    void unaryOperator(CtUnaryOperator<?> operator);
+
     void literal(CtLiteral<?> literal);
 
     void fieldRead(CtFieldRead<?> fieldRead);
@@ -30,8 +34,15 @@ public interface IExpressionBuilder {
 
     void variableWrite(CtVariableWrite<?> variableWrite);
 
+    void newArray(CtNewArray<?> newArray);
 
-    void  newArray(CtNewArray<?> newArray);
+    void arrayRead(CtArrayRead<?> arrayRead);
+
+    void arrayWrite(CtArrayWrite<?> arrayWrite);
+
+    void conditional(CtConditional<?> conditional);
+
+    void typeAccess(CtTypeAccess<?> typeAccess);
 
     void append(IExpressionBuilder builder);
 

@@ -63,9 +63,8 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtVariableWrite(CtVariableWrite<T> variableWrite) {
-        final var name = variableWrite.getVariable().getSimpleName();
+        builder.variableWrite(variableWrite);
 
-        Logging.debug("visitCtVariableWrite: " + name);
 
         //  variableWrite.
     }
@@ -78,25 +77,35 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtArrayRead(CtArrayRead<T> arrayRead) {
-        Logging.warning("Do not implemented - visitCtArrayRead");
+        builder.arrayRead(arrayRead);
     }
 
     @Override
     public <T> void visitCtArrayWrite(CtArrayWrite<T> arrayWrite) {
-        Logging.warning("Do not implemented - visitCtArrayWrite");
+        builder.arrayWrite(arrayWrite);
+    }
 
+    @Override
+    public <T> void visitCtTypeAccess(CtTypeAccess<T> typeAccess) {
+        builder.typeAccess(typeAccess);
     }
 
 
     @Override
     public <T> void visitCtAssert(CtAssert<T> asserted) {
-        Logging.warning("Do not implemented - visitCtAssert");
+        builder.assertBlock(asserted);
     }
 
 
     @Override
     public <T> void visitCtBinaryOperator(CtBinaryOperator<T> operator) {
         builder.binaryOperator(operator);
+    }
+
+
+    @Override
+    public <T> void visitCtConditional(CtConditional<T> conditional) {
+        builder.conditional(conditional);
     }
 
     @Override
@@ -120,11 +129,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
         Logging.warning("Do not implemented - visitCtCatch");
     }
 
-
-    @Override
-    public <T> void visitCtConditional(CtConditional<T> conditional) {
-        Logging.warning("Do not implemented - visitCtConditional");
-    }
 
     @Override
     public void visitCtContinue(CtContinue continueStatement) {
@@ -155,7 +159,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-
         builder.invocation(invocation);
     }
 
@@ -174,7 +177,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> reference) {
         Logging.warning("Do not implemented - visitCtCatchVariableReference");
     }
-
 
 
     @Override
@@ -235,16 +237,9 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
 
     @Override
-    public <T> void visitCtTypeAccess(CtTypeAccess<T> typeAccess) {
-        Logging.warning("Do not implemented - visitCtTypeAccess");
-    }
-
-    @Override
     public <T> void visitCtUnaryOperator(CtUnaryOperator<T> operator) {
-        Logging.warning("Do not implemented - visitCtUnaryOperator");
-
+        builder.unaryOperator(operator);
     }
-
 
     @Override
     public void visitCtWhile(CtWhile whileLoop) {
@@ -252,24 +247,24 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
     @Override
     public void visitCtYieldStatement(CtYieldStatement statement) {
-
+        Logging.warning("Do not implemented - visitCtYieldStatement");
     }
 
     @Override
     public void visitCtTypePattern(CtTypePattern pattern) {
-
+        Logging.warning("Do not implemented - visitCtTypePattern");
     }
 
     @Override
     public void visitCtRecord(CtRecord recordType) {
+        Logging.warning("Do not implemented - visitCtRecord");
 
     }
 
     @Override
     public void visitCtRecordComponent(CtRecordComponent recordComponent) {
-
+        Logging.warning("Do not implemented - visitCtRecordComponent");
     }
 }

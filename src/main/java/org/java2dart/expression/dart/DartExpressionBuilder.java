@@ -16,6 +16,13 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         op = new DartOp(factory);
     }
 
+    @Override
+    public void assertBlock(CtAssert<?> asserted) {
+        builder.append("assert( ");
+        asserted.getAssertExpression().accept(visitor);
+        builder.append(" )");
+    }
+
     public void thisAccess() {
         builder.append("this.");
     }
@@ -26,10 +33,24 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void invocation(CtInvocation<?> invocation) {
-        Logging.warning("Do not implemented - visitCtInvocation");
 
-    //    invocation.
+        invocation.getTarget().accept(visitor);
+        builder.append(".");
+        final var executable = invocation.getExecutable();
+        final var name = executable.getSimpleName();
+        builder.append(name);
 
+        final var arguments = invocation.getArguments();
+        var needsComma = false;
+        builder.append("(");
+        for (final var arg : arguments) {
+            if (needsComma) {
+                builder.append(", ");
+            }
+            arg.accept(visitor);
+            needsComma = true;
+        }
+        builder.append(")");
     }
 
     @Override
@@ -50,18 +71,26 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     }
 
     public void binaryOperator(CtBinaryOperator<?> operator) {
-
-        // builder.append("(");
         operator.getLeftHandOperand().accept(visitor);
 
         final var kind = operator.getKind();
         builder.append(" ")
-                .append(op.binOp.source(kind))
+                .append(op.operator.source(kind))
                 .append(" ");
 
         operator.getRightHandOperand().accept(visitor);
-        //builder.append(")");
+    }
 
+    @Override
+    public void unaryOperator(CtUnaryOperator<?> operator) {
+        final var kind = operator.getKind();
+        if (kind == UnaryOperatorKind.POSTDEC || kind == UnaryOperatorKind.POSTINC) {
+            operator.getOperand().accept(visitor);
+            builder.append(op.operator.source(kind));
+        } else {
+            builder.append(op.operator.source(kind));
+            operator.getOperand().accept(visitor);
+        }
     }
 
     @Override
@@ -70,7 +99,9 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     }
 
     public void fieldRead(CtFieldRead<?> fieldRead) {
-        thisAccess();
+        fieldRead.getTarget().accept(visitor);
+        builder.append(".");
+        // thisAccess();
         final var name = fieldRead.getVariable().getSimpleName();
         builder.append(name);
     }
@@ -123,6 +154,41 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         builder.append("]");
     }
 
+    @Override
+    public void arrayRead(CtArrayRead<?> arrayRead) {
+        arrayRead.getTarget().accept(visitor);
+        builder.append("[");
+        arrayRead.getIndexExpression().accept(visitor);
+        builder.append("]");
+    }
+
+    @Override
+    public void arrayWrite(CtArrayWrite<?> arrayWrite) {
+        arrayWrite.getTarget().accept(visitor);
+        builder.append("[");
+        arrayWrite.getIndexExpression().accept(visitor);
+        builder.append("]");
+    }
+
+    @Override
+    public void conditional(CtConditional<?> conditional) {
+        conditional.getCondition().accept(visitor);
+        builder.append(" ? ");
+        conditional.getThenExpression().accept(visitor);
+        builder.append(" : ");
+        conditional.getElseExpression().accept(visitor);
+    }
+
+    @Override
+    public void typeAccess(CtTypeAccess<?> typeAccess) {
+        // Logging.warning("Do not implemented - visitCtTypeAccess");
+
+        builder.append(op.typeAccess.source(typeAccess));
+
+
+        // typeAccess.getAccessedType()
+
+    }
 
     public void append(IExpressionBuilder builder) {
         this.builder.append(builder.toString());
