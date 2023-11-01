@@ -9,7 +9,7 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     private final int[][] intArrayField;
     public int intField = 6;
-    public double doubleField;
+    public double doubleField = 0.0;
     InnerClass<T> innerStringField;
     private String stringField;
     public BaseClass(int intField, double doubleField, String stringField, int[][] intArrayField) {
@@ -30,8 +30,13 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
     }
 
     public void method(T value) {
-
-
+        if (doubleField > 5 && doubleField <= 10 ) {
+            System.out.println(doubleField);
+        } else if (intField == 9) {
+            System.out.println(intField);
+        } else {
+            System.out.println(stringField);
+        }
     }
 
     public String retStringMethod(String stringField) {

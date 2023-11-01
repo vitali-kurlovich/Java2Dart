@@ -110,7 +110,7 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <R> void visitCtBlock(CtBlock<R> block) {
-        Logging.warning("Do not implemented - visitCtBlock");
+        builder.block(block);
     }
 
     @Override
@@ -153,7 +153,7 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void visitCtIf(CtIf ifElement) {
-        Logging.warning("Do not implemented - visitCtIf");
+        builder.ifBlock(ifElement);
     }
 
 

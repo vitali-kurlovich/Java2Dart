@@ -24,11 +24,11 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     }
 
     public void thisAccess() {
-        builder.append("this.");
+        builder.append("this");
     }
 
     public void superAccess() {
-        builder.append("super.");
+        builder.append("super");
     }
 
     @Override
@@ -181,13 +181,31 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void typeAccess(CtTypeAccess<?> typeAccess) {
-        // Logging.warning("Do not implemented - visitCtTypeAccess");
-
         builder.append(op.typeAccess.source(typeAccess));
+    }
 
+    @Override
+    public void block(CtBlock<?> block) {
+        Logging.warning("Do not implemented - visitCtBlock");
+        builder.append(" {\n");
 
-        // typeAccess.getAccessedType()
+        //block.accept(visitor);
 
+        builder.append("}");
+    }
+
+    @Override
+    public void ifBlock(CtIf ifElement) {
+        builder.append("if (");
+        ifElement.getCondition().accept(visitor);
+        builder.append(")");
+        ifElement.getThenStatement().accept(visitor);
+
+       final var elseStatement = ifElement.getElseStatement();
+       if (elseStatement != null) {
+           builder.append(" else ");
+           elseStatement.accept(visitor);
+       }
     }
 
     public void append(IExpressionBuilder builder) {

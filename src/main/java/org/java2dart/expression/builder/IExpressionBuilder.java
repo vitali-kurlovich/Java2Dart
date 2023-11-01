@@ -44,6 +44,9 @@ public interface IExpressionBuilder {
 
     void typeAccess(CtTypeAccess<?> typeAccess);
 
+    void block(CtBlock<?> block);
+    void ifBlock(CtIf ifElement);
+
     void append(IExpressionBuilder builder);
 
     String toString();
