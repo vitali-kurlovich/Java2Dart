@@ -47,6 +47,9 @@ public interface IExpressionBuilder {
     void block(CtBlock<?> block);
     void ifBlock(CtIf ifElement);
 
+   void switchBlock(CtSwitch<?> switchStatement);
+    void caseBlock(  CtCase<?> caseStatement);
+
     void append(IExpressionBuilder builder);
 
     String toString();

@@ -24,11 +24,11 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     }
 
     public void thisAccess() {
-        builder.append("this");
+        builder.append("this.");
     }
 
     public void superAccess() {
-        builder.append("super");
+        builder.append("super.");
     }
 
     @Override
@@ -100,14 +100,16 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     public void fieldRead(CtFieldRead<?> fieldRead) {
         fieldRead.getTarget().accept(visitor);
-        builder.append(".");
-        // thisAccess();
+        //builder.append(".");
+
         final var name = fieldRead.getVariable().getSimpleName();
         builder.append(name);
     }
 
     public void fieldWrite(CtFieldWrite<?> fieldWrite) {
-        thisAccess();
+        fieldWrite.getTarget().accept(visitor);
+        //builder.append(".");
+        //  thisAccess();
         final var name = fieldWrite.getVariable().getSimpleName();
         builder.append(name);
     }
@@ -181,17 +183,28 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void typeAccess(CtTypeAccess<?> typeAccess) {
+
         builder.append(op.typeAccess.source(typeAccess));
+        builder.append(".");
     }
 
     @Override
     public void block(CtBlock<?> block) {
-        Logging.warning("Do not implemented - visitCtBlock");
         builder.append(" {\n");
 
-        //block.accept(visitor);
+        for (final var statement : block.getStatements()) {
+            statement.accept(visitor);
 
-        builder.append("}");
+            final var source = builder.toString().trim();
+
+           if ( !source.endsWith("}") && !source.endsWith(";") ) {
+               builder.append(";");
+           }
+
+            builder.append("\n");
+        }
+
+        builder.append("} ");
     }
 
     @Override
@@ -201,21 +214,45 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         builder.append(")");
         ifElement.getThenStatement().accept(visitor);
 
-       final var elseStatement = ifElement.getElseStatement();
-       if (elseStatement != null) {
-           builder.append(" else ");
-           elseStatement.accept(visitor);
-       }
+        final var elseStatement = ifElement.getElseStatement();
+        if (elseStatement != null) {
+            builder.append("else");
+            elseStatement.accept(visitor);
+        }
     }
+
+    @Override
+    public void switchBlock(CtSwitch<?> switchStatement) {
+        builder.append("switch (");
+        switchStatement.getSelector().accept(visitor);
+        builder.append(") ");
+        builder.append("{\n");
+
+        for (final var caseItem: switchStatement.getCases() ) {
+            caseItem.accept(visitor);
+        }
+
+        builder.append("}");
+    }
+
+    @Override
+    public void caseBlock(  CtCase<?> caseStatement) {
+      //  Logging.warning("Do not implemented - visitCtCase");
+        builder.append("case ");
+     //   caseStatement.getCaseKind()
+
+        //caseStatement.getCaseExpression()
+
+       // caseStatement.getCaseExpression().accept(visitor);
+
+    }
+
 
     public void append(IExpressionBuilder builder) {
         this.builder.append(builder.toString());
     }
 
-
     public String toString() {
         return builder.toString();
     }
-
-
 }

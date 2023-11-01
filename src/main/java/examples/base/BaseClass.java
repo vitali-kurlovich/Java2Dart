@@ -4,14 +4,20 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.Set;
 
+
 public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K> implements BaseInterface, SecondInteface<Integer> {
 
 
     private final int[][] intArrayField;
     public int intField = 6;
-    public double doubleField = 0.0;
+    double doubleField = 0.0;
     InnerClass<T> innerStringField;
     private String stringField;
+
+
+
+    protected BaseEnum enumField = BaseEnum.LAST;
+
     public BaseClass(int intField, double doubleField, String stringField, int[][] intArrayField) {
         this.intField = intField;
         this.doubleField = doubleField;
@@ -21,12 +27,30 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     @Override
     public void method(Integer value) {
-    final var prefix = "sdf";
+
+    switch (value) {
+        case 1:
+            this.intField *= 2;
+            break;
+        case 2:
+            break;
+        default:
+            this.intField /= 2;
+            break;
+    }
     }
 
     public void method() {
 
         System.out.println("Hello");
+
+        switch (enumField) {
+            case LAST -> { this.intField += 2; }
+            case FIRST-> { this.intField--; }
+        }
+
+
+
     }
 
     public void method(T value) {

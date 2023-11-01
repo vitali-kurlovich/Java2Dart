@@ -113,14 +113,44 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
         builder.block(block);
     }
 
+
+    @Override
+    public <T> void visitCtInvocation(CtInvocation<T> invocation) {
+        builder.invocation(invocation);
+    }
+
     @Override
     public void visitCtBreak(CtBreak breakStatement) {
         Logging.warning("Do not implemented - visitCtBreak");
     }
 
+
+    @Override
+    public void visitCtContinue(CtContinue continueStatement) {
+        Logging.warning("Do not implemented - visitCtContinue");
+    }
+
+
+    @Override
+    public void visitCtIf(CtIf ifElement) {
+        builder.ifBlock(ifElement);
+    }
+
+
+
+    @Override
+    public <S> void visitCtSwitch(CtSwitch<S> switchStatement) {
+        builder.switchBlock(switchStatement);
+    }
+
+    @Override
+    public <T, S> void visitCtSwitchExpression(CtSwitchExpression<T, S> switchExpression) {
+        Logging.warning("Do not implemented - visitCtSwitchExpression");
+    }
+
     @Override
     public <S> void visitCtCase(CtCase<S> caseStatement) {
-        Logging.warning("Do not implemented - visitCtCase");
+      builder.caseBlock(caseStatement);
 
     }
 
@@ -129,11 +159,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
         Logging.warning("Do not implemented - visitCtCatch");
     }
 
-
-    @Override
-    public void visitCtContinue(CtContinue continueStatement) {
-        Logging.warning("Do not implemented - visitCtContinue");
-    }
 
     @Override
     public void visitCtDo(CtDo doLoop) {
@@ -151,16 +176,9 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
         Logging.warning("Do not implemented - visitCtForEach");
     }
 
-    @Override
-    public void visitCtIf(CtIf ifElement) {
-        builder.ifBlock(ifElement);
-    }
 
 
-    @Override
-    public <T> void visitCtInvocation(CtInvocation<T> invocation) {
-        builder.invocation(invocation);
-    }
+
 
     @Override
     public void visitCtTextBlock(CtTextBlock ctTextBlock) {
@@ -205,15 +223,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-    @Override
-    public <S> void visitCtSwitch(CtSwitch<S> switchStatement) {
-        Logging.warning("Do not implemented - switchStatement");
-    }
-
-    @Override
-    public <T, S> void visitCtSwitchExpression(CtSwitchExpression<T, S> switchExpression) {
-        Logging.warning("Do not implemented - visitCtSwitchExpression");
-    }
 
     @Override
     public void visitCtSynchronized(CtSynchronized synchro) {
