@@ -18,6 +18,8 @@ public class DartLiteral {
 
     public @NonNull String source(CtLiteral<?> literal) {
 
+      final var base =  literal.getBase();
+
         if (literal.getValue() == null) {
             return "null";
         }
@@ -27,10 +29,16 @@ public class DartLiteral {
             return String.valueOf(value);
         }
 
+        if (literal.getValue() instanceof Double) {
+            final Double value = (Double) literal.getValue();
+            return String.valueOf(value);
+        }
+
         if (literal.getValue() instanceof String) {
             final String value = (String) literal.getValue();
             return "\"" + escape(value) + "\"";
         }
+
 
         throw new RuntimeException("Unknown literal");
     }
