@@ -10,13 +10,10 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     private final int[][] intArrayField;
     public int intField = 6;
+    protected BaseEnum enumField = BaseEnum.LAST;
     double doubleField = 0.0;
     InnerClass<T> innerStringField;
     private String stringField;
-
-
-
-    protected BaseEnum enumField = BaseEnum.LAST;
 
     public BaseClass(int intField, double doubleField, String stringField, int[][] intArrayField) {
         this.intField = intField;
@@ -25,19 +22,26 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
         this.intArrayField = intArrayField;
     }
 
+    void forLoop(int begin, int end) {
+        var sum = 0;
+        for(int i=begin; i<end; i++) {
+            sum += i;
+        }
+    }
+
     @Override
     public void method(Integer value) {
 
-    switch (value) {
-        case 1:
-            this.intField *= 2;
-            break;
-        case 2:
-            break;
-        default:
-            this.intField /= 2;
-            break;
-    }
+        switch (value) {
+            case 1, 3, 5:
+                this.intField *= 2;
+                break;
+            case 2:
+                break;
+            default:
+                this.intField /= 2;
+                break;
+        }
     }
 
     public void method() {
@@ -45,16 +49,19 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
         System.out.println("Hello");
 
         switch (enumField) {
-            case LAST -> { this.intField += 2; }
-            case FIRST-> { this.intField--; }
+            case LAST -> {
+                this.intField += 2;
+            }
+            case FIRST -> {
+                this.intField--;
+            }
         }
-
 
 
     }
 
     public void method(T value) {
-        if (doubleField > 5 && doubleField <= 10 ) {
+        if (doubleField > 5 && doubleField <= 10) {
             System.out.println(doubleField);
         } else if (intField == 9) {
             System.out.println(intField);
@@ -65,11 +72,11 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     public String retStringMethod(String stringField) {
 
-        assert ( !stringField.isEmpty());
+        assert (!stringField.isEmpty());
 
         this.stringField = "Adb" + "Cda" + stringField;
 
-        int[] x = new int[] { 0, 1, 42};
+        int[] x = new int[]{0, 1, 42};
 
         x[1] = stringField.length() > 3 ? x[0] : x[2];
 

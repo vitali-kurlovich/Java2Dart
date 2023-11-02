@@ -121,7 +121,7 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void visitCtBreak(CtBreak breakStatement) {
-        Logging.warning("Do not implemented - visitCtBreak");
+        builder.breakBlock(breakStatement);
     }
 
 
@@ -129,6 +129,18 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     public void visitCtContinue(CtContinue continueStatement) {
         Logging.warning("Do not implemented - visitCtContinue");
     }
+
+    @Override
+    public void visitCtFor(CtFor forLoop) {
+
+       builder.forLoop(forLoop);
+    }
+
+    @Override
+    public void visitCtForEach(CtForEach foreach) {
+        Logging.warning("Do not implemented - visitCtForEach");
+    }
+
 
 
     @Override
@@ -165,16 +177,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
         Logging.warning("Do not implemented - visitCtDo");
     }
 
-
-    @Override
-    public void visitCtFor(CtFor forLoop) {
-        Logging.warning("Do not implemented - visitCtFor");
-    }
-
-    @Override
-    public void visitCtForEach(CtForEach foreach) {
-        Logging.warning("Do not implemented - visitCtForEach");
-    }
 
 
 
@@ -219,7 +221,8 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T, A extends T> void visitCtOperatorAssignment(CtOperatorAssignment<T, A> assignment) {
-        Logging.warning("Do not implemented - visitCtOperatorAssignment");
+
+        builder.operatorAssignment(assignment);
     }
 
 

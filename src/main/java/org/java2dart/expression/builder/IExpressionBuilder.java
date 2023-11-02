@@ -18,6 +18,8 @@ public interface IExpressionBuilder {
 
     void assignment(CtAssignment<?, ?> assignment);
 
+   void operatorAssignment(CtOperatorAssignment<?, ?> assignment);
+
     void binaryOperator(CtBinaryOperator<?> operator);
 
     void unaryOperator(CtUnaryOperator<?> operator);
@@ -49,6 +51,10 @@ public interface IExpressionBuilder {
 
    void switchBlock(CtSwitch<?> switchStatement);
     void caseBlock(  CtCase<?> caseStatement);
+
+    void breakBlock(CtBreak breakStatement);
+
+    void forLoop(CtFor forLoop);
 
     void append(IExpressionBuilder builder);
 

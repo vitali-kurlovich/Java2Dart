@@ -7,6 +7,8 @@ import org.java2dart.synthesize.factory.dart.DartDefinitionFactory;
 import org.jspecify.annotations.NonNull;
 import spoon.reflect.code.*;
 
+import java.util.List;
+
 public final class DartExpressionBuilder implements IExpressionBuilder {
     private final StringBuilder builder = new StringBuilder();
     private final DartExpressionVisitor visitor = new DartExpressionVisitor(this);
@@ -67,6 +69,19 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     public void assignment(CtAssignment<?, ?> assignment) {
         assignment.getAssigned().accept(visitor);
         builder.append(" = ");
+        assignment.getAssignment().accept(visitor);
+
+    }
+
+    @Override
+    public void operatorAssignment(CtOperatorAssignment<?, ?> assignment) {
+        assignment.getAssigned().accept(visitor);
+
+        final var operator = op.operator.source(assignment.getKind());
+        builder.append(" ")
+                .append(operator)
+                .append("= ");
+
         assignment.getAssignment().accept(visitor);
     }
 
@@ -136,8 +151,8 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void variableWrite(CtVariableWrite<?> variableWrite) {
-        //final var name = variableWrite.getVariable().getSimpleName();
-        Logging.warning("Do not implemented - variableWrite");
+        final var name = variableWrite.getVariable().getSimpleName();
+        builder.append(name);
     }
 
     @Override
@@ -188,22 +203,11 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         builder.append(".");
     }
 
+
     @Override
     public void block(CtBlock<?> block) {
         builder.append(" {\n");
-
-        for (final var statement : block.getStatements()) {
-            statement.accept(visitor);
-
-            final var source = builder.toString().trim();
-
-           if ( !source.endsWith("}") && !source.endsWith(";") ) {
-               builder.append(";");
-           }
-
-            builder.append("\n");
-        }
-
+        statements(block.getStatements());
         builder.append("} ");
     }
 
@@ -228,7 +232,7 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         builder.append(") ");
         builder.append("{\n");
 
-        for (final var caseItem: switchStatement.getCases() ) {
+        for (final var caseItem : switchStatement.getCases()) {
             caseItem.accept(visitor);
         }
 
@@ -236,15 +240,44 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     }
 
     @Override
-    public void caseBlock(  CtCase<?> caseStatement) {
-      //  Logging.warning("Do not implemented - visitCtCase");
-        builder.append("case ");
-     //   caseStatement.getCaseKind()
+    public void caseBlock(CtCase<?> caseStatement) {
 
-        //caseStatement.getCaseExpression()
+        final var caseExpressions = caseStatement.getCaseExpressions();
 
-       // caseStatement.getCaseExpression().accept(visitor);
+        if (caseExpressions != null && !caseExpressions.isEmpty()) {
+            builder.append("case ");
 
+            var needsComma = false;
+            for (final var expr : caseExpressions) {
+                if (needsComma) {
+                    builder.append(", ");
+                }
+                expr.accept(visitor);
+                needsComma = true;
+            }
+        } else {
+            builder.append("default");
+        }
+
+        builder.append(": ");
+        statements(caseStatement.getStatements());
+    }
+
+    @Override
+    public void breakBlock(CtBreak breakStatement) {
+
+        builder.append("break");
+    }
+
+    @Override
+    public void forLoop(CtFor forLoop) {
+        builder.append("for ( ");
+        statements(forLoop.getForInit());
+        forLoop.getExpression().accept(visitor);
+        builder.append("; ");
+        statements(forLoop.getForUpdate());
+        builder.append(" ) ");
+        forLoop.getBody().accept(visitor);
     }
 
 
@@ -254,5 +287,19 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     public String toString() {
         return builder.toString();
+    }
+
+    private void statements(List<CtStatement> statements) {
+        for (final var statement : statements) {
+            statement.accept(visitor);
+
+            final var source = builder.toString().trim();
+
+            if (!source.endsWith("}") && !source.endsWith(";")) {
+                builder.append(";");
+            }
+
+            builder.append("\n");
+        }
     }
 }
