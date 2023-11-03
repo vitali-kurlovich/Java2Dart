@@ -2,6 +2,7 @@ package examples.base;
 
 import org.jspecify.annotations.NonNull;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -25,7 +26,18 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
     void forLoop(int begin, int end) {
         var sum = 0;
         for(int i=begin; i<end; i++) {
+            if (i == 4) {
+                continue;
+            }
+
             sum += i;
+        }
+    }
+
+    void forEach(List<Integer> array) {
+        var sum = 0;
+        for (final var item: array) {
+            sum += item;
         }
     }
 

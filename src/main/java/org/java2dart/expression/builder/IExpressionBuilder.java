@@ -18,7 +18,7 @@ public interface IExpressionBuilder {
 
     void assignment(CtAssignment<?, ?> assignment);
 
-   void operatorAssignment(CtOperatorAssignment<?, ?> assignment);
+    void operatorAssignment(CtOperatorAssignment<?, ?> assignment);
 
     void binaryOperator(CtBinaryOperator<?> operator);
 
@@ -47,14 +47,20 @@ public interface IExpressionBuilder {
     void typeAccess(CtTypeAccess<?> typeAccess);
 
     void block(CtBlock<?> block);
+
     void ifBlock(CtIf ifElement);
 
-   void switchBlock(CtSwitch<?> switchStatement);
-    void caseBlock(  CtCase<?> caseStatement);
+    void switchBlock(CtSwitch<?> switchStatement);
+
+    void caseBlock(CtCase<?> caseStatement);
 
     void breakBlock(CtBreak breakStatement);
 
+    void continueBlock(CtContinue continueStatement);
+
     void forLoop(CtFor forLoop);
+
+    void forEach(CtForEach foreach);
 
     void append(IExpressionBuilder builder);
 

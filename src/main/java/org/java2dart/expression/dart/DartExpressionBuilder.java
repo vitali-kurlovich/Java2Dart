@@ -10,8 +10,8 @@ import spoon.reflect.code.*;
 import java.util.List;
 
 public final class DartExpressionBuilder implements IExpressionBuilder {
-    private final StringBuilder builder = new StringBuilder();
-    private final DartExpressionVisitor visitor = new DartExpressionVisitor(this);
+    private final @NonNull StringBuilder builder = new StringBuilder();
+    private final @NonNull DartExpressionVisitor visitor = new DartExpressionVisitor(this);
     private final @NonNull DartOp op;
 
     public DartExpressionBuilder(@NonNull DartDefinitionFactory factory) {
@@ -270,6 +270,11 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
     }
 
     @Override
+    public void continueBlock(CtContinue continueStatement) {
+        builder.append("continue");
+    }
+
+    @Override
     public void forLoop(CtFor forLoop) {
         builder.append("for ( ");
         statements(forLoop.getForInit());
@@ -280,6 +285,17 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         forLoop.getBody().accept(visitor);
     }
 
+    @Override
+    public void forEach(CtForEach foreach) {
+
+        builder.append("for ( ");
+        foreach.getVariable().accept(visitor);
+        builder.append(" in ");
+        foreach.getExpression().accept(visitor);
+        builder.append(" ) ");
+
+        foreach.getBody().accept(visitor);
+    }
 
     public void append(IExpressionBuilder builder) {
         this.builder.append(builder.toString());
