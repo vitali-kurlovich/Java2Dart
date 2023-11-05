@@ -23,6 +23,23 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
         this.intArrayField = intArrayField;
     }
 
+    final void throwFunc(boolean flag) throws IllegalStateException {
+        if (!flag) {
+            throw  new IllegalStateException("Throw exception");
+        }
+    }
+
+
+    void tryCatch() {
+        try {
+            throwFunc(true);
+        } catch (Exception  err) {
+            System.out.println(err.getMessage());
+        } finally {
+            System.out.println("Finally");
+        }
+    }
+
     void forLoop(int begin, int end) {
         var sum = 0;
         for(int i=begin; i<end; i++) {
@@ -39,6 +56,22 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
         for (final var item: array) {
             sum += item;
         }
+    }
+
+     int whileLoop() {
+        var sum = 0;
+        while (sum % 200 != 3) {
+            sum += (sum + 1);
+        }
+        return sum;
+    }
+
+    int doLoop(int start) {
+        var sum = start;
+        do {
+            sum += (sum + 1);
+        } while ( (sum % 200 != 3));
+        return sum;
     }
 
     @Override

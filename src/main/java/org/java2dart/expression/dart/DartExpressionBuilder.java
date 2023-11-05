@@ -35,24 +35,19 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void invocation(CtInvocation<?> invocation) {
-
         invocation.getTarget().accept(visitor);
         builder.append(".");
         final var executable = invocation.getExecutable();
         final var name = executable.getSimpleName();
         builder.append(name);
+        arguments(invocation.getArguments());
+    }
 
-        final var arguments = invocation.getArguments();
-        var needsComma = false;
-        builder.append("(");
-        for (final var arg : arguments) {
-            if (needsComma) {
-                builder.append(", ");
-            }
-            arg.accept(visitor);
-            needsComma = true;
-        }
-        builder.append(")");
+    @Override
+    public void constructorCall(CtConstructorCall<?> ctConstructorCall) {
+        final var name = ctConstructorCall.getType().getSimpleName();
+        builder.append(name);
+        arguments(ctConstructorCall.getArguments());
     }
 
     @Override
@@ -78,9 +73,7 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         assignment.getAssigned().accept(visitor);
 
         final var operator = op.operator.source(assignment.getKind());
-        builder.append(" ")
-                .append(operator)
-                .append("= ");
+        builder.append(" ").append(operator).append("= ");
 
         assignment.getAssignment().accept(visitor);
     }
@@ -89,9 +82,7 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         operator.getLeftHandOperand().accept(visitor);
 
         final var kind = operator.getKind();
-        builder.append(" ")
-                .append(op.operator.source(kind))
-                .append(" ");
+        builder.append(" ").append(op.operator.source(kind)).append(" ");
 
         operator.getRightHandOperand().accept(visitor);
     }
@@ -287,7 +278,6 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void forEach(CtForEach foreach) {
-
         builder.append("for ( ");
         foreach.getVariable().accept(visitor);
         builder.append(" in ");
@@ -297,12 +287,59 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
         foreach.getBody().accept(visitor);
     }
 
+    @Override
+    public void whileLoop(CtWhile whileLoop) {
+        builder.append("while (");
+        whileLoop.getLoopingExpression().accept(visitor);
+        builder.append(" ) ");
+        whileLoop.getBody().accept(visitor);
+    }
+
+    @Override
+    public void doLoop(CtDo doLoop) {
+        builder.append("do");
+        doLoop.getBody().accept(visitor);
+        builder.append("while (");
+        doLoop.getLoopingExpression().accept(visitor);
+        builder.append(" ) ");
+    }
+
+    @Override
+    public void throwStatement(CtThrow throwStatement) {
+        throwStatement.getThrownExpression().accept(visitor);
+    }
+
+    @Override
+    public void tryBlock(CtTry tryBlock) {
+        Logging.warning("Do not implemented - visitCtTry");
+    }
+
+    @Override
+    public void catchBlock(CtCatch catchBlock) {
+        Logging.warning("Do not implemented - visitCtCatch");
+    }
+
+
     public void append(IExpressionBuilder builder) {
         this.builder.append(builder.toString());
     }
 
     public String toString() {
         return builder.toString();
+    }
+
+
+    private void arguments(List<CtExpression<?>> arguments) {
+        var needsComma = false;
+        builder.append("(");
+        for (final var arg : arguments) {
+            if (needsComma) {
+                builder.append(", ");
+            }
+            arg.accept(visitor);
+            needsComma = true;
+        }
+        builder.append(")");
     }
 
     private void statements(List<CtStatement> statements) {

@@ -62,6 +62,15 @@ public interface IExpressionBuilder {
 
     void forEach(CtForEach foreach);
 
+    void whileLoop(CtWhile whileLoop);
+    void doLoop(CtDo doLoop);
+
+    void throwStatement(CtThrow throwStatement);
+    void tryBlock(CtTry tryBlock);
+    void catchBlock(CtCatch catchBlock);
+
+   void constructorCall(CtConstructorCall<?> ctConstructorCall);
+
     void append(IExpressionBuilder builder);
 
     String toString();

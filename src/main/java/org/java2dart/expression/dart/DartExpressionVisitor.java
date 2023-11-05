@@ -25,6 +25,22 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     }
 
     @Override
+    public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> assignment) {
+        builder.assignment(assignment);
+    }
+
+    @Override
+    public <T, A extends T> void visitCtOperatorAssignment(CtOperatorAssignment<T, A> assignment) {
+        builder.operatorAssignment(assignment);
+    }
+
+    @Override
+    public <T> void visitCtUnaryOperator(CtUnaryOperator<T> operator) {
+        builder.unaryOperator(operator);
+    }
+
+
+    @Override
     public <R> void visitCtReturn(CtReturn<R> returnStatement) {
         builder.returnStatement(returnStatement);
     }
@@ -40,11 +56,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-    @Override
-    public <T, A extends T> void visitCtAssignment(CtAssignment<T, A> assignement) {
-        //  Logging.info("visitCtAssignment");
-        builder.assignment(assignement);
-    }
 
     @Override
     public <T> void visitCtLiteral(CtLiteral<T> literal) {
@@ -132,7 +143,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void visitCtFor(CtFor forLoop) {
-
         builder.forLoop(forLoop);
     }
 
@@ -144,13 +154,13 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void visitCtWhile(CtWhile whileLoop) {
-        Logging.warning("Do not implemented - visitCtWhile");
+        builder.whileLoop(whileLoop);
     }
 
 
     @Override
     public void visitCtDo(CtDo doLoop) {
-        Logging.warning("Do not implemented - visitCtDo");
+        builder.doLoop(doLoop);
     }
 
 
@@ -173,12 +183,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     @Override
     public <S> void visitCtCase(CtCase<S> caseStatement) {
         builder.caseBlock(caseStatement);
-
-    }
-
-    @Override
-    public void visitCtCatch(CtCatch catchBlock) {
-        Logging.warning("Do not implemented - visitCtCatch");
     }
 
 
@@ -201,7 +205,7 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtConstructorCall(CtConstructorCall<T> ctConstructorCall) {
-        Logging.warning("Do not implemented - visitCtConstructorCall");
+        builder.constructorCall(ctConstructorCall);
     }
 
     @Override
@@ -219,15 +223,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
         Logging.warning("Do not implemented - visitCtExecutableReferenceExpression");
     }
 
-    @Override
-    public <T, A extends T> void visitCtOperatorAssignment(CtOperatorAssignment<T, A> assignment) {
-        builder.operatorAssignment(assignment);
-    }
-
-    @Override
-    public <T> void visitCtUnaryOperator(CtUnaryOperator<T> operator) {
-        builder.unaryOperator(operator);
-    }
 
     @Override
     public void visitCtSynchronized(CtSynchronized synchro) {
@@ -236,19 +231,24 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void visitCtThrow(CtThrow throwStatement) {
-        Logging.warning("Do not implemented - visitCtThrow");
+        builder.throwStatement(throwStatement);
     }
 
     @Override
     public void visitCtTry(CtTry tryBlock) {
-        Logging.warning("Do not implemented - visitCtTry");
+        builder.tryBlock(tryBlock);
     }
+
+    @Override
+    public void visitCtCatch(CtCatch catchBlock) {
+      builder.catchBlock(catchBlock);
+    }
+
 
     @Override
     public void visitCtTryWithResource(CtTryWithResource tryWithResource) {
         Logging.warning("Do not implemented - visitCtTryWithResource");
     }
-
 
     @Override
     public void visitCtYieldStatement(CtYieldStatement statement) {
