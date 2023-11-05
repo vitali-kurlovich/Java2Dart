@@ -56,7 +56,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     }
 
 
-
     @Override
     public <T> void visitCtLiteral(CtLiteral<T> literal) {
         builder.literal(literal);
@@ -194,13 +193,7 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtCatchVariable(CtCatchVariable<T> catchVariable) {
-
         builder.catchVariable(catchVariable);
-    }
-
-    @Override
-    public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> reference) {
-        Logging.warning("Do not implemented - visitCtCatchVariableReference");
     }
 
 
@@ -217,11 +210,6 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
     @Override
     public <T> void visitCtLambda(CtLambda<T> lambda) {
         Logging.warning("Do not implemented - visitCtLambda");
-    }
-
-    @Override
-    public <T, E extends CtExpression<?>> void visitCtExecutableReferenceExpression(CtExecutableReferenceExpression<T, E> expression) {
-        Logging.warning("Do not implemented - visitCtExecutableReferenceExpression");
     }
 
 
@@ -242,7 +230,7 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public void visitCtCatch(CtCatch catchBlock) {
-      builder.catchBlock(catchBlock);
+        builder.catchBlock(catchBlock);
     }
 
 

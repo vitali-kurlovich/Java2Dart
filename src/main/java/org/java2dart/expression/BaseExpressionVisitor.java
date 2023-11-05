@@ -86,6 +86,18 @@ public abstract class BaseExpressionVisitor implements CtVisitor {
     }
 
     @Override
+    public <T> void visitCtCatchVariableReference(CtCatchVariableReference<T> reference) {
+        Logging.warning("Do not implemented - visitCtCatchVariableReference");
+    }
+
+    @Override
+    public <T, E extends CtExpression<?>> void visitCtExecutableReferenceExpression(CtExecutableReferenceExpression<T, E> expression) {
+        Logging.warning("Do not implemented - visitCtExecutableReferenceExpression");
+    }
+
+
+
+    @Override
     public void visitCtTypeParameter(CtTypeParameter typeParameter) {
         Logging.warning("Do not implemented - visitCtTypeParameter");
     }

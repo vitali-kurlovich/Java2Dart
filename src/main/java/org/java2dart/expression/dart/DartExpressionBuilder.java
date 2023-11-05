@@ -320,7 +320,6 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void tryBlock(CtTry tryBlock) {
-        //  Logging.warning("Do not implemented - visitCtTry");
         builder.append("try");
         tryBlock.getBody().accept(visitor);
 
@@ -328,6 +327,11 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
             catchBlock.accept(visitor);
         }
 
+        final var finalizer = tryBlock.getFinalizer();
+        if (finalizer != null) {
+            builder.append("\n");
+            finalizer.accept(visitor);
+        }
     }
 
     @Override
