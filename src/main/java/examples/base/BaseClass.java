@@ -11,7 +11,7 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
 
     private final int[][] intArrayField;
     public int intField = 6;
-    protected BaseEnum enumField = BaseEnum.LAST;
+    private BaseEnum enumField = BaseEnum.LAST;
     double doubleField = 0.0;
     InnerClass<T> innerStringField;
     private String stringField;
@@ -23,7 +23,7 @@ public final class BaseClass<T extends SecondInteface<T>, K> extends FooClass<K>
         this.intArrayField = intArrayField;
     }
 
-    final void throwFunc(boolean flag) throws IllegalStateException {
+    void throwFunc(boolean flag) throws IllegalStateException {
         if (!flag) {
             throw  new IllegalStateException("Throw exception");
         }

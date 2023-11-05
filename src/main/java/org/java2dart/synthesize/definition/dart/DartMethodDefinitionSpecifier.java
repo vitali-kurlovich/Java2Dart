@@ -6,9 +6,9 @@ import spoon.reflect.declaration.CtMethod;
 
 public final class DartMethodDefinitionSpecifier implements MethodDefinitionSpecifier {
 
-    protected final @NonNull DartModifiersDefinitionSpecifier modifiersSpecifier;
-    protected final @NonNull DartTypeReferenceSpecifier typeReferenceSpecifier;
-    protected final @NonNull DartParameterDefinitionSpecifier parameterDefinitionSpecifier;
+    private final @NonNull DartModifiersDefinitionSpecifier modifiersSpecifier;
+    private final @NonNull DartTypeReferenceSpecifier typeReferenceSpecifier;
+    private final @NonNull DartParameterDefinitionSpecifier parameterDefinitionSpecifier;
 
     public DartMethodDefinitionSpecifier(@NonNull DartModifiersDefinitionSpecifier modifiersSpecifier,
                                          @NonNull DartTypeReferenceSpecifier typeSpecifier,

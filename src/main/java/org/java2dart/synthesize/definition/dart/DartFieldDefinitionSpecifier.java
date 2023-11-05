@@ -19,13 +19,12 @@ public class DartFieldDefinitionSpecifier implements FieldDefinitionSpecifier {
 
     @Override
     public @NonNull String specify(CtField<?> field) {
-        final var builder = new StringBuilder();
-        builder.append(modifiersSpecifier.specify(field))
-                .append(" ")
-                .append(typeReferenceSpecifier.specify(field.getType()))
-                .append(" ")
-                .append(field.getSimpleName());
+        String builder = modifiersSpecifier.specify(field) +
+                " " +
+                typeReferenceSpecifier.specify(field.getType()) +
+                " " +
+                field.getSimpleName();
 
-        return builder.toString().trim();
+        return builder.trim();
     }
 }
