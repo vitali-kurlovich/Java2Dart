@@ -194,7 +194,8 @@ public class DartExpressionVisitor extends BaseExpressionVisitor {
 
     @Override
     public <T> void visitCtCatchVariable(CtCatchVariable<T> catchVariable) {
-        Logging.warning("Do not implemented - visitCtCatchVariable");
+
+        builder.catchVariable(catchVariable);
     }
 
     @Override

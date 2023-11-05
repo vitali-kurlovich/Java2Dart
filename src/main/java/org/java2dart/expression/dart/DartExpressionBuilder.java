@@ -35,6 +35,7 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void invocation(CtInvocation<?> invocation) {
+
         invocation.getTarget().accept(visitor);
         builder.append(".");
         final var executable = invocation.getExecutable();
@@ -130,6 +131,13 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
             builder.append(" = ");
             expr.accept(visitor);
         }
+    }
+
+    @Override
+    public void catchVariable(CtCatchVariable<?> catchVariable) {
+        //Logging.warning("Do not implemented - visitCtCatchVariable");
+        final var name = catchVariable.getSimpleName();
+        builder.append(name);
     }
 
     @Override
@@ -306,17 +314,48 @@ public final class DartExpressionBuilder implements IExpressionBuilder {
 
     @Override
     public void throwStatement(CtThrow throwStatement) {
+        builder.append("throw").append(" ");
         throwStatement.getThrownExpression().accept(visitor);
     }
 
     @Override
     public void tryBlock(CtTry tryBlock) {
-        Logging.warning("Do not implemented - visitCtTry");
+        //  Logging.warning("Do not implemented - visitCtTry");
+        builder.append("try");
+        tryBlock.getBody().accept(visitor);
+
+        for (final var catchBlock : tryBlock.getCatchers()) {
+            catchBlock.accept(visitor);
+        }
+
     }
 
     @Override
     public void catchBlock(CtCatch catchBlock) {
-        Logging.warning("Do not implemented - visitCtCatch");
+        // Logging.warning("Do not implemented - visitCtCatch");
+
+        if (catchBlock.getParameter().isImplicit()) {
+            Logging.debug("isImplicit");
+        }
+
+        final var variable = catchBlock.getParameter();
+        final var typeName = variable.getType().getSimpleName();
+
+        if (typeName != null && !typeName.isEmpty()) {
+            builder.append(" ")
+                    .append("on")
+                    .append(" ")
+                    .append(typeName);
+        }
+
+        builder.append("catch");
+        builder.append(" (");
+        variable.accept(visitor);
+        builder.append(")");
+
+        catchBlock.getBody().accept(visitor);
+
+
     }
 
 

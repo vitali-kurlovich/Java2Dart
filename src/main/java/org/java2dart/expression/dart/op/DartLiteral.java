@@ -25,18 +25,23 @@ public class DartLiteral {
         }
 
         if (literal.getValue() instanceof Integer) {
-            final Integer value = (Integer) literal.getValue();
+            final var value = (Integer) literal.getValue();
             return String.valueOf(value);
         }
 
         if (literal.getValue() instanceof Double) {
-            final Double value = (Double) literal.getValue();
+            final var value = (Double) literal.getValue();
             return String.valueOf(value);
         }
 
         if (literal.getValue() instanceof String) {
-            final String value = (String) literal.getValue();
+            final var value = (String) literal.getValue();
             return "\"" + escape(value) + "\"";
+        }
+
+        if (literal.getValue() instanceof Boolean) {
+            final var value = (Boolean) literal.getValue();
+            return value ? "true" : "false";
         }
 
 

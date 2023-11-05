@@ -32,6 +32,8 @@ public interface IExpressionBuilder {
 
     void localVariable(CtLocalVariable<?> localVariable);
 
+    void catchVariable(CtCatchVariable<?> catchVariable);
+
     void variableRead(CtVariableRead<?> variableRead);
 
     void variableWrite(CtVariableWrite<?> variableWrite);

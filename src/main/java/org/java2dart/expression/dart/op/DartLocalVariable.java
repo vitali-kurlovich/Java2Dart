@@ -2,6 +2,7 @@ package org.java2dart.expression.dart.op;
 
 import org.java2dart.synthesize.factory.dart.DartDefinitionFactory;
 import org.jspecify.annotations.NonNull;
+import spoon.reflect.code.CtCatchVariable;
 import spoon.reflect.code.CtLocalVariable;
 
 public final class DartLocalVariable {
@@ -39,5 +40,9 @@ public final class DartLocalVariable {
 
         return builder.toString();
     }
+
+
+
+    // CtCatchVariable<T> catchVariable
 
 }
